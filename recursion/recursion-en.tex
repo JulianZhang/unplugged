@@ -1,8 +1,15 @@
 \ifx\wholebook\relax \else
 
 \documentclass{article}
+\usepackage[nomarginpar
+  %, margin=.5in
+]{geometry}
 
-\input{../common-en.tex}
+\addtolength{\oddsidemargin}{-0.05in}
+\addtolength{\evensidemargin}{-0.05in}
+\addtolength{\textwidth}{0.1in}
+
+\usepackage[en]{../prelude}
 
 \setcounter{page}{1}
 
@@ -28,30 +35,30 @@
 
 \begin{wrapfigure}{R}{0.3\textwidth}
  \centering
- \includegraphics[scale=0.4]{img/Pythagoras.eps}
+ \includegraphics[scale=0.4]{img/Pythagoras.jpg}
  \captionsetup{labelformat=empty}
  \caption{Pythagoras (about 570BC - 490BC)}
  \label{fig:Pythagoras}
 \end{wrapfigure}
 
-People learn the nature with the help of numbers. In the previous chapter, we introduced the Peano axioms and the isomorphisms of natural numbers, like the list data structure in programming. Although we have the natural numbers as the foundamental tool, our building still need some critical corner stones. We use recursive definition without proof of the correctness, like the fraction for example.
+People learn our world with numbers. In previous chapter, we introduced Peano axioms, and things that are isomorphic to natural numbers, like the list data structure in programming. Natural number is a fundamental tool, however, our building still need some corner stones. We accept the recursive definition without proof of its correctness, like the factorial for example.
 
 \[
 \begin{array}{l}
-fact(0) = 1 \\
-fact(n + 1) = (n + 1) fact(n)
+\textit{fact}(0) = 1 \\
+\textit{fact}(n + 1) = (n + 1) \textit{fact}(n)
 \end{array}
 \]
 
-Why does recursion work? what's the theory of recursion? Could the recursion be expressed in some formal way? We'll explore these questions in this chapter.
+Why does recursion work? What is the theory of recursion? Could we formally express recursion? We'll explore these questions in this chapter.
 
 \section{Everything is number}
 
-Pythagoras is the first mathematician and philosopher who study the universe from numbers. Pythagoras is famous all over the world in the theory named after him. He was born in the island of Samos, off the coast of modern Turkey. Pythagoras might have learnt from Thales of Miletus. With Thales suggestion, he went to Oriental to learn about mathematics. He spent 13 years (22 years in other sayings) in Egypt. After the Persian Empire conquered Egypt, Pythagoras went eastward to Babylon with the army. He learned mathematics and astronomy from the Babylonians. Pythagoras might also arrived in India. Wherever he went, Pythagoras learned from the local scholars to enrich his knowledge. He did not only study hard, but also thought deeply. After long time of learning and studying, Pythagoras formed his own thoughts\cite{HanXueTao16}.
+Pythagoras was the first mathematician and philosopher who studied the universe with numbers. He is famous all over the world in the theory named after him. He was born in the island of Samos, off the coast of modern Turkey. Pythagoras might have learnt from Thales of Miletus. With Thales suggestion, he went to oriental to learn about mathematics. He spent 13 years (22 years in other sayings) in Egypt. After the Persian Empire conquered Egypt, Pythagoras went eastward to Babylon with the army. He learned mathematics and astronomy from the Babylonians. Pythagoras might also arrive in India. Wherever he went, Pythagoras learned from the local scholars to enrich his knowledge. He did not only study hard, but also thought deeply. After long time of study, Pythagoras formed his own thoughts\cite{HanXueTao16}.
 
-Pythagoras returned his hometown after long journey abroad and began to give lectures. Around 520BC, he left Samos, possibly because he disagreed with the local tyranny. He arrived in the Greek colony of Croton (today's southern Italy). At Croton, he won the trust and admiration of people and founded the philosophical school of Pythagoreanism. Many prominent members of his school were women. The school is devoted to study astronomy, geometry, number theory and music. They are called quadrivium, affecting more than 2000 years of European education\cite{StepanovRose15}. Quadrivium reflects the Pythagoreans' philosophy, everything is number. The planetary motion corresponds to geometry, while geometry is built on top of numbers. Numbers is also connected with music. The so-called Pythagoreans, who were the first to take up mathematics, not only advanced this subject, but saturated with it, they fancied that the principles of mathematics were the principles of all things. said Aristotle in Metaphysics. Pythagoras is the first one discovered the pattern of octiave in mathematics. Pythagoras was revered as the founder of mathematics and music\footnote{There are different sayings about Pythagoras' death. His teachings of dedication and asceticism are credited with aiding in Croton's victory over the neighboring colony. After the victory, a democratic constitution was proposed, but the Pythagoreans rejected it. The supporters of democracy roused the populace against them. An attack was made upon them in some meeting-place. The building was set on fire, and many of the members perished; Different sources disagree regarding whether Pythagoras was killed, or if he managed to flee to Metapontum, where he lived out the rest of his life.}.
+Pythagoras returned his hometown after long journey abroad and began to give lectures. Around 520BC, he left Samos, possibly because he disagreed with the local tyranny. He arrived in the Greek colony of Croton (southern Italy today). At Croton, he won trust and admiration of people, and founded the philosophical school of Pythagoreanism. Many prominent members of his school were women. The school was devoted to study astronomy, geometry, number theory, and music. They are called quadrivium, affected more than 2000 years of European education\cite{StepanovRose15}. Quadrivium reflects the Pythagoreans' philosophy, that everything is number. The planetary motion corresponds to geometry, while geometry is built on top of numbers. Numbers are also connected with music. The so-called Pythagoreans, who were the first to take up mathematics, not only advanced this subject, but saturated with it, they fancied that the principles of mathematics were the principles of all things. said Aristotle in Metaphysics. Pythagoras is the first one discovered the pattern of octave in mathematics. Pythagoras was revered as the founder of mathematics and music\footnote{There are different sayings about Pythagoras' death. His teachings of dedication and asceticism are credited with aiding in Croton's victory over the neighboring colony. After the victory, a democratic constitution was proposed, but the Pythagoreans rejected it. The supporters of democracy roused the populace against them. An attack was made upon them in some meeting-place. The building was set on fire, and many of the members perished; Different sources disagree regarding whether Pythagoras was killed, or if he managed to flee to Metapontum, where he lived out the rest of his life.}.
 
-The Pythagreans believed all things were made of numbers. They studied the numbers and the their connection to the nature. It developed the early number theory, one of the most important area in mathematics. The pythagreans classified the natural numbers, defined many important concept including even and odd numbers, prime and composite numbers and so on. They found some number equal to the sum of their proper postive divisors\footnote{The proer postive divisors are those positive divisors less than the number}, and named them as perfect numbers. Pythagreans found the first two perfect numbers\footnote{Also known as complete numbers or ideal numbers. Euclid proved a formation rule (Euclid's Element, Book IX, proposition 35) whereby $q(q+1)/2$ is an even perfect number whenever $q$ is a prime of the form $2^p-1$ for prime $p$—what is now called a Mersenne prime. Much later, Euler proved that all even perfect numbers are of this form. This is known as the Euclid–Euler theorem.}. The smallest perfrect number is 6 (6 = 1 + 2 + 3), the next is 28 (28 = 1 + 2 + 4 + 7 + 14). The Pythagorean also found a class of figurate numbers\footnote{The Pythagorean studied mathematics by making figures with small stones. The English word calculus comes from the Greek word stone\cite{HanXueTao16}.}, when they formed geometry figure with stones.
+The Pythagoreans believed all things were made of numbers. They studied the numbers and the their connection to nature. They developed the early number theory, one of the most important area in mathematics. The pythagreans classified the natural numbers, defined many important concepts including even and odd numbers, prime and composite numbers and so on. They found some numbers equal to the sum of their proper postive divisors\footnote{The proer postive divisors are those positive divisors less than the number}, and named them as perfect numbers. For example 6 = 1 + 2 + 3, while 1, 2, 3 are the all three divisors of 6. Pythagoreans found the first two perfect numbers\footnote{Also known as complete numbers or ideal numbers. Euclid proved a formation rule (Euclid's Element, Book IX, proposition 35) whereby $q(q+1)/2$ is an even perfect number whenever $q$ is a prime of the form $2^p-1$ for prime $p$—what is now called a Mersenne prime. Much later, Euler proved that all even perfect numbers are of this form. This is known as the Euclid–Euler theorem.}. The smallest one is 6, the next is 28 (28 = 1 + 2 + 4 + 7 + 14). The Pythagorean also found a class of figurate numbers\footnote{The Pythagorean studied mathematics by making figures with small stones. The English word calculus comes from the Greek word stone\cite{HanXueTao16}.}, when they formed geometry figure with stones.
 
 \begin{figure}[htbp]
 %\begin{wrapfigure}{R}{0.4\textwidth}
@@ -120,7 +127,7 @@ Figure \ref{fig:triangular-num} and \ref{fig:oblong-num} demonstrate the triangu
 1 + 2 + 3 + ... + n = \frac{1}{2}n(n+1)
 \]
 
-The Pythagoreans also observed that the odd number could be represented in gnomon shape as shown in figure \ref{fig:gnomon-num}. And the first $n$ gnome shapes form a square, as in figure \ref{fig:square-num}. By this way, they found the formula to calculate the sum of $n$-odd numbers.
+The Pythagoreans also found the odd number could be represented in gnomon\footnote{The word ``gnomon'' originally in Babylonia it probably meant and upright stick whose shadow was used to tell time. In Pythagoras' time it meant a carpenter's square. It also meant what was left over from a square when a smaller square was cut out of one corner. Later Euclid extended from square to parallelogram(\cite{MKlein1972}, p31).} shape as shown in figure \ref{fig:gnomon-num}. And the first $n$ gnomon shapes form a square, as in figure \ref{fig:square-num}. By this way, they found the formula to calculate the sum of $n$-odd numbers.
 
 \[
 1 + 3 + 5 + ... + (2n - 1) = n^2
@@ -183,46 +190,46 @@ The Pythagoreans also observed that the odd number could be represented in gnomo
 %\end{wrapfigure}
 \end{figure}
 
-This is the answer to the exercise problem in chapter 1. With these facts, the Pythagreans found there were many things can be explained with numbers. Given two strings under the same tension, it's said Pythagras found the tune is harmonic if the ratio of their lengths is integer. He developed the earlist music theory based on this. It seemed that music and mathematics are totally different things, while finally Pythagoras concluded that music was mathematics. Such unexpected relationship impacted Pythagoras greatly. He guess that all things can be explained with integers or the ratio of integers. The Pythagoreans started to finding more and more things connected to nunbers, they believed the meaning of the whole universe is the harmonic of numbers, and developed the phylosophy based on number. This led to the attempt to build the geometry also on top of the numbers, so the overall mathematics is based on integers.
+This is the answer to the exercise problem in chapter 1. With these facts, the Pythagoreans found there were many things could be explained in numbers. Given two strings under the same tension, it's said Pythagras found the tune was harmonic if the ratio of their lengths is an integer. He developed the earlist music theory based on this. It seemed that music and mathematics were totally different things, while finally Pythagoras concluded that music was mathematics. Such unexpected relationship impacted Pythagoras greatly. He guessed that all things could be explained with integers or the ratio of integers. The Pythagoreans started to find more and more things connected to nunbers, they believed the meaning of the whole universe was the harmonic of numbers, and developed the phylosophy based on number. This led to the attempt to build the geometry also on top of the numbers, so the overall mathematics is based on integers.
 
-The Pythagoreans' most famous achievement is the Pythagoras theorem. However, we'll see later, this theorem is a double-edged sward, it leads to a recursive circle, and reveals the loophole of the idea that everything is number. In order to understand this, we need introduce the concept of commensurable and the Euclidean algorithm. To build the geometry on top of the numbers, The Pythagorean defined how to measure a line segment with another, if segment A can be represented by duplicating segment V finite times, we say V can measure A. It means the length of one segment is the integer times of the other. Altough we can use varies of measurements, when use the same segment to measure different ones, it has to be the common measure. That is to say if and only if segment V can measure both A and B, it is the common measure of them. The Pythagoreans believed for any two segments, there must be a common measure. If this was true, then the whole geometry can be built on integers.
+The Pythagoreans' most famous achievement is the Pythagoras theorem. However, we'll see later, this theorem is a double-edged sward. It led to a recursive circle, and revealed the loophole of the idea that everything is number. In order to understand this, we need introduce the concept of commensurable and the Euclidean algorithm. To build the geometry on top of the numbers, The Pythagoreans defined how to measure a line segment with another, if segment A can be represented by duplicating segment V finite times, we say V measures A. It means the length of one segment is the integer times of the other. There can be varies of measurements for a given line. When one can use the same segment to measure different lines, it has to be the common measure. That is to say if and only if segment V can measure both A and B, it is the common measure of them. The Pythagoreans believed for any two segments, there must be a common measure. If this was true, then the whole geometry can be built on top of numbers.
 
 %\begin{wrapfigure}{R}{0.4\textwidth}
 \begin{figure}[htbp]
  \centering
- \includegraphics[scale=0.2]{img/Pythagoras-proof.eps}
- \caption{One of the methods to prove the Pythagoras theorem. The areas in white are same.）}
+ \includegraphics[scale=0.2]{img/Pythagoras-proof.png}
+ \caption{One of the methods to prove the Pythagoras theorem. The areas in white are same.}
  \label{fig:Pythagoras-proof}
 \end{figure}
 %\end{wrapfigure}
 
 \section{The Euclidean algorithm}
 
-As there can be mutliple common measures, we define the biggest one as the greatest common measure. Formally speaking, if segment V is the common measure of A and B, and V is greater than any other common measure, we say V is the greatest common measure of A and B. Given two segments, how to find the greatest common measure? There is a famous acient recursive method, called the Euclidean algorithm to solve this problem. It named after the great ancient Greek methematician Euclid\footnote{The Euclidean algorithm was also developed independently in ancient India and China. The Indian methematician Aryabhata used this method to solve the Diophantine equation around the end of the 5th centry. The Euclidean algorithm was treated as a special case of the Chinese remainder theorem in {\em Sunzi Suanjing}. In 1247, Qin Jiushao gave the detailed algorithm in his Mathematical Treatise in Nine Sections (Shushu Jiuzhang).}. This algorithm is defined as proposition 3, in book X\footnote{The same algorithm for integers is also defined as propostion 1, book VII. However, the algorithm for segements covers the integer case.} of Euclid's Elements\cite{Elements}.
+As there can be mutliple common measures, we define the biggest one as the greatest common measure. Formally speaking, if segment V is the common measure of A and B, and V is greater than any other common measures, we say V is the greatest common measure of A and B. Given two segments, how to find the greatest common measure? There is a famous acient recursive method, called the Euclidean algorithm can solve this problem. It is named after the great ancient Greek methematician Euclid\footnote{The Euclidean algorithm was also developed independently in ancient India and China. The Indian mathematician Aryabhata used this method to solve the Diophantine equation around the end of the 5th centry. The Euclidean algorithm was treated as a special case of the Chinese remainder theorem in {\em Sunzi Suanjing}. Qin Jiushao gave the detailed algorithm in his {\em Mathematical Treatise in Nine Sections} ({\fontspec{\cnmainft}数书九章}) in 1247.}. This algorithm is defined as proposition 3, in book X\footnote{The same algorithm for integers is also defined as propostion 1, book VII. However, the algorithm for segements covers the integer case.} of Euclid's Elements\cite{Elements}.
 
 \subsection{The Euclid's Elements}
 
-\begin{wrapfigure}{R}{0.4\textwidth}
+\begin{wrapfigure}{R}{0.35\textwidth}
 %\begin{figure}[htbp]
  \centering
- \includegraphics[scale=0.6]{img/Euclid.eps}
+ \includegraphics[scale=0.65]{img/Euclid.jpg}
  \captionsetup{labelformat=empty}
  \caption{Euclid, About 300BC}
  \label{fig:Euclid}
 %\end{figure}
 \end{wrapfigure}
 
-Euclid of Alexandria is the most prominent ancient Greek mathematican, often referred to as ``father of geometry''. His {\em Elements} is one of the most influential works in the history of mathematics. However, little is known of Euclid's life except that he taught at Alexandria in Egypt. The year and place of both his birth and death are unknown. Proclus, the last major Greek philosopher who lived around 450AD introduced Euclid briefly in his {\em Commentary on the Elements}. He mentioned a interesting story about Euclid. When Ptolemy I of Alexandria (ruler of Egypt 323BC - 283BC) grew frustrated at the degree of effort required to master geometry via Eculid's {\em Elements}, he asked if there was a shorter path, Euclid replied there is no royal road to geometry. This becomes the learning maxim of eternal. Another story told by Stobaeus said someone who had begun to learn geometry with Euclid, when he had learnt the first theorem, asked Euclid "What shall I get by learning these things?" Euclid said "Give him threepence since he must make gain out of what he learns". Euclid disagree with the narrow practical view of learning\cite{Elements}.
+Euclid of Alexandria is the most prominent ancient Greek mathematician, often referred as ``father of geometry''. His {\em Elements} is one of the most influential works in the history. However, little is known of Euclid's life except that he taught at Alexandria in Egypt. The year and place of his birth and death are unknown. Proclus, the last major Greek philosopher who lived around 450AD introduced Euclid briefly in his {\em Commentary on the Elements}. He mentioned an interesting story about Euclid. When Ptolemy I of Alexandria (king of Egypt 323BC - 283BC) grew frustrated at the degree of effort required to master geometry via Eculid's {\em Elements}, he asked if there was a shorter path, Euclid replied there is no royal road to geometry. This becomes the learning maxim of eternal. Another story told by Stobaeus said someone who had begun to learn geometry with Euclid, when he had learnt the first theorem, asked Euclid ``What shall I get by learning these things?'' Euclid said ``Give him three pence since he must make gain out of what he learns''. Euclid disagreed with the narrow practical view of learning\cite{Elements}.
 
-From ancient times to the late 19th century, people considered the {\em Elements} as a perfect example of correct reasoning. Although many of the results in {\em Elements} originated with earlier mathematicians, one of Euclid's accomplishments was to present them in a single, logically coherent framework, making it easy to use and easy to reference, including a system of rigorous mathematical proofs that remains the basis of mathematics 23 centuries later. More than a thousand editions have been published, making it one of the most popular books after the Bible. Even today, {\em Elements} is still widely taught in school\footnote{The most popular version is edited by the French mathematician Lagrange (1736 - 1813).} as one of the basic way to train logic reasoning\cite{HanXueTao16}.
+From ancient time to the late 19th century, people considered the {\em Elements} as a perfect example of correct reasoning. Although many of the results in {\em Elements} originated with earlier mathematicians, one of Euclid's accomplishments was to present them in a single, logically coherent framework, making it easy to use and easy to reference, including a system of rigorous mathematical proofs that remains the basis of mathematics 23 centuries later. More than a thousand editions have been published, making it one of the most popular books after the Bible. Even today, {\em Elements} is still widely taught in school\footnote{The most popular version is edited by the French mathematician Lagrange (1736 - 1813).} as one of the basic way to train logic reasoning\cite{HanXueTao16}.
 
 \subsection{Euclidean algorithm}
 
-\begin{proposition}[Elements, Book X, Proposition 3]
-Given two commensurable quantities, find the greatest common measure.
+\begin{proposition}[Euclid's Elements, Book X, Proposition 3]
+To find the greatest common measure of two given commensurable magnitudes.
 \end{proposition}
 
-The solution Euclid gave only uses recursion and subtraction. It means the greatest common measure can be solved only with ruler and compass essentially. This algorithm can be formalized as the following\footnote{Term 'gcm' is the abbreviation for the greatest common measure. When $a$ and $b$ are integers, we often use gcd as the abbreviation for the greatest common divisor.}.
+The solution Euclid gave only uses recursion and subtraction. It means the greatest common measure can be solved only with ruler and compass essentially. This algorithm can be formalized as the following\footnote{Term `gcm' is the abbreviation for the greatest common measure. When $a$ and $b$ are integers, we often use `gcd' as the abbreviation for the greatest common divisor.}.
 
 \be
 gcm(a, b) = \left \{
@@ -236,7 +243,7 @@ gcm(a, b) = \left \{
 \label{eq:gcm-minus}
 \ee
 
-Suppose segement $a$ and $b$ are comensurable. If they are equal, then either one is the greatest common measure, we can return $a$ as the result. If $a$ is longer than $b$, we can use compass to intercept $b$ from $a$ repeatedly (through recursion), then find the greatest common measure for the intercepted segment $a'$ and $b$; otherwise if $b$ is longer than $a$, we intercept $a$ from $b$ repeatedly, and find the greatest common measure for the segment $a$ and $b'$. Figure \ref{fig:line-seg-gcm} illustrated the steps when processing two segments. We can also use this algorithm to process two integers 42 and 30. The detailed steps is as the following table.
+Suppose segement $a$ and $b$ are comensurable. If they are equal, then either one is the greatest common measure, we can return $a$ as the result. If $a$ is longer than $b$, we can use compass to intercept $b$ from $a$ repeatedly (through recursion), then find the greatest common measure for the intercepted segment $a'$ and $b$; otherwise if $b$ is longer than $a$, we intercept $a$ from $b$ repeatedly, and find the greatest common measure for the segment $a$ and $b'$. Figure \ref{fig:line-seg-gcm} illustrated the steps when processing two segments. We can also use this algorithm to process two integers 42 and 30. The detailed steps are list in the following table.
 
 \begin{figure}[htbp]
 \centering
@@ -267,10 +274,12 @@ Suppose segement $a$ and $b$ are comensurable. If they are equal, then either on
 \label{fig:line-seg-gcm}
 \end{figure}
 
+\vspace{5mm}
+
 \begin{tabular}{|l|l|l|}
 \hline
 $gcm(a, b)$ & $a$ & $b$ \\
-\hline
+\hhline{|=|=|=|}
 $gcm(42, 30)$ & 42 & 30 \\
 \hline
 $gcm(12, 30)$ & 12 & 30 \\
@@ -283,7 +292,9 @@ $gcm(6, 6)$ & 6 & 6 \\
 \hline
 \end{tabular}
 
-Repeatedly subtracting $b$ from $a$ to get $a'$, it's exactly the definition of division with remainder: $a' = a - \lfloor a / b \rfloor$, or denoted as $a'= a \bmod b$. We can use the division with remainder to replace the repeated subtraction in the origin Euclidean algorithm. Besides that, when one quantity is an integeral multiple of the other, for example $b \leq a$ and $a$ can be divided by $b$, we know the greatest common measure is $b$. As the remainder $a \bmod b = 0$, we define $gcm(0, b) = gcm(b, 0) = b$. We can compare $a$ and $b$ first and exchange them if $a < b$. As we know $a \bmod b$ must be less than $b$, when next time do the recursive computation, we can directly exchange them as $gcm(b, a \bmod b)$. This gives the improved Euclidean algorithm.
+\vspace{5mm}
+
+Repeatedly subtracting $b$ from $a$ to get $a'$, it's exactly the definition of division with remainder: $a' = a - \lfloor a / b \rfloor b$, or denoted as $a'= a \bmod b$. We can use the division with remainder to replace the repeated subtraction in the origin Euclidean algorithm. Besides that, when one magnitude is an integer multiple of the other, for example $b \leq a$ and $a$ can be divided by $b$, we know the greatest common measure is $b$. As the remainder $a \bmod b = 0$, we define $gcm(0, b) = gcm(b, 0) = b$. We can compare $a$ and $b$ first, then exchange them if $a < b$. As we know $a \bmod b$ must be less than $b$, when recursively compute the next time, we can directly exchange them as $gcm(b, a \bmod b)$. This gives the improved Euclidean algorithm.
 
 \be
 gcm(a, b) = \left \{
@@ -296,7 +307,7 @@ gcm(a, b) = \left \{
 \label{eq:gcm}
 \ee
 
-Why does this algorithm give the greatest common measure? We need prove it with two steps. At step one, we prove this algorithm gives the common measure. Suppose $b \leq a$, let the integer $q_0$ be the quotient, $r_0$ be the remainder. We have $a = b q_0 + r_0$. As we get the common measure if $r_0$ is zero, let's focus on the case that $r_0$ is not zero. We can next express $b$ as $b = r_0 q_1 + r_1$, and list the similar equations unless the remainder is zero.
+Why does this algorithm give the greatest common measure? We prove it with two steps. At step one, we prove this algorithm gives the common measure. Suppose $b \leq a$, let the integer $q_0$ be the quotient, $r_0$ be the remainder. We have $a = b q_0 + r_0$. As we get the common measure if $r_0$ is zero, let's focus on the case that $r_0$ is not zero. We can next express $b$ as $b = r_0 q_1 + r_1$, and list the similar equations unless the remainder is not zero.
 
 \[
 \begin{array}{rcl}
@@ -308,45 +319,62 @@ r_1 &=& r_2 q_3 + r_3 \\
 \end{array}
 \]
 
-As long as $a$ and $b$ are commensurable, this list is not infinite. This is because every time, we use compass to intercept integral times, the quotients are integers. And the remainders are less than the divisor. We have $b > r_0 > r_1 > r_2 > ... > 0$. As the remainder can not less than zero, and the initial quantity is finite, we must reach to $r_{n-2} = r_{n-1} q_n$ within finite steps.
+This list grows as long as $a$ and $b$ are commensurable. But it is not infinite. This is because every time, we use compass to intercept integer times. The quotients are integers. And all the remainders are less than the relative divisors. We have $b > r_0 > r_1 > r_2 > ... > 0$. As the remainder can not be less than zero, and the initial magnitude is finite, we must reach to $r_{n-2} = r_{n-1} q_n$ within finite steps.
 
-Next is to prove $r_{n-1}$ can measure both $a$ and $b$. Obviously $r_{n-1}$ measures $r_{n-2}$ by definition. Consider the last second equation $r_{n-3} = r_{n-2} q_{n-1} + r_{n-1}$, since $r_{n-1}$ measures $r_{n-2}$, $r_{n-1}$ also measures $r_{n-2} q_{n-1}$. So it measures $r_{n-2} q_{n-1} + r_{n-1}$, which equals to $r_{n-3}$. Similiarily, we can prove $r_{n-1}$ measures the left hand of every equations step by step up, till $b$ and $a$. This proves the answer found by Euclidean algorithm, $r_{n-1}$ is the common measure of $a$ and $b$. Suppose the greatest common measure is $g$, we have $r_{n-1} \leq g$.
+Next is to prove $r_{n-1}$ can measure both $a$ and $b$. Obviously $r_{n-1}$ measures $r_{n-2}$ by definition. Consider the last second equation $r_{n-3} = r_{n-2} q_{n-1} + r_{n-1}$, since $r_{n-1}$ measures $r_{n-2}$, $r_{n-1}$ also measures $r_{n-2} q_{n-1}$. So it measures $r_{n-2} q_{n-1} + r_{n-1}$, which equals to $r_{n-3}$. Similiarily, we can prove $r_{n-1}$ measures the left hand of every equations step by step upwards to $b$ and $a$. Thus proves the answer found by Euclidean algorithm, $r_{n-1}$ is the common measure of $a$ and $b$. Suppose the greatest common measure is $g$, we have $r_{n-1} \leq g$.
 
 The next step is to prove, for any common measure $c$ for $a$ and $b$, it measures $r_{n-1}$. As $c$ is the common measure, both $a$ and $b$ can be expressed with it, let $a = mc$, $b = nc$, where $m$ and $n$ are some integers. Then the first equation $a = b q_0 + r_0$ can be denoted as $mc = ncq_0 + r_0$, as we know $r_0 = (m - nq_0)c$, it means $c$ measures $r_0$. Similarily, we can prove $c$ measures $r_1$, $r_2$, ..., $r_{n-1}$ one by one. Thus we proved any common measure also measures $r_{n-1}$, so the greatest one $g$ also measures $r_{n-1}$. It means $g \leq r_{n-1}$.
 
-Combine the results from step one and two, that $r_{n-1} \leq g$ and $g \leq r_{n-1}$, we deduced the greatest common measure $g = r_{n-1}$. It does not only proved the correctness of Euclidean algorithm, but also tells us $g$ is the greatest common measure for every pair of quantities:
+Combine the results from step one and two, that $r_{n-1} \leq g$ and $g \leq r_{n-1}$, we deduce the greatest common measure $g = r_{n-1}$. It does not only prove the correctness of Euclidean algorithm, but also tells us $g$ is the greatest common measure for every pair of magnitudes:
 
 \be
 g = gcm(a, b) = gcm(b, r_0) = ... = gcm(r_{n-2}, r_{n-1}) = r_{n-1}
 \label{eq:recursive-gcm}
 \ee
 
+\begin{figure}[htbp]
+ \centering
+ \subcaptionbox{Recursively cut off squares}{\includegraphics[scale=0.45]{img/GCM.png}}
+ \subcaptionbox{Tile the small squares}{
+   \begin{adjustbox}{max width=\textwidth}
+   \begin{tikzpicture}
+     \draw[step=1, thin] (0, 0) grid (30, 13);
+   \end{tikzpicture}
+   \end{adjustbox}
+ }
+ \captionsetup{labelformat=empty}
+ \caption{A geometric description of Euclidean algorithm}
+ \label{fig:geometric-GCM}
+\end{figure}
+
 \subsection{Extended Euclidean algorithm}
 
-\begin{wrapfigure}{R}{0.4\textwidth}
-%\begin{figure}[htbp]
- \centering
- \includegraphics[scale=0.5]{img/Bezout.eps}
- \captionsetup{labelformat=empty}
- \caption{Étienne Bézout, 1730 - 1783}
- \label{fig:Bezout}
-%\end{figure}
-\end{wrapfigure}
-
-The extended Euclidean algorithm is an extension to the Euclidean algorithm. For the given quantity $a$ and $b$, in addition to compute the greatest common measure $g$, it also find two integers $x$ and $y$, that satisfy Bézout's identity $ax + by = g$. Why does Bézout's identity\footnote{Bézout's identity, or Bézout's theorem was first found and proven by French mathematician Méziriac (Claude Gaspard Bachet de Méziriac，1581–1638) for integers. Bézout proved it hold for polynomials. Bézout identity can be extended to any Euclidean domain and Principle Idean Domain (PID).} always hold? Below is one of the methods to prove it. We can construct a set, consists of all the positive linear combinations of $a$ and $b$.
+The extended Euclidean algorithm is an extension to the Euclidean algorithm. For given magnitude $a$ and $b$, in addition to compute their greatest common measure $g$, it can also find two integers $x$ and $y$, that satisfy Bézout's identity $ax + by = g$. Why does Bézout's identity\footnote{Bézout's identity, or Bézout's theorem was first found and proven by French mathematician Méziriac (Claude Gaspard Bachet de Méziriac，1581–1638) for integers. Bézout proved it hold for polynomials. Bézout identity can be extended to any Euclidean domain and Principle Idean Domain (PID).} always hold? Here is a proof. We can construct a set, consists of all the positive linear combinations of $a$ and $b$.
 
 \[
 S = \{ ax + by | x, y \in \mathbb{Z}\ \text{and} \ ax + by > 0\}
 \]
 
-For line segments, $S$ must not be empty, as it at least contains $a$ (where $x = 1, y = 0$) and $b$ (where $x = 0, y = 1$). Since all the elements in $S$ are positive, there must exist the smallest one. We denote the smallest element as $g = as + bt$. We'll next show that $g$ is the greatest common measure of $a$ and $b$. Let's express $a$ as the quotient and remainder of $g$.
+%\begin{wrapfigure}{R}{0.4\textwidth}
+\begin{figure}[htbp]
+ \centering
+ \subcaptionbox{Étienne Bézout, 1730 - 1783}[0.45\linewidth]{\includegraphics[scale=0.45]{img/Bezout.jpeg}}
+ \subcaptionbox{Claude Gaspard Bachet de Méziriac, 1581–1638, who first discovered and proved Bézout's idendity for integers.}[0.45\linewidth]{\includegraphics[scale=0.95]{img/Meziriac.jpg}}
+ \captionsetup{labelformat=empty}
+ \caption{}
+ \label{fig:Bezout}
+ \label{fig:Meziriac}
+\end{figure}
+%\end{wrapfigure}
+
+For line segments, $S$ must not be empty, as it contains at least $a$ (where $x = 1, y = 0$) and $b$ (where $x = 0, y = 1$). Since all the elements in $S$ are positive, there must exist the smallest one. We denote the smallest element as $g = as + bt$. We'll next show that $g$ is the greatest common measure of $a$ and $b$. Let's express $a$ as the quotient and remainder of $g$.
 
 \be
 a = qg + r
 \label{eq:Euclidean-division}
 \ee
 
-Where the remainder $0 \leq r < g$. It is either zero or belongs to set $S$, this is because the following.
+Where the remainder $0 \leq r < g$. It is either zero or belongs to set $S$, this is because:
 
 \[
 \begin{array}{rll}
@@ -356,7 +384,7 @@ r & = a - qg & \text{From (\ref{eq:Euclidean-division})} \\
 \end{array}
 \]
 
-It means $r$ can be expressed as the linear combination of $a$ and $b$, therefore, if it's not zero, it must belong to set $S$. However, this is not possible because we previously defined $g$ as the least postive element in $S$, while $r$ is less than $g$. To avoid this contradition, we know that $r$ has to be zero. from equation (\ref{eq:Euclidean-division}), $g$ measures $a$. With the same method, we can prove $g$ also measures $b$. Therefore $g$ is the common measure of them. We'll next prove that $g$ is the greatest one. Consider an arbitrary common measure $c$ for $a$ and $b$, according to the definition, there exists integers $m$ and $n$, that $a = mc$ and $b = nc$. Then $g$ can be expressed as:
+It means $r$ can be expressed as the linear combination of $a$ and $b$, therefore, if it's not zero, it must belong to set $S$. However, this is not possible because we previously defined $g$ as the least postive element in $S$, while $r$ is less than $g$. To avoid this contradition, we know that $r$ has to be zero. From equation (\ref{eq:Euclidean-division}), $g$ measures $a$. With the same method, we can prove $g$ also measures $b$. Therefore $g$ is the common measure of them. We'll next prove that $g$ is the greatest one. Consider an arbitrary common measure $c$ for $a$ and $b$, according to the definition, there exists integers $m$ and $n$, that $a = mc$ and $b = nc$. Then $g$ can be expressed as:
 
 \[
 \begin{array}{rll}
@@ -367,16 +395,6 @@ g & = as + bt & \text{The definition} \\
 \]
 
 It means $c$ measure $g$, so $c \leq g$. It gives that $g$ is the greatest common measure. Summarize the above, we complete the proof of Bézout's identity. There exists integers, that $ax + by = g$ holds. Besides that, we know the greatest common measure is the minimum postive values among all the linear combinations.
-
-%\begin{wrapfigure}{R}{0.4\textwidth}
-\begin{figure}[htbp]
- \centering
- \includegraphics[scale=0.8]{img/Meziriac.eps}
- \captionsetup{labelformat=empty}
- \caption{Claude Gaspard Bachet de Méziriac, 1581–1638, who first discovered and proved Bézout's idendity for integers.}
- \label{fig:Meziriac}
-\end{figure}
-%\end{wrapfigure}
 
 We can deduce the extended Euclid algorithm with Bézout's idendity.
 
@@ -391,7 +409,7 @@ ax + by & = gcm(a, b) & \text{Bézout's idendity} \\
 \end{array}
 \]
 
-This gives the recursion case:
+This gives the recursive case:
 
 \[
 \left \{
@@ -402,7 +420,7 @@ This gives the recursion case:
 \right.
 \]
 
-The edge case happends when $b = 0$, we have $gcm(a, 0) = 1a + 0b$. Combine it with the recursive case, gives the extended Euclid algorithm.
+The edge case happens when $b = 0$, we have $gcm(a, 0) = 1a + 0b$. Combine it with the recursive case, we obtain the extended Euclidean algorithm.
 
 \be
 gcm_{ex}(a, b) = \left \{
@@ -418,22 +436,22 @@ gcm_{ex}(a, b) = \left \{
 \label{eq:gcm-ext}
 \ee
 
-As an example, here is a puzzle can be solved with the extended Euclid algorithm(\cite{LiuXinyu2017}, p50). Given two jars with capacity of 9 and 4 gallons, how to get 4 gallons from the river?
+Here is a puzzle can be solved with the extended Euclidean algorithm(\cite{LiuXinyu2017}, p50). Given two jars with capacity of 9 and 4 gallons, how to get 4 gallons of water from the river?
 
-There are some variances of this puzzle. The capacities can be other nunmbers. It's said the French mathematician Poisson (Sim\`{e}on Denis Poisson) solved this puzzle when he was a kid.
+There are some variances of this puzzle. The capacities can be other nunmbers. It's said the French mathematician Sim\`{e}on Denis Poisson solved this puzzle when he was a child.
 
-There are total six operations between two jars. Denote the big one as $A$, its capacity is $a$; denote the small one as $B$ with capacity $b$:
+There are total six operations between two jars. Denote the big one as $A$ with capacity of $a$; denote the small one as $B$ with capacity of $b$:
 
 \begin{itemize}
 \item Fill the big jar $A$;
 \item Fill the small jar $B$;
 \item Empty the big jar $A$;
 \item Empty the small jar $B$;
-\item Pour the water from jar $A$ to $B$;
+\item Pour the water from jar $A$ to jar $B$;
 \item Pour the warer from jar $B$ to jar $A$.
 \end{itemize}
 
-The last two operation stop when either jar is empty or filled. Below example shows a list of operations (suppose $b < a  2b$ hold).
+The last two operations stop when either jar is empty or full. Below example shows a list of operations (suppose $b < a < 2b$ hold).
 
 \begin{table}[htbp]
 \centering
@@ -454,13 +472,13 @@ a & 3b - 2a & pour from $B$ to $A$ \\
 \caption{The water in the jars and the operations.} \label{tab:jug-ops}
 \end{table}
 
-No matter what sequence of operations, the water in the jars can always be expressed as $ax + by$ where $x$ and $y$ are integers. It means the water we get is the linear combination of $a$ and $b$. From the proof of Bézout's identity, we know the smallest positive number of this linear combination is exactly the greatest common measure $g$. We can tell it is possible to get $c$ gallon water if and only if $c$ can be measured by $g$\footnote{If and only if $c$ can be devided by the greatest common divisor $g$ for integer capacities.}. We assume $c$ is not greater than the capacity of the bigger jar.
+No matter what sequence of operations, the water in the jars can always be expressed as $ax + by$ where $x$ and $y$ are integers. It means the water we get is the linear combination of $a$ and $b$. From the proof of Bézout's identity, we know the smallest positive number of this linear combination is exactly the greatest common measure $g$. We can tell if it is possible to get $c$ gallons of water if and only if $c$ can be measured by $g$\footnote{If and only if $c$ can be devided by the greatest common divisor $g$ for integer capacities.}. We assume $c$ is not greater than the capacity of the bigger jar.
 
-For example, we can't get 5 gallons of water with two jars of 4 gallons and 6 gallons. This is because the greatest common divisor of 4 and 6 is 2. Which can't divides 5. (In other words, we can't get odd galons of water with two jars of even gallons capacities.) If $a$ and $b$ are coprime, i.e. $gcd(a, b) = 1$, then we are sure to get any natural number $c$ gallons of water.
+For example, we can't get 5 gallons of water with two jars of 4 gallons and 6 gallons. This is because the greatest common divisor of 4 and 6 is 2. Which can't divide 5. (In other words, we can't get odd galons of water with two jars of even gallons capacities.) If $a$ and $b$ are coprime, i.e. $gcd(a, b) = 1$, then we are sure to be able to get any natural number $c$ gallons of water.
 
-Although we can tell the puzzle is solvable if $g$ measures $c$, we still don't know the steps to pour the water. Actually, the steps can be decuded as far as we can find two integers $x$ and $y$, satisfying $ax + by = c$. If $x > 0, y < 0$, it means we need fill jar $A$ $x$ times, and empty jar $B$ $y$ times; Else if $x < 0, y > 0$, we need empty jar $A$ $x$ times, and fill jar $B$ $y$ times.
+Although we can tell that the puzzle is solvable when $g$ measures $c$, we still don't know the detailed steps to pour water. Actually, the steps can be decuded as far as we can find two integers $x$ and $y$, satisfying $ax + by = c$. If $x > 0, y < 0$, it means we need fill jar $A$ $x$ times, and empty jar $B$ $y$ times; Else if $x < 0, y > 0$, we need empty jar $A$ $x$ times, and fill jar $B$ $y$ times.
 
-For instance, let the capacity of the big jar $a = 5$ gallon, the small jar $b = 3$ gallon. We want to get $c=4$ gallons of water. As $4 = 3 \times 3 - 5$, so $x = -1, y = 3$. We can arrange the steps as below.
+For instance, let the capacity of the big jar $a = 5$ gallons, the small jar $b = 3$ gallons. We want to get $c=4$ gallons of water. As $4 = 3 \times 3 - 5$, so $x = -1, y = 3$. We can arrange the steps as below table.
 
 \begin{table}[htbp]
 \centering
@@ -483,22 +501,22 @@ $A$ & $B$ & operation \\
 We can see from these steps, jar $B$ is filled 3 times, jar $A$ is emptied 1 time. The next question is how to find $x$ and $y$ that satisfies $ax + by = c$. With the extended Euclid algorithm, we can find a solution to Bézout's identity $ax_0 + by_0 = g$. Since $c$ is $m$ times of the greatest common measure $g$, we can make a solution by multiplying $x_0$ and $y_0$ $m$ times.
 
 \[
-\begin{cases}
-  x_1 = x_0 \dfrac{c}{g} \\[2ex]
+\begin{dcases}
+  x_1 = x_0 \dfrac{c}{g} \\
   y_1 = y_0 \dfrac{c}{g}
-\end{cases}
+\end{dcases}
 \]
 
-From this solution, we can have all the integer solutions to the Diophantus equation{Naming after the acient Greek mathematician, Diophantus of Alexandira (about 200 - 284AD). In his book \textit{Arithmetica}, he made important advances in mathematical notation, becoming the first person known to use algebraic notation and symbolism. Diophantus is often called “the father of algebra" because he contributed greatly to number theory, mathematical notation, and because \textit{Arithmetica} contains the earliest known use of syncopated notation\cite{HanXueTao2009}.}.
+From this solution, we can generate all the integer solutions to the Diophantine equation \footnote{Naming after the acient Greek mathematician, Diophantus of Alexandira (about 200 - 284AD). In his book \textit{Arithmetica}, he made important advances in mathematical notation, becoming the first person known to use algebraic notation and symbolism. Diophantus is often called “the father of algebra" because he contributed greatly to number theory, mathematical notation, and because \textit{Arithmetica} contains the earliest known use of syncopated notation\cite{HanXueTao2009}.}.
 
 \be
-\begin{cases}
-  x = x_1 - k \dfrac{b}{g} \\[2ex]
+\begin{dcases}
+  x = x_1 - k \dfrac{b}{g} \\
   y = y_1 + k \dfrac{a}{g}
-\end{cases}
+\end{dcases}
 \ee
 
-Where $k$ is an integer number. Thus we achieve all the integer solutions to the water jar puzzle. Further, we can find a special $k$, which minimizes $|x| + |y|$, it gives the fast pouring steps\footnote{One way to get this special $k$ is to represent the solution as two lines in Cartesian plain. When taking absoluted value, it flips the lower part to the x-axis. Then we can find the $k$ minimizes $|x| + |y|$ from the figure.}. Below is the example Haskell program solves this  puzzle.
+Where $k$ is an integer. Thus we get all the integer solutions to the water jar puzzle. Further, we can find a special $k$, that minimizes $|x| + |y|$, it gives the fast pouring steps\footnote{One way to get this special $k$ is to represent the solution as two lines in Cartesian plain. When taking absoluted value, it flips the lower part to the x-axis. Then we can find the $k$ minimizes $|x| + |y|$ from the figure.}. Below is the example Haskell program solves this  puzzle.
 
 \lstset{frame=single}
 \begin{lstlisting}
@@ -528,51 +546,49 @@ jars a b c = (x, y) where
   m = max (abs x1 `div` u) (abs y1 `div` v)
 \end{lstlisting}
 
-After figure out $x$ and $y$, we can populate the steps as in Appendix.
+After figure out $x$ and $y$, we can populate the steps as in Appendix of this chapter.
 
-\subsection{Influence of Euclid algorithm}
+\subsection{Influence of Euclidean algorithm}
 
-在“万物皆数”的哲学思想下，虽然欧几里得算法最初是为了寻找两个整数的最大公约数而产生的。但是经过欧几里得之手，算法却应用到了抽象的几何量上。从整数的最大公约数，到可公度量的最大公度，我们看到了几何量和数的分离\footnote{这也是我们使用gcm，而没有使用更常见的gcd作为算法简写的原因。}。几何不仅没有建立在整数之上，反而独立发展，解决了整数之外的问题。以至于后来古希腊数学形成了这样的传统，任何关于数的结论，都需要给出几何的证明。这一传统直到十六世纪仍然影响着人们。意大利数学家卡尔丹（Gerolamo Cardano）\footnote{也译作卡尔达诺}在关于解三次、四次方程的著作《大术》（Ars Magna，1545年出版）中，仍然使用类似立方体填补法的几何论证\cite{HanXueTao2009}。
+Euclidean algorithm was developed to find the the greatest common divisor for two integers in spirit of all things are made of numbers. However, Euclid applied it to the abstract geometric magnitudes. We see the separation of geometry from numbers\footnote{This is the reason why we name Euclide algorithm gcm, but not gcd.}. Geometry was not built on top of numbers, but developed independently to solve the generic problems not limit to numbers. The ancient Greek formed such a tradition, that even for any conclusion about number, one need to give proof in terms of geometry. It kept influencing people till the 16th Century. For example, the Italian mathematician Gerolamo Cardano still used geometric cubic filling method in his book {\em Ars Magna} when solving the cubic and four-order equations in 1545\cite{HanXueTao2009}.
 
-欧几里得算法是最著名的一个递归算法。德国数学家，解析数论创始人狄利克雷（Dirchlet）在他的著作《数论讲义》中评价到：“整个数论的结构都建立在同一个基础之上，这个基础就是最大公约数算法。”现代密码学的RSA加密算法\footnote{RSA算法是最早的一种公开密钥加密的非对称加密算法，RSA是1977年由罗纳德·李维斯特（Ron Rivest）、阿迪·萨莫尔（Adi Shamir）和伦纳德·阿德曼（Leonard Adleman）一起提出的。当时他们三人都在麻省理工学院工作。RSA就是他们三人姓氏开头字母拼在一起组成的。}直接使用了扩展欧几里得算法。我们在上一节通过一道趣题展示了如何使用扩展欧几里得算法给出二元线性不定方程$ax + by = c$的整数解。具体来说，就是先求出最大公度$g$，并判断$g$是否整除$c$，若不能，则无整数解。否则，将满足贝祖等式的$x_0$，$y_0$，扩大$c/g$倍得到一组特解$x_1$、$y_1$。然后得到一般二元线性不定的通解$x = x_1 - k b / g$和$y = y_1 + k a / g$。
+The Euclidean algorithm is the most famous recursive algorithm. German mathematician, Dirichlet, the founder of analytic number theory, commented in his {\em Lectures on Number Theory}\footnote{Lejeune Dirichlet, J.P.G.; Richard Dedekind (1863). {\em Vorlesungen über Zahlentheorie}. F. Vieweg und sohn.}, The structure of the whole number theory is based on the same foundation, which is the greatest common divisor algorithm. The modern RSA cryptosystem\footnote{RSA is the world first public-key asymmetric crypto algorithm developed by Ron Rivest, Adi Schamir, and Leonard Adelman in MIT, 1977. The acronym RSA is made of the initial letters of their surnames.} utilizes the extended Euclidean algorithm directly. We demonstrated how to figure out the integer solutions for binary linear Diophantine equation $ax + by = c$. Find the greatest common measure $g$. There's no integer solution if $g$ does not divide $c$. Otherwise, for the $x_0, y_0$ satisfying Bézout identity, duplicate them $c/g$ times to get a special solution $x_1, y_1$, then define the common solution of $x = x_1 - k b / g$, and $y = y_1 + k a / g$.
 
-\begin{wrapfigure}{R}{0.4\textwidth}
+\begin{wrapfigure}{R}{0.32\textwidth}
 %\begin{figure}[htbp]
  \centering
- \includegraphics[scale=0.25]{img/Hippasus.eps}
+ \includegraphics[scale=0.25]{img/Hippasus.jpg}
  \captionsetup{labelformat=empty}
- \caption{希帕索思（Hippasus of Metapontum）约公元前五世纪。}
+ \caption{Hippasus of Metapontum, about 5th Centry, BC.}
  \label{fig:Hippasus}
 %\end{figure}
 \end{wrapfigure}
 
-欧几里得算法是一把锋利的宝剑，但是它强大的递归原理被反过来指向了“万物皆数”的基石——万物可公度。一切事物和现象都可以归结为整数与整数的比。从而引发了毕达哥拉斯学派哲学思想的危机。约公元前470年左右，毕达哥拉斯学派的学生希帕索思试图寻找正方形的对角线和边的公度。经过仔细思考他发现不管度量单位取得多么小，这两条线段都无法公度。还有的说法是希帕索思从毕达哥拉斯学派的神秘五角星标志上得到了启发。毕达哥拉斯学派成员用五角星作为学派的徽章和联络标志。有一则故事说，学派的一个成员流落异乡，贫病交迫，无力酬谢房主的款待，临终前要房主在门上画一个五角星。若干年后，有同派的人看到这个标志，询问事情的经过，厚报房主而去\cite{HanXueTao16}。美国迪士尼在1959年的动画片《唐老鸭漫游数学奇境》中，描绘了唐老鸭遇到了毕达哥拉斯和他的朋友们，在了解音乐、艺术与数的关系后，唐老鸭的手掌上也画上了神秘的五角星。如图\ref{fig:pentagram}所示，传说希帕索思发现线段AC和AG也是无法公度的。
-
-%《唐老鸭漫游数学奇境》（Donald In Mathmagic Land ）
+The Euclid algorithm is a double-edges sword. The powerful recursive method can be applied to attack the corner stone of the concept that all things are made of numbers. The Pythagoreans believed any two numbers must have common measurement, because all things and phenomenon are essentially ratio of integer to integer. About 470AC, Hippasus, a student in Pythagorean school attempted to find the common measure for the side and diagonal of a square. However, no matter how small magnitude being used, he could not measure them. It surprised the people, and led to a crisis for the foundation of Pythagoreans. There is also saying that, Hippasus was inspired by the mysterious pentagram logo of Pythagorean school. The Pythagoreans use pentagram as the school's badge and liaison symbol. There was a story about a school member met difficulty in a foreign land, poor and sick. The landlord helped to take care of him. He drew a pentagram on the door before dead. A few years later, someone in Pythagorean school saw the sign. He asked about the past, paid the landlord a lot of money then left\cite{HanXueTao16}. In the Walt Disney's film {\em Donald in Mathmagic Land} in 1959, Duck Donald met Pythagoras and his friends, they discovered the principles of music scale together. After shaking hands with Pythagoras, who then vanishes, Donald found on his hand a pentagram, the symbol of the secret Pythagorean society. As shown in figure \ref{fig:pentagram}, there is another story said that Hippasus also found segment AC and AG couldn't be commensurable.
 
 %\begin{wrapfigure}{L}{0.4\textwidth}
 \begin{figure}[htbp]
  \centering
- \includegraphics[scale=0.5]{img/pentagram.eps}
+ \includegraphics[scale=0.5]{img/pentagram.png}
  %\captionsetup{labelformat=empty}
- \caption{递归的五角星}
+ \caption{The recursive pentagram}
  \label{fig:pentagram}
 \end{figure}
 %\end{wrapfigure}
 
-十九世纪的苏格兰数学家乔治$\cdot$克里斯托重建了希帕索思的证明。使用反证法，假设存在一条单位线段$c$能够公度正方形的边和对角线。根据度量的定义，可以令边长为$mc$、对角线长为$nc$，其中$m$、$n$都是正整数。如图\ref{fig:irrational}所示，我们以点A为圆心，以边长为半径做圆弧交对角线AC于点E。然后从E出发作垂直与对角线的直线，并交边BC于点F。
+The Scottish mathematician George Chrystal reconstructed Hippasus's proof in the 19th Century. Using reduction to absurdity, suppose there exists a segment $c$ that measures both the side and diagonal of the square. From the definition of the common measurement, let the side be $mc$, and the diagonal be $nc$, where both $m, n$ are integers. As shown in figure \ref{fig:irrational}, taking the side as radius, we draw an arc with $A$ as the center, which intersects the diagonal $AC$ at point $E$. Then draw a line from $E$ that is perpendicular to the diagonal, and intersects side $BC$ at point $F$.
 
 %\begin{wrapfigure}{L}{0.4\textwidth}
 \begin{figure}[htbp]
  \centering
- \includegraphics[scale=2]{img/irrational.eps}
+ \includegraphics[scale=2]{img/irrational.jpg}
  %\captionsetup{labelformat=empty}
- \caption{正方形的边长和对角线}
+ \caption{The side and the diagonal of the square.}
  \label{fig:irrational}
 \end{figure}
 %\end{wrapfigure}
 
-根据圆的定义，线段AE的长度等于正方形的边长，所以线段EC的长度等于$(m - n)c$。因为EF垂直于AC，而角$\angle ECF$是$45\degree$，故三角形ECF是等腰直角三角形。由于等腰三角形两腰相等，故而有$|EC| = |EF|$。接下来我们注意两个直角三角形$\triangle AEF$和$\triangle ABF$，由于边AE等于AB，同时AF是公共边，因此两个直角三角形全等。这样就得到边$|EF| = |FB|$。综合下来，我们有$|EC| = |EF| = |FB|$。这样线段FB的长度也等于$(m - n)c$，所以线段CF的长度等于CB的长度减去FB的长度，等于$nc - (m - n)c = (2n - m)c$。我们把得到的结论列在下面。
+As it is an arc, the length of $AE$ equals to the square side. Thus the length of segment $AE$ is $(m - n)c$. Because $EF$ is perpendicular to $AC$, while angle $\angle ECF$ spans $45\degree$, therefore the triangle $ECF$ is the isosceles right triangle. Since the isosceles triangle has two sides of equal length, we have $|EC| = |EF|$ holds. Observe two right triangles $\triangle AEF$ and $\triangle ABF$. Side $AE$ equals $AB$, and $AF$ is the shared side, they congruent. Then we have $|EF| = |FB|$. As the result, the three segments $|EC| = |EF| = |FB|$. Therefore the length of $FB$ is also $(m - n)c$, while segment $CF$ can be get by deducing $FB$ from $CB$, which is $nc - (m - n)c = (2n - m)c$. We list all the results as below.
 
 \[
 \begin{array}{c|c}
@@ -584,60 +600,57 @@ After figure out $x$ and $y$, we can populate the steps as in Appendix.
 |CF| = (2n - m)c \\
 |CE| = (m - n)c
 \end{cases} \\[4ex]
-\text{大正方形} & \text{小正方形}
+\\
+\text{The big square} & \text{The small square}
 \end{array}
 \]
 
-由于$m$、$n$都是正整数，显然$c$也可以公度小正方形的对角线$CF$和边$CE$。仿照上面的方法，我们可以继续作出更小的正方形，并且重复作出无穷无尽的更小的正方形。而$c$总可以公度每一个小正方形的斜边和对角线。由于$m$、$n$是有限的正整数，这一过程不可能无限做下去，这样就产生了矛盾。于是我们一开始的假设不成立，即正方形的边和对角线不可公度。
+As both $m, n$ are integers, it's obvious that $c$ measures both the diagonal $CF$ and side $CE$ of the small square. Using the same method as above, we can draw another even smaller square. Repeating it leads to smaller and smaller infinite squares. But $c$ measures both diagonal and side for every square. Since $m, n$ are finite integers, we can't endlessly duplicate this process, which leads to absurdity. Therefore, our assumption is not true, there is no common measure for the diagonal and side of a square.
 
-这样毕达哥拉斯万物皆数的理论就出现了一个漏洞：存在线段的长度无法用整数比进行度量。据说希帕索思因为这个发现，而遭到谋杀，毕达哥拉斯学派担心这个秘密被泄露出去，而把希帕索思沉入大海。然而历史的车轮不会倒退，古希腊的哲学家和数学家们正视了这个问题，经过欧多克索斯、亚里士多德和欧几里得等人的工作，终于严格定义了不可公度和无理量，并通过几何将它们纳入了古希腊的数学体系。
+It is a loophole in Pythagorean theory about all things are made of numbers, there exists segments that can't be represented by ratio of integers. It was said Hippasus was murdered due to this finding. The Pythagoreans didn't want that secret be disclosed, they drowned Hippasus at sea. The discovery of irrational number greatly boost mathematics. The ancient Greek philosophers and mathematicians considered this problem seriously. After the work of Odoxos, Aristotle, and Euclid, they finally strictly defined the incommensurable magnitudes, and incorporate it into the ancient Greek mathematics through geometry.
 
-\begin{proposition}[《几何原本》，卷十，命题二]
-如果从两个不等量的大量中连续减去小量，直到余量小于小量，再从小量中连续减去余量直到小于余量，这样一直作下去，当所余的量总不能量尽它前面的量时，则称两个量不可公度。
+\begin{proposition}[Euclid's Elements, Book X, Proposition 2]
+If, when the less of two unequal magnitudes is continually subtracted in turn from the greater that which is left never measures the one before it, then the two magnitudes are incommensurable.
 \end{proposition}
 
-这里出现了一个有趣的现象，不可公度是用欧几里得算法能否停止来定义的。由于欧几里得算法是递归的，也就是说递归能否中止成了判断条件。这再次将我们的注意力引入到递归的本质上。递归究竟是什么？它怎样用形式化的方法表示？
+It's interesting that the incommensurable is defined by checking whether the Euclidean algorithm terminates or not. Because Euclidean algorithm is recursive, it means the condition is essentially whether recursion terminates or not. It brings our attention to the nature of recursion, what's recursion? How to represent recursion in a formal way?
 
 \begin{Exercise}
-\Question{我们给出的欧几里得算法是递归的，请消除递归，只使用循环实现欧几里得算法和扩展欧几里得算法。}
-\Question{大多数编程环境中的取模运算，要求除数、被除数都是整数。但是线段的长度不一定是整数，请实现一个针对线段的取摸运算。它的效率如何？}
-\Question{我们在证明欧几里得算法正确性的过程中说：“每次都保证余数小于除数。即$b > r_0 > r_1 > r_2 > ... > 0$，但是余数不可能小于零。由于起始值是有限的，故最终算法一定中止。”为什么不会出现，$r_{n}$无限接近于零但不等于零的情况？算法一定会中止么？$a$和$b$是可公度的这一前提保证了什么？}
-\Question{对于二元线性不定方程$ax + by = c$，若$x_1$、$y_1$和$x_2$、$y_2$为两对整数解。试证明$|x_1 - x_2|$的最小值为$b/gcm(a, b)$，且$|y_1 - y_2|$的最小值为$a/gcm(a, b)$。}
-\Question{试证明图\ref{fig:pentagram}的五角星中的线段AC和AG是不可公度的。使用实数表示，它们比值是什么？}
+\Question{The Euclidean algorithm described in this section is in recursive manner. Try to eliminate recursion, implement it and the extended Euclidean algorithm only with loop.}
+\Question{Most programming environments require integers for modular operation. However, the length of segment isn't necessarily integer. Implement a modular operation that manipulates segments. What's about its efficiency?}
+\Question{In the proof of Euclidean algorithm, we mentioned ``Remainders are always less than the divisor. We have $b > r_0 > r_1 > r_2 > ... > 0$. As the remainder can not less than zero, and the initial magnitude is finite, the algorithm must terminate.'' Can $r_{n}$ infinitely approximate zero, but not be zero? Does the algorithm always terminate? What does the precondition that $a$ and $b$ are commensurable ensure?}
+\Question{For the binary linear Diophantine equation $ax + by = c$, let $x_1, y_1$ and $x_2, y_2$ be two pairs of solution. Proof that the minimum of $|x_1 - x_2|$ is $b/gcm(a, b)$, and the minimum of $|y_1 - y_2|$ is $a/gcm(a, b)$}
+\Question{For the regular pentagon with side of 1, how long is the diagonal? Proof that in the pentagram shown in figure \ref{fig:pentagram}, the segment $AC$ and $AG$ are incommensurable. What's their ratio in real number?}
 \end{Exercise}
 
-\section{$\lambda$演算}
+\section{The $\lambda$ calculus}
 
-如果进行计算的是如我们人类这样的智慧生命，也许不用深究递归的原理。我们只需要进行计算，发现递归时就在自己的思维中螺旋进入下一个层次。当递归终止时，就退回上一层。当人们思考如何用机器帮助我们进行计算时，这一问题才变得重要起来。二十世纪三十年代，当人们在研究可计算问题时，分别独立提出了一些计算模型。最著名的包括图灵提出的图灵机模型（1935年），丘奇（1932到1941年）和克莱尼（Stephen Kleene，1935年）提出的$\lambda$演算，埃尔布朗（Jacques Herbrand）和哥德尔（Kurt Gödel）提出的递归函数（1934年）等。
+Recursion would not be a problem if performed by human. As the intelligent beings, we are able to enter the next level of computation when meet recursion, and return back to the upper level after that. However, it matters when instruct machine to compute. Several computation models were developed in 1930s independently. The most famous ones are Turing machine (1935 by Turing), $\lambda$-calculus (1932 - 1941 by Church, and 1935 by Stephen Kleene. The Greek letter $\lambda$ is pronounced as lambda), and recursive function (1934 by Jacques Herbrand and Kurt Gödel).
 
 %\begin{wrapfigure}{L}{0.35\textwidth}
 \begin{figure}[htbp]
  \centering
- \includegraphics[scale=0.2]{img/Turing.eps}
+ \subcaptionbox{Alan Mathison Turing, 1912 - 1954}[0.45\linewidth]{\includegraphics[scale=0.2]{img/Turing.jpg}} \quad
+ \subcaptionbox{Alonzo Church, 1903 - 1995}[0.45\linewidth]{\includegraphics[scale=0.65]{img/Church.jpg}}
  \captionsetup{labelformat=empty}
- \caption{艾伦$\cdot$图灵（Alan Mathison Turing，1912 - 1954）}
  \label{fig:Turing}
+ \label{fig:Church}
 \end{figure}
 %\end{wrapfigure}
 
-图灵是英国数学家、逻辑学家，深刻地影响了计算机科学的理论发展，他提出使用图灵机来形式化算法和计算的概念，是现代通用计算机的模型。图灵因此被称为计算机科学之父和人工智能之父\cite{wiki-Turing}。第二次世界大战期间，图灵参加了盟军位于布莱切利公园的密码破译中心。他设计了很多技术用以快速破解纳粹德国的密码。图灵研制了一台绰号为“炸弹”（Bombe）的电子机器，使用战前波兰发现的方法，可以在一小时内找到德军恩尼格玛（Enigma）密码机的密钥。密码的成功破译是盟国获胜的一个关键因素，许多历史学家认为缩短了战争达2年之多，并且挽救了成千上万的生命。战争结束后，图灵开始从事“自动计算机”(ACE)的逻辑设计和具体研制工作。在图灵的设计思想指导下，1950年制出了ACE样机，1958年制成大型ACE机。人们认为，通用计算机的概念就是图灵提出来的。1950年，图灵开始考虑机器思维的问题并在论文《计算机与智能》中提出了著名的“图灵测试”。这一划时代的作品，使图灵赢得了“人工智能之父”的桂冠。1951年，由于在可计算数学方面所取得的成就，图灵成为英国皇家学会会员，时年39岁。为了纪念他对计算机科学的巨大贡献，由美国计算机协会（ACM）于1966年设立一年一度的图灵奖，以表彰在计算机科学中做出突出贡献的人，图灵奖被喻为“计算机界的诺贝尔奖”。
+Turing was an English mathematician, computer scientist, and logician. Turing was highly influential in the development of theoretical computer science, providing a formalization of the concepts of algorithm and computation with the Turing machine, which can be considered a model of a general-purpose computer. Turing is widely considered to be the father of theoretical computer science and artificial intelligence\cite{wiki-Turing}.
 
-\begin{wrapfigure}{R}{0.3\textwidth}
-%\begin{figure}[htbp]
- \centering
- \includegraphics[scale=0.6]{img/Church.eps}
- \captionsetup{labelformat=empty}
- \caption{阿隆佐$\cdot$丘奇（Alonzo Church, 1903 - 1995）}
- \label{fig:Church}
-%\end{figure}
-\end{wrapfigure}
+During the Second World War, Turing worked for the Government at Bletchley Park, Britain's codebreaking center that produced Ultra intelligence. He devised a number of techniques for speeding the breaking of German ciphers, including improvements to the pre-war Polish bombe method, an electromechanical machine that could find settings for the Enigma cipher machine. Turing played a pivotal role in cracking intercepted coded messages that enabled the Allies to defeat the Nazis in many crucial engagements. It has been estimated that this work shortened the war in Europe by more than two years and saved millions lives.
 
-对计算本身进行形式化，被称为“元数学”。这一试图重新为计算树立数学地位的尝试产生了一个杰作——$\lambda$演算。$\lambda$演算名字的由来还有一则有趣的故事。在研究计算本身时，人们意识到应该区分函数和函数的值，例如我们说“如果$x$是奇数那么$x \times x$也是奇数”，这时我们指的是函数的值，而如果我们说“$x \times x$是递增的”，那说的就是这个函数本身。为了区别这两个概念，我们会把函数写成$x \mapsto x \times x$而不单是$x \times x$。
+After the war, Turing worked on the Automatic Computing Engine (ACE), which was one of the first designs for a stored-program computer. the Pilot ACE  executed its first program on 1950, and a number of later computers around the world owe much to it. The full version of ACE was built in 1958 after his death. From 1950, Turing worked in ``Computing Machinery and Intelligence''. He addressed the problem of artificial intelligence, and proposed an experiment that became known as the Turing test, an attempt to define a standard for a machine to be called ``intelligent''. The idea was that a computer could be said to ``think'' if a human interrogator could not tell it apart, through conversation, from a human being. Turing was elected a Fellow of the Royal Society (FRS) in 1951 at the age of 39. Since 1966, the Turing Award has been given annually by the Association for Computing Machinery (ACM) for technical or theoretical contributions to the computing community. It is widely considered to be the computing world's highest honour, equivalent to the Nobel Prize.
 
-“$\mapsto$”符号是在1930年前后，由尼古拉$\cdot$布尔巴基（Nicolas Bourbaki）\footnote{“布尔巴基”是一群法国数学家共同使用的笔名。布尔巴基的目的是在集合论的基础上，用最具严格性，最一般的方式来重写整个现代高等数学。布尔巴基学派产生了包括安德烈·韦伊，亨利·嘉当，舒瓦兹，塞尔，格罗滕迪克，迪厄多内等一大批著名数学家。}引入的。二十世纪初，罗素和怀特海在《数学原理》中使用了$\hat{x}(x \times x)$的表示法，1930年代时，丘奇想使用类似的表示法，但是他的出版商不知道如何在$x$上面印出这个“帽子”符号，于是就改成在$x$的前面加上一个与之相似的大写希腊字母$\Lambda$，它后来又变成了小写字母$\lambda$。于是最终表达式就成了今天我们看到的$\lambda x . x \times x$\cite{Dowek2011}。虽然$x \mapsto x \times x$的表示法已经广为接受，人们还是会在逻辑学和计算机科学中使用丘奇的表示法，而这种语言的名字“$\lambda$演算”也正源自于此。
+The formalization of computation itself is called {\em Metamathematics}. This attempt led to a great work, the $\lambda$-calculus. There's a interesting story about the name. When considering the computation itself, people realized we should distinguish function and its evaluation result. For example, if we say `if $x$ is odd, then $x \times x$ is also odd', we mean the evaluated value of the function; while if we say `$x \times x$ is monotonic increasing', we mean the function itself. To differentiate these two concepts, we write function as $x \mapsto x \times x$, but not only $x \times x$.
 
-\subsection{表达式化简}
-我们先从一些简单的例子开始了解如何用$\lambda$演算形式化算法与计算过程。首先是加减乘除四则运算，我们把它们也看成某种函数。比如加法1+2，可以看作用一个名为“+”的函数，作用到1和2两个变量上。按照把函数名写在前面的习惯，这一表达式可以写成$(+\ 1\ 2)$。针对表达式的求值，就可以看作是一系列的化简过程，例如：
+The `$\mapsto$' symbol was introduced by Nicolas Bourbaki\footnote{Nicolas Bourbaki is the collective pseudonym of a group of (mainly French) mathematicians. Their aim is to reformulate mathematics on an extremely abstract and formal but self-contained basis with the goal of grounding all of mathematics on set theory. Many famous mathematician participants the Bourbaki group, like Henri Cartan, Claude Chevalley, Jean Dieudonné, André Weil, Laurent Schwartz, Jean-Pierre Serre, Alexander Grothendieck, and Serge Lang.} around 1930. Russel and Whitehead used the notation $\hat{x}(x \times x)$ in their famous book {\em Principia Mathematica} in 1910s. Church wanted to use a similar notation in 1930s, however, the publisher he worked with didn't know how to print the `hat' symbol on top of $x$. Alternatively, they printed the uppercase Greek letter $\Lambda$ before $x$, and later changed to lowercase letter $\lambda$. That is the reason why we see it's in the form of $\lambda x . x \times x$ today\cite{Dowek2011}. Although the $x \mapsto x \times x$ presentation is widely accepted, people tend to use Church's notation particularly in logic and computer science, and named it as the `$\lambda$-calculus'.
+
+\subsection{Expression reduction}
+
+We start from some simple example of $\lambda$-calculus to demonstrate how to formalize the computation and algorithm. For basic arithmetic operations of plus, minus, times, and subtraction, we treat them also as functions. For instance 1 + 2 can be considered as applying function `+' to two arguments 1 and 2. Following the traditions to write function name first, this expression can be written as $(+\ 1\ 2)$. The process of expression evaluation can be viewed as a series of reduction steps. For example:
 
 \[
 \begin{array}{ll}
@@ -648,11 +661,11 @@ After figure out $x$ and $y$, we can populate the steps as in Appendix.
 \end{array}
 \]
 
-这里箭头符号$\to$读作“化简为”。注意到函数$f$应用到变量$x$上，并没有写成$f(x)$而是写成了$f\ x$的形式。对于多元函数，如$f(x, y)$，我们不把它写成$(f\ (x, y))$而是用更加简单一致的方法写成$((f\ x)\ y)$。这样为了表达“三加四”这样的加法，需要写成$((+\ 3)\ 4)$。表达式$(+\ 3)$实际上表示了一个函数，它把任何传入的变量都加3。这样在整体上这个表达式的含义就是：把加法“+”函数先应用到变量3上，这样的结果是一个函数，然后再把这个函数应用到变量4上。这样本质上，我们认为所有的函数都只接受一个参数。这一方法最初是由肖芬格尔（Schönfinkel, 1889 - 1942）在1924年提出，后来经哈斯克尔$\cdot$克里在1958年后被广泛使用的。因此它被称为函数的“克里化”（Currying）\cite{SPJ1987}。
+The arrow symbol $\to$ read as `reduce to'. Note that when apply $f$ to variable $x$, we don't write it as $f(x)$, but as $f\ x$. For multi-variable functions, like $f(x, y)$, we don't write as $(f\ (x, y))$, but use the uniformed way as $((f\ x)\ y)$. Therefore, three plus four should be written as $((+\ 3)\ 4)$. Expression $(+\ 3)$ actually represents a function, it adds 3 to any argument passed in. As a whole, this expression means `apply function + to a variable that equals to 3, it gives a function as result. Then apply this function to another variable that equals to 4'. By this means, we treat every function only takes one argument. This method was first introduced by Schönfinkel (1889 - 1942) in 1924, then widely used by Haskell Curry from 1958. It is known as {\em Currying}\cite{SPJ1987}.
 
-严格按照克里化的方式写出的表达式含有很多括弧，为了简化描述，我们在不引起歧义的情况下会省略一些括弧，例如将$((f\ ((+\ 3)\ 4))\ (g\ x))$简写为$(f\ (+\ 3\ 4)\ (g\ x))$。
+There will be too many parentheses if written strictly in Curried form. To make it concise, we'll omit some parentheses without causing ambiguity. For example we'll simplify $((f\ ((+\ 3)\ 4))\ (g\ x))$ to $(f\ (+\ 3\ 4)\ (g\ x))$.
 
-在进行表达式化简时，需要能够理解一些基本含义并做出计算。对于四则运算，我们已经在第一章中介绍的皮亚诺算术的基础上定义了加法和乘法。我们也可以用类似的方式定义其逆运算减法和除法。对于参与运算以及表示结果的常数，我们也有基于零和后继的定义。在这些理论基础上，实现时通常将基本运算和数字内置实现（built-in）以提高性能。通常加以内置实现的还有与或非等逻辑运算、布尔常量真(true)和假(false)。条件表达式可以按照第一章描述的麦卡锡形式$(p \mapsto f, g)$实现，也可以定义为下面的if形式。
+We need define the meanings for basic components when perform expression reduction. For arithmetic operation, we've defined plus and multiplication in chapter 1 on top of Peano axioms. We can use the similar approach to define their reversed operation for minus and divide. For the numbers as operands, we can define them with zero and the successor. With these being clarified in theory, we realize the arithmetic operators and numbers built-in for performance consideration. The logic and, or, not, Boolean constant value true and false are also typically built-in realized. The conditional expression can be realized in McCarthy form like $(p \mapsto f, g)$ introduced in chapter 1, or defined as the below \texttt{if} form:
 
 \[
 \begin{array}{llcl}
@@ -661,7 +674,7 @@ After figure out $x$ and $y$, we can populate the steps as in Appendix.
 \end{array}
 \]
 
-其中$e_t$和$e_f$都是表达式。第一章中通过$cons$定义的复合数据结构，也可以通过函数来抽取其中的各个部分：
+Where both $e_t$, $e_f$ are expressions. For the compound data structure defined by $cons$ in chapter 1, we also need define functions to extract every part:
 
 \[
 \begin{array}{l}
@@ -670,64 +683,66 @@ tail\ (cons\ a\ b) \mapsto b
 \end{array}
 \]
 
-\subsection{$\lambda$抽象}
+\subsection{$\lambda$ abstraction}
 
-我们前面简单介绍了$\lambda$符号的由来，所谓$\lambda$抽象，实际上是一种构建函数的方法。我们通过一个例子来了解$\lambda$抽象的各个组成部分。
+We told the story about how $\lambda$ symbol was introduced. $\lambda$ abstraction is a method to construct function. Let's use an example to understand every component in $\lambda$ abstraction.
 
 \[
 (\lambda x . +\ x\ 1)
 \]
 
-一个$\lambda$抽象包含四个组成部分，首先是$\lambda$符号，表示“接下来要定义一个函数”。紧随其后的是变量，在本例中就是$x$，被称为形参（formal parameter）。形参之后是一个点，剩余部分是函数体，它向右延申到最长，在本例中是$+\ x\ 1$。有时为了避免对函数体的右边界产生歧义，可以增加括号，对于本例，可以写成：$(+\ x\ 1)$。为了记忆方便，我们可以将$\lambda$抽象的四个部分按照如下方法对应到自然语言上。
+A $\lambda$ abstraction contains four parts. First is the $\lambda$ symbol, it means we start to define a function. The next part is the variable. It's $x$ in this example. The variable is called formal parameter. Following the formal parameter, there is a dot. The rest part is the function body that extends to the right most. It's $+\ x\ 1$ in our example. We can add parentheses to avoid ambiguity about the right boundary of the body. For our example, it will be $(+\ x\ 1)$. To make it easy for memory, we write the four parts in $\lambda$ abstraction corresponding to natural language as below.
 
+\vspace{5mm}
 \begin{tabular}{cccc}
 ($\lambda$ & $x$ & . & +\  $x$\ 1) \\
 $\uparrow$ & $\uparrow$ & $\uparrow$ & $\uparrow$ \\
-函数的 & 自变量是$x$ & 它 & 将$x$和1相加 \\
+That function of & $x$ & which & add $x$ to 1 \\
 \end{tabular}
+\vspace{5mm}
 
-为了方便，在后继的推导中我们也会等价地使用$x \mapsto x + 1$形式的记法。这里有一点需要澄清，$\lambda$抽象并不等同于$\lambda$表达式。$\lambda$抽象只是$\lambda$表达式的一种情况，$\lambda$表达式还包括其它三种情况：
+We'll also use the equivalent $x \mapsto x + 1$ form for convenience. Note that $\lambda$ abstraction is not equivalent to $\lambda$ expression, $\lambda$ abstraction is only one type of $\lambda$ expressions. $\lambda$ expression also has two other types:
 
 \begin{tabular}{rcll}
-<表达式> & = & <常量> & 内置的常量，数字、布尔值等 \\
-        & | & <变量> & 变量名 \\
-        & | & <表达式> <表达式> & 应用 \\
-        & | & $\lambda$ <变量> . <表达式> & $\lambda$抽象
+<exp> & = & <constant> & built-in constants, numbers, Boolean etc. \\
+        & | & <variable> & variable names \\
+        & | & <exp> <exp> & applications \\
+        & | & $\lambda$ <variable> . <exp> & $\lambda$ abstraction
 \end{tabular}
 
-\subsection{$\lambda$变换规则}
+\subsection{$\lambda$ conversion rules}
 
-考虑下面的$\lambda$表达式，如果对它化简，我们需要知道“全局”变量$y$的值。与之相对，我们不需要事先知道变量$x$的值，因为它以形参出现在函数中。
+When evaluate the below $\lambda$ expression, we need to know the value for the global variable $y$. On the other hand, we needn't know the value of variable $x$, because it appears as the formal parameter.
 
 \[
 (\lambda x . +\ x\ y)\ 2
 \]
 
-比较$x$和$y$的不同之处，我们称$x$是被$\lambda x$“绑定”的。当将这一$\lambda$抽象应用到参数2时，我们会用2替换掉所有的$x$。相反，$y$没有被$\lambda$绑定，我们称变量$y$是自由的。总之，表达式的值是由未被绑定的自由变量的值决定的。一个变量要么是被绑定的，要么是自由的。下面是一个稍复杂点的例子：
+Different from $y$, we say $x$ is bound to $\lambda x$. When apply this $\lambda$ abstraction to argument 2, we replace $x$ by 2. On the contrary, $y$ is not bound by $\lambda$, we say $y$ is free. Overall, the expression value is determined by the unbound free variable values. A variable is either bound or free. Here is another example:
 
 \[
 \lambda x . +\ ((\lambda y . +\ y\ z)\ 3)\ x
 \]
 
-我们可以把它写成箭头记法，这样可以看得更清楚：
+We can make it clear with the arrow notation:
 
 \[
 x \mapsto ((y \mapsto y + z)\ 3) + x
 \]
 
-这样就可以看出，$x$与$y$是被绑定的，而$z$是自由变量。在更加复杂的表达式中，同一变量的名字，有时是被绑定的，有时又以自由变量的形式出现，例如：
+We see that both $x$ and $y$ are bound, while $z$ is free. In the more complex expression, the same variable name may be bound, and at the same time appear as free. For example:
 
 \[
 +\ x\ ((\lambda x . +\ x\ 1)\ 2)
 \]
 
-写成箭头形式为：
+Written in the arrow form:
 
 \[
 x + ((x \mapsto x + 1)\ 2)
 \]
 
-我们看到，第一次出现的$x$是个自由变量，而后面出现的$x$是被绑定的。在复杂的表达式中，这种同一名字代表不同的变量的情况给会表达式化简带来麻烦。为了解决名称冲突的问题，我们引入第一条$\lambda$变换规则——$\alpha$-变换。其中$\alpha$是希腊字母阿尔法。这一规则说，我们可以将$\lambda$表达式中的一个变量，重新命名为另一个变量。例如：
+We see that, $x$ is free in its first occurrence, but is bound in the second occurrence. The same name represents for different variable can cause confusion in a complex expression. To solve the name conflict, we introduce the first $\lambda$ conversion rule, $\alpha$-conversion. Where $\alpha$ is the Greek letter alpha. This rule allows us to rename a variable in $\lambda$ expression to another one. For example:
 
 \[
 \lambda x . +\ x\ 1 \quad \overset{\alpha}{\longleftrightarrow} \quad \lambda y . +\ y\ 1
@@ -735,25 +750,25 @@ x + ((x \mapsto x + 1)\ 2)
 
 %for short arrow, can be replaced with \xleftrightarrow{\alpha}
 
-写成箭头形式为：
+or written in the arrow form:
 
 \[
 x \mapsto x + 1 \quad \overset{\alpha}{\longleftrightarrow} \quad y \mapsto y + 1
 \]
 
-我们说$\lambda$抽象是一种构建函数的方法，如何将构建好的函数应用到参数值上呢？这就需要引入第二条$\lambda$变换规则——$\beta$-变换。正向使用这条规则时，把$\lambda$抽象函数体中的所有形参的自由出现替换成形参的值。例如：
+We mentioned that $\lambda$ abstraction is a method to construct function. How to apply the constructed function to specific parameter? In order to do that, we need the second $\lambda$ conversion rule, the $\beta$-conversion. When using this rule, we replace all the free occurrence of formal parameter in function body to its value. For example:
 
 \[
 (x \mapsto x + 1)\ 2
 \]
 
-根据变换规则，把$\lambda$抽象$x \mapsto x + 1$应用到自变量2上得2 + 1。即2 + 1是将函数体$x + 1$中出现的形参$x$替换为2的结果。用箭头将这一变换表示为：
+According to the conversion rule, applying the $\lambda$ abstraction $x \mapsto x + 1$ to the free variable 2 gives 2 + 1. 2 + 1 is the result when replace the formal parameter $x$ in function body $x + 1$ with 2. It can be written in arrow form as below:
 
 \[
 (x \mapsto x + 1)\ 2 \quad \overset{\beta}{\longrightarrow} \quad 2 + 1
 \]
 
-我们称这一特定箭头方向的变换为$\beta$-规约（$\beta$-reduction）\footnote{也称为$\beta$-消解或$\beta$-化简}。而反向使用这条规则称为$\beta$-抽象。下面再通过更多的列子了解一下$\beta$-规约。首先是形参多次出现的例子：
+We call the conversion along the direction of this arrow as $\beta$-reduction. When using it reversely, we call it $\beta$-abstraction. Let's get familiar with $\beta$-reduction with more examples. First is about multiple occurrences of the formal parameter.
 
 \[
 \begin{array}{rcl}
@@ -762,35 +777,35 @@ x \mapsto x + 1 \quad \overset{\alpha}{\longleftrightarrow} \quad y \mapsto y + 
 \end{array}
 \]
 
-然后是形参出现零次的情况：
+Here's another example that the formal parameter does not occur.
 
 \[
 (x \mapsto 1)\ 2 \quad \overset{\beta}{\longrightarrow} \quad 1
 \]
 
-这是一个典型的“常量映射”的例子。接下来是一个多重规约的例子：
+This is a typical example of constant projection. The next is a multiple steps reduction.
 
 \[
 \begin{array}{rcll}
-(x \mapsto (y \mapsto y - x))\ 2\ 4\ & \overset{\beta}{\longrightarrow} & (y \mapsto y - 2)\ 4 & \text{克里化} \\
-                                     & \overset{\beta}{\longrightarrow} & 4 - 2 & \text{内层规约} \\
-                                     & \longrightarrow & 1 & \text{内置四则运算}
+(x \mapsto (y \mapsto y - x))\ 2\ 4\ & \overset{\beta}{\longrightarrow} & (y \mapsto y - 2)\ 4 & \text{Currying} \\
+                                     & \overset{\beta}{\longrightarrow} & 4 - 2 & \text{Inner reduction} \\
+                                     & \longrightarrow & 2 & \text{Built-in arithmetic}
 \end{array}
 \]
 
-可以看到，从外向内逐层规约是一个不断克里化的过程。有时我们把多重规约简写如下：
+We see that the reduction from inner to outer is a repeated Currying process. We write the multiple steps reduction in a simplified way sometimes:
 
 \[
 (\lambda x . (\lambda y . E)) \quad \Rightarrow \quad (\lambda x . \lambda y . E)
 \]
 
-其中$E$表示函数体。写成箭头形式为：
+Where $E$ represents the function body. Written in the arrow form:
 
 \[
 (x \mapsto (y \mapsto E)) \quad \Rightarrow \quad (x \mapsto y \mapsto E)
 \]
 
-使用$\beta$-规约进行函数应用时，参数也可以是另一个函数，例如：
+When applying a function with $\beta$-reduction, the parameter can be another function. For example:
 
 \[
 \begin{array}{rcl}
@@ -800,39 +815,40 @@ x \mapsto x + 1 \quad \overset{\alpha}{\longleftrightarrow} \quad y \mapsto y + 
 \end{array}
 \]
 
-最后一个我们要介绍的变换是$\eta$-变换。它的定义如下：
+The last conversion rule we'll introduce is the $\eta$-conversion. It's defined as the following:
 
 \[
 (\lambda x . F\ x) \quad \overset{\eta}{\longleftrightarrow} \quad F
 \]
 
-写成箭头形式为：
+or written in the arrow form:
 
 \[
 x \mapsto F\ x \quad \overset{\eta}{\longleftrightarrow} \quad F
 \]
 
-其中$F$是函数，且$x$不是$F$中的自由变量。我们来看一个例子：
+Where $F$ is a function, and $x$ is not the free variable in $F$. Here is an example:
 
 \[
 (\lambda x . +\ 1\ x) \quad \overset{\eta}{\longleftrightarrow} \quad (+\ 1)
 \]
 
-在这个例子中，$\eta$-变换两边的行为表现得完全一样。如果应用到一个参数上，效果都是把这个参数增加1。$\eta$-变换之所以要求$x$不能是$F$的自由变量是为了避免错误地将$(\lambda x. +\ x\ x)$变换为$(+\ x)$。我们可以看到，$x$是$(+\ x)$中的自由变量。同样，限定$F$必须为函数是为了避免错误地将1变换为$(\lambda x . 1\ x)$。在上面的定义中，称从左向右的变换为$\eta$-规约。
+In this example, the $\lambda$-expressions in both sides of $\eta$-conversion behave same. When apply to a parameter, the effect is add 1 to it. The reason why $x$ must not be the free variable in $F$ in $\eta$-conversion is to avoid wrongly converting expression like $(\lambda x. +\ x\ x)$ to $(+\ x)$. We can see that $x$ is the free variable in $(+\ x)$. It's also necessary to limit $F$ to function, otherwise it could convert 1 to $(\lambda x . 1\ x)$, which does not make sense. We call the transform from left to right as $\eta$-reduction.
 
-至此，我们介绍了$\lambda$表达式变换的三大规则，我们小结一下。
+So far, we introduced the three conversion rules for $\lambda$ expression. Summarized as below:
 
 \begin{enumerate}
-\item $\alpha$-变换用于改变形参的名字；
-\item $\beta$-规约用于实现函数应用；
-\item $\eta$-规约用于去除多余的$\lambda$抽象。
+\item $\alpha$-conversion to change the name for formal parameters;
+\item $\beta$-reduction to realize function application;
+\item $\eta$-reduction to eliminate redundant $\lambda$ abstraction.
 \end{enumerate}
 
-此外，我们称内置函数的化简，如加减乘除四则运算、逻辑上的与或非等为$\delta$-变换。在某些文献上，还会看到另外一种$\lambda$表达式变换的简记形式，我们这里简单介绍一下。对表达式$(\lambda x. E)\ M$，进行$\beta$-规约时，我们用$M$替换$E$中的$x$，将此结果记为$E[M/x]$。这样三大变换就可以简写成下面的形式：
+Besides these three rules, we call the built-in functions, like arithmetic operations, logic and, or, not as $\delta$-conversion. Some materials about $\lambda$-calculus uses another simplified notation. When perform $\beta$-reduction for expression $(\lambda x. E)\ M$, we use $M$ to replace $x$ in $E$, written the result as $E[M/x]$. Then the three conversion rules can be simplified as below:
 
+\vspace{5mm}
 \begin{tabular}{|l|rcl|rcl|}
 \hline
-变换 & \multicolumn{3}{|c|}{$\lambda$形式} & \multicolumn{3}{|c|}{箭头形式} \\
+conversion & \multicolumn{3}{|c|}{$\lambda$ form} & \multicolumn{3}{|c|}{arrow form} \\
 \hline
 $\alpha$ & $(\lambda x . E)$ & $\overset{\alpha}{\longleftrightarrow}$ & $\lambda y . E[y/x]$
          & $x \mapsto E$ & $\overset{\alpha}{\longleftrightarrow}$ & $y \mapsto E[y/x]$ \\
@@ -844,16 +860,17 @@ $\eta$   & $(\lambda x . E\ x)$ & $\overset{\eta}{\longleftrightarrow}$ & $E$
          & $x \mapsto E\ x$ & $\overset{\eta}{\longleftrightarrow}$ & $E$ \\
 \hline
 \end{tabular}
+\vspace{5mm}
 
-由于这些转换规则都是双向的，在对一个$\lambda$表达式进行变换时，既可以从左向右进行规约，也可以反过来从右向左进行抽象。这样自然会产生两个问题。第一个问题是，化简过程最终会停止么？第二个问题是，不同的化简方式得到的结果是一致的么？对于第一个问题，答案是不确定的，化简过程不能保证一定会中止\footnote{注意答案并不是“否定”，而是不确定。这本质上和图灵停机问题是一致的。即不存在一个可判定过程，确定任意化简是否中止。我们在最后一章会详细讨论这个问题。}。下面就是一个“死循环”的例子：$(D\ D)$，其中$D$定义为$\lambda x. x\ x$，写成箭头形式为$x \mapsto x\ x$。如果我们试图化简，就会得到这样的结果：
+All these conversions can be applied in both directions, left to right or reversed. It raises two questions by nature. First, will the reduction terminate? Second, do the different reduction steps lead to the same result? For the first question, the answer is not deterministic. The reduction process is not ensure to terminate\footnote{Note the answer is not 'no', but none deterministic. It's essentially as same as the Turing halting problem. There is no determined process can tell if a given reduction process terminates. We'll introduce the details in the last chapter.}. Here is an example of endless loop: $(D\ D)$, where $D$ is defined as $\lambda x. x\ x$. Or written in the arrow form: $x \mapsto x\ x$. If we attempt to simplify it, we'll get the following result:
 
 \[
 \begin{array}{rcll}
-(D\ D) & \to & (x \mapsto x\ x)\ (x \mapsto x\ x) & \text{代入$D$的定义} \\
-       & \xrightarrow{\alpha} & (x \mapsto x\ x)\ (y \mapsto y\ y) & \text{对第二个$\lambda$抽象用$\alpha$-变换} \\
-       & \xrightarrow{\beta} & (y \mapsto y\ y)\ (y \mapsto y\ y) & \text{用第二个表达式替换$x$} \\
-       & \xrightarrow{\alpha} & (x \mapsto x\ x)\ (x \mapsto x\ x) & \text{再用$x$替换回$y$} \\
-       & \to & (x \mapsto x\ x)\ (x \mapsto x\ x) & \text{重复使用上述步骤} \\
+(D\ D) & \to & (x \mapsto x\ x)\ (x \mapsto x\ x) & \text{Substitute with definition of $D$} \\
+       & \xrightarrow{\alpha} & (x \mapsto x\ x)\ (y \mapsto y\ y) & \text{$\alpha$-conversion for the second $\lambda$ abstraction} \\
+       & \xrightarrow{\beta} & (y \mapsto y\ y)\ (y \mapsto y\ y) & \text{replace $x$ with the second expression} \\
+       & \xrightarrow{\alpha} & (x \mapsto x\ x)\ (x \mapsto x\ x) & \text{replace $y$ with $x$} \\
+       & \to & (x \mapsto x\ x)\ (x \mapsto x\ x) & \text{repeat the above steps} \\
        & ... &
 \end{array}
 \]
@@ -861,137 +878,137 @@ $\eta$   & $(\lambda x . E\ x)$ & $\overset{\eta}{\longleftrightarrow}$ & $E$
 \begin{wrapfigure}{R}{0.3\textwidth}
 %\begin{figure}[htbp]
  \centering
- \includegraphics[scale=0.3]{img/Church-Rosser.eps}
+ \includegraphics[scale=0.3]{img/Church-Rosser.png}
  %\captionsetup{labelformat=empty}
- \caption{丘奇-罗瑟定理的示意}
+ \caption{Church-Rosser confluence}
  \label{fig:Church-Rosser-confluence}
 %\end{figure}
 \end{wrapfigure}
 
-更耐人寻味的是这个例子：$(\lambda x . 1)\ (D\ D)$，如果先化简$(\lambda x . 1)$，那么化简过程会中止，答案为1。反之如果先化简$(D\ D)$，则根据上面的结论，这一过程就会陷入“死循环”而无法中止。丘奇和他的学生罗瑟\footnote{罗瑟（John Barkley Rosser Sr. 1907 - 1989）是美国数学家、逻辑学家。除了丘奇-罗瑟定理外，罗瑟还和克莱尼一起还提出了克莱尼-罗瑟悖论，在数论领域，他提出了罗瑟筛法，并证明了罗瑟定理，该定理指出，第$n$个素数$p_n > n \ln n$。罗瑟在1936年还给出了一种更强的哥德尔第一不完全定理的形式，他把不可判定命题改进为：“对本命题的任何证明，都存在一个对否命题的更短证明。”}在1936年证明了一对定理，完整地回答了第二个问题。
+A more interesting example is $(\lambda x . 1)\ (D\ D)$, if firstly reduce the $(\lambda x . 1)$ part, it terminates with the result of 1. But if firstly reduce $(D\ D)$ part, it loops endlessly as shown above. Church and his student Rosser\footnote{John Barkley Rosser Sr. 1907 - 1989. was an American mathematician and logician. Besides Church-Rosser confluence theory, he also found the Kleene-Rosser paradox with Kleene. In number theory, he developed what is now called ``Rosser sieve'' and proved Rosser theorem that the $n$-th prime number $p_n > n \ln n$. Rosser gave a stronger form for the  Gödel's first incompleteness theorem. He improved the none deterministic proposition to `For any proof to this proposition, there exists a shorter one for the negated one.'} proved a pair of theorems that completely answered the second question.
 
-\begin{theorem}[丘奇-罗瑟定理一]
-若$E_1 \leftrightarrow E_2$，则存在$E$，使得$E_1 \to E$且$E_2 \to E$。
+\begin{theorem}[Church-Rosser theorem 1]
+If $E_1 \leftrightarrow E_2$, then there exists $E$ that $E_1 \to E$ and $E_2 \to E$.
 \end{theorem}
 
-也就是说，如果化简过程是可终止的，则化简结果是一致的。不同的化简方法会化简到同一结果，如图\ref{fig:Church-Rosser-confluence}所示。在此基础上，丘奇和罗瑟又证明了第二定理。为此我们先要给出“范式”（Normal form）的概念，所谓范式，又称$\beta$范式，是指不能再进行$\beta$-规约的形式。简单来讲，就是表达式中能够应用的函数都已经应用了。更严格的范式是$\beta-\eta$范式，在这样的范式中，既不能进行$\beta$-规约，也不能进行$\eta$-规约。例如$(x \mapsto x + 1)\ y$不是范式，因为它可以进行$\beta$-规约变成$y + 1$。下面是范式的递归定义。
+It means, if the reduction process terminates, then the results confluence. Varies reduction steps give the same result, as shown in figure \ref{fig:Church-Rosser-confluence}. Church and Rosser proved the second theorem on top of the first one. We need the concept of the {\em normal form} to understand it. The normal form, also known as $\beta$ normal form, is an expression that we can't do any further $\beta$-reduction. It means all the functions have already been applied. A more strict normal form is the $\beta-\eta$ normal form, which neither $\beta$-reduction, nor $\eta$-reduction can be performed. For example, $(x \mapsto x + 1)\ y$ is not normal form, because we can apply $\beta$-reduction to change it to $y + 1$. The following defines the normal form recursively.
 
 \[
 \begin{array}{rcll}
-normal((\lambda x . y)\ z) & = & \textbf{false} & \text{可进一步$\beta$-规约} \\
-normal(\lambda x . (f\ x)) & = & \textbf{false} & \text{可进一步$\eta$-规约} \\
-normal(x\ y) & = & normal(x) \land normal(y) & \text{应用：函数和参数都是范式} \\
-normal(x) & = & \textbf{true} & \text{其它情况}
+normal((\lambda x . y)\ z) & = & \textbf{false} & \text{can do further $\beta$-reduction} \\
+normal(\lambda x . (f\ x)) & = & \textbf{false} & \text{can do further $\eta$-reduction} \\
+normal(x\ y) & = & normal(x) \land normal(y) & \text{Application: both function and parameter are normal forms} \\
+normal(x) & = & \textbf{true} & \text{others}
 \end{array}
 \]
 
-\begin{theorem}[丘奇-罗瑟定理二]
-若$E_1 \to E_2$，且$E_2$为范式，则存在从$E_1$化简到$E_2$的正规顺序。
+\begin{theorem}[Church-Rosser Theorem 2]
+If $E_1 \to E_2$, and $E_2$ is normal form, then there exists normal order to convert from $E_1$ to $E_2$.
 \end{theorem}
 
-注意，这一定理要求化简过程也必须是可终止的。所谓正规顺序（normal order）就是从左向右，从外向内的化简顺序。
+Note this theorem requires the reduction process terminates. The normal order is the order to reduce from left to right, from outer to inner.
 
-\section{递归的定义}
+\section{Definition of recursion}
 
-利用上一节中介绍的$\lambda$抽象，我们已经可以定义一些简单函数，但是如何定义递归函数呢？比如阶乘，它可以递归地定义为：
+With $\lambda$ abstraction, we can define some simple functions. How to define recursive function? The factorial for example can be recursively defined as below:
 
 \[
 fact = n \mapsto \textbf{if}\ n = 0\ \textbf{then}\ 1\ \textbf{else}\ n \times fact (n - 1)
 \]
 
-但这并不是一个合法的$\lambda$表达式，问题是由于$\lambda$抽象只定义了匿名函数，而我们并未定义如何给函数命名。再次观察递归的阶乘定义，它形如:
+But this is not a valid $\lambda$ expression. The $\lambda$ abstraction can only define anonymous functions, while we don't know how to name a function. Observe the recursive factorial definition, it has the pattern like:
 
 \[
 fact = n \mapsto (... fact ...)
 \]
 
-我们反向使用$\beta$-规约（即$\beta$-抽象），将其变换为：
+Reversely using the $\beta$-reduction (i.e. $\beta$-abstraction), we can get:
 
 \[
 fact = (f \mapsto (n \mapsto (... f ...)))\ fact
 \]
 
-进一步可以抽象为
+It can be further abstract to:
 
 \be
 fact = H\ fact
 \label{eq:H-fact}
 \ee
 
-其中
+where
 
 \[
 H = f \mapsto (n \mapsto (... f ...))
 \]
 
-注意到，经过这样的变换，我们得到的$H$不再是递归的，它是一个普通的$\lambda$表达式。观察式(\ref{eq:H-fact})，它表示了递归。在形式上它是一个数学方程，让我们联想起“微分方程”的概念。例如解微分方程$y' = sin(x)$得到$y = a - cos(x)$。如果我们能将方程$F = H\ F$解出，就能完整地定义阶乘了。进一步观察，我们发现这个方程的含义是，将$H$应用到$F$上，得到的结果仍然是$F$。这一概念在数学上叫做“不动点”。我们称$F$是$H$的不动点。再举一个不动点的例子：$\lambda$表达式$x \mapsto x \times x$的不动点是0和1，这是因为$(x \mapsto x \times x)\ 0 = 0$且$(x \mapsto x \times x)\ 1 = 1$。
+Note that after this conversion, $H$ is not recursive any more. It is a normal $\lambda$ expression. Observe the equation (\ref{eq:H-fact}), it represents recursion. It is in equation form, which reminds us about the differential equation. For example, solving the differential equation $y' = sin(x)$ gives $y = a - cos(x)$. If we can solve the equation $F = H\ F$, then we are able to define factorial independently. Further observe this equation, it means when apply $H$ to $F$, the result is still $F$. Such concept is called {\em fixed point} in mathematics. We say that $F$ is the fixed point of $H$. Here's another example: the fixed points for $\lambda$ expression $x \mapsto x \times x$ are 0 and 1, this is because we have $(x \mapsto x \times x)\ 0 = 0$ and $(x \mapsto x \times x)\ 1 = 1$.
 
-\subsection{Y组合子}
+\subsection{Y combinator}
 
-我们希望找到$H$的不动点，显然$H$的不动点只依赖于$H$本身。为此，我们引入一个函数$Y$，它接受一个函数，然后返回这个函数的不动点。$Y$的行为表现如下：
+We want to figure out the fixed point for $H$, it's obvious that the fixed point only depends on $H$. To do that, we introduce a function $Y$. It accepts a function, then returns its fixed point. $Y$ behaves like this:
 
 \be
 Y\ H = H\ (Y\ H)
 \label{eq:Y-H}
 \ee
 
-为此$Y$被称为“不动点组合子”（fixpoint combinator）。使用$Y$，我们就得到了方程(\ref{eq:H-fact})的解：
+$Y$ is called fixpoint combinator. By using $Y$, we define the solution to equation (\ref{eq:H-fact}).
 
 \be
 fact = Y\ H
 \label{eq:fact-in-Y}
 \ee
 
-这样得到的$fact$是一个无递归的定义。我们可以这样验证这个解：
+Such $fact$ is a non-recursive definition. We can verify this solution as the following:
 
 \[
 \begin{array}{rcll}
-fact & = & Y\ H & \text{式(\ref{eq:fact-in-Y})} \\
-     & = & H\ (Y\ H) & \text{式(\ref{eq:Y-H})} \\
-     & = & H\ fact & \text{式(\ref{eq:fact-in-Y})反向}
+fact & = & Y\ H & \text{By (\ref{eq:fact-in-Y})} \\
+     & = & H\ (Y\ H) & \text{By (\ref{eq:Y-H})} \\
+     & = & H\ fact & \text{Reverse of (\ref{eq:fact-in-Y})}
 \end{array}
 \]
 
-$Y$的强大之处在于它可以表达所有的递归函数。但是现在的$Y$仍然是个黑盒子，我们需要用$\lambda$抽象来真正实现它。下面就是$Y$的实现：
+$Y$ is so powerful that it can represent any recursive functions. However, it is still a black box to us. We need realize it in $\lambda$ abstraction.
 
 \be
 Y = \lambda h . (\lambda x . h\ (x\ x))\ (\lambda x . h\ (x\ x))
 \ee
 
-写成箭头形式为：
+Written in the arrow form:
 
 \[
 Y = h \mapsto (x \mapsto h\ (x\ x)) (x \mapsto h\ (x\ x))
 \]
 
-我们打开了潘多拉的魔盒，现在来验证一下这个$Y$的$\lambda$抽象是否表现得符合我们的预期：$Y\ H = H\ (Y\ H)$。
+We are opening a magic box, let's verify if $Y$ in $\lambda$ abstraction behaves as we expected: $Y\ H = H\ (Y\ H)$.
 
 \begin{proof}
 \[
 \begin{array}{rcll}
-Y\ H & = & (h \mapsto (x \mapsto h\ (x\ x)) (x \mapsto h\ (x\ x)))\ H & \text{$Y$的定义} \\
-     & \xleftrightarrow{\beta} & (x \mapsto H\ (x\ x))\ (x \mapsto H\ (x\ x)) & \text{$\beta$-规约，用$H$代换$h$} \\
-     & \xleftrightarrow{\alpha} & (y \mapsto H\ (y\ y))\ (x \mapsto H\ (x\ x)) & \text{对前半部分用$\alpha$-变换} \\
-     & \xleftrightarrow{\beta} & H\ ((x \mapsto H\ (x\ x))\ (x \mapsto H\ (x\ x))) & \text{$\beta$-规约，$y$被后半部代换} \\
-     & \xleftrightarrow{\beta} & H\ (h \mapsto (x \mapsto h\ (x\ x))\ (x \mapsto h\ (x\ x))\ H) & \text{$\beta$-抽象，$H$抽出为参数} \\
-     & = & H\ (Y\ H) & \text{代入$Y$的定义}
+Y\ H & = & (h \mapsto (x \mapsto h\ (x\ x)) (x \mapsto h\ (x\ x)))\ H & \text{Definition of $Y$} \\
+     & \xleftrightarrow{\beta} & (x \mapsto H\ (x\ x))\ (x \mapsto H\ (x\ x)) & \text{$\beta$-reduction, substitute $h$ with $H$} \\
+     & \xleftrightarrow{\alpha} & (y \mapsto H\ (y\ y))\ (x \mapsto H\ (x\ x)) & \text{$\alpha$-conversion for the first half} \\
+     & \xleftrightarrow{\beta} & H\ ((x \mapsto H\ (x\ x))\ (x \mapsto H\ (x\ x))) & \text{$\beta$-reduction, substitute $y$ with the second half} \\
+     & \xleftrightarrow{\beta} & H\ (h \mapsto (x \mapsto h\ (x\ x))\ (x \mapsto h\ (x\ x))\ H) & \text{$\beta$-abstraction, extract $H$ as parameter} \\
+     & = & H\ (Y\ H) & \text{Definition of $Y$}
 \end{array}
 \]
 \end{proof}
 
-最终，使用$Y$，我们可以如下实现阶乘的定义：
+Finally, let us define factorial with $Y$:
 
 \[
 Y\ (f \mapsto (n \mapsto \textbf{if}\ n = 0\ \textbf{then}\ 1\ \textbf{else}\ n \times f\ (n - 1)))
 \]
 
-用$\lambda$-抽象来定义$Y$的数学意义远大于其实现的意义。在真实的环境中，通常$Y$被内置实现为函数，可以直接将$Y\ H$转化为$H\ (Y\ H)$。
+It is more significant in mathematics than in practice to define $Y$ in $\lambda$ abstraction. $Y$ is often realized as a built-in function in real environment, which directly converts $Y\ H$ to $H\ (Y\ H)$.
 
-\section{$\lambda$演算的意义}
+\section{The impact of $\lambda$ calculus}
 
-$\lambda$演算的意义在于，它用一组简单的规则对复杂的计算过程进行了定义。将欧几里得算法用$\lambda$表示出来，再利用$\beta$规约进行计算。这样的实现可能比较复杂，但确实可行。它不仅可以表达这一函数，而是对所有的可计算函数都使用。图灵后来证明了$\lambda$演算与图灵机的等价性。$\lambda$演算的一大优势在于它仅仅使用了传统的数学概念——函数。因而在十九世纪30年代，$\lambda$演算被用来对数学进行形式化。然而在1935年，克莱尼-罗瑟悖论证明了最初的$\lambda$形式系统在逻辑上是不一致的。1936年，丘奇将$\lambda$演算模型中和纯计算有关的部分分离出来，称为的无类型$\lambda$演算。1940年时，丘奇又提出了一个弱化计算，但是逻辑自洽的形式系统，被称之为简单类型$\lambda$演算。
+The significant of the $\lambda$ calculus is that it models the complex computation process with a set of simple rules. Consider the way of representing the Euclidean algorithm in $\lambda$ expressions, then perform $\beta$-reduction to evaluate the result, it's feasible although looks complex from realization perspective. It does not limit to Euclidean algorithm, but can represents any computable functions. People later proved that $\lambda$ calculus and Turing machine are equivalent. One advantage of $\lambda$ calculus is that it only uses the traditional function concept in mathematics. People used it in 1930s to formalize the metamathematics. However, Kleene and Rosser proved that the original lambda calculus was inconsistent in 1935. Subsequently, in 1936 Church isolated and published just the portion relevant to computation, what is now called the untyped lambda calculus. In 1940, he also introduced a computationally weaker, but logically consistent system, known as the simply typed lambda calculus.
 
-我们展示了如何用$\lambda$演算定义基本的四则运算、逻辑运算、定义和应用普通函数以及递归函数。最后，我们给出如何用$\lambda$演算定义复合数据结构。我们用此前定义的$cons$、$head$、$tail$作为例子。以下是它们的$\lambda$抽象定义：
+We showed how to use $\lambda$ calculus to define arithmetic operations, logic operations, the simple functions, and recursive functions. There is also an important thing, the composed data structure, need be covered. Actually, $\lambda$ calculus can define $cons$, $head$, and $tail$ as well:
 
 \[
 \begin{array}{rcl}
@@ -1001,7 +1018,7 @@ tail & = & (\lambda c . c\ (\lambda a . \lambda b . b))
 \end{array}
 \]
 
-写成箭头形式为：
+Written in the arrow form:
 
 \[
 \begin{array}{rcl}
@@ -1011,7 +1028,7 @@ tail & = & c \mapsto c\ (a \mapsto b \mapsto b)
 \end{array}
 \]
 
-我们来验证一下$head\ (cons\ p\ q) = p$这一关系。
+Let's verify that $head\ (cons\ p\ q) = p$ holds.
 
 \[
 \begin{array}{rcl}
@@ -1026,11 +1043,12 @@ head\ (cons\ p\ q) & = & (c \mapsto c\ (a \mapsto b \mapsto a))\ (cons\ p\ q) \\
 \end{array}
 \]
 
-这说明，理论上复合数据结构不必一定要内置实现，而可以用$\lambda$定义。本章练习中还展示了如何用$\lambda$演算基于皮亚诺公理系统定义自然数、布尔值及逻辑运算。
+It tells us that the composite data structure needn't be built-in realized. We can use $\lambda$ to define them. The exercise of this chapter demands you to consider how to define the natural numbers in Peano Axioms, the Boolean values, and the logic operators with $\lambda$ calculus.
 
 \begin{Exercise}
-\Question{使用$\lambda$变换规则验证$tail\ (cons\ p\ q) = q$。}
-\Question{可以仅仅使用$\lambda$演算来定义自然数。下面是丘奇数的定义：
+\Question{Use $\lambda$ conversion rules to verify $tail\ (cons\ p\ q) = q$。}
+\Question{We can define numbers with $\lambda$ calculus. The following definition is called Church numbers:
+
 \[
 \begin{array}{r@{\quad:\quad}l}
 0 & \lambda f . \lambda x . x \\
@@ -1040,9 +1058,10 @@ head\ (cons\ p\ q) & = & (c \mapsto c\ (a \mapsto b \mapsto a))\ (cons\ p\ q) \\
   & ...
 \end{array}
 \]
-请利用第一章介绍的内容，定义丘奇数的加法和乘法。
+Define the addition and multiplication operators for the Church numbers with what we introduced in chapter 1.
 }
-\Question{以下是丘奇布尔值的定义，以及逻辑运算的一种实现：
+\Question{The following defines the Church Boolean values, and the relative logic operators:
+
 \[
 \begin{array}{r@{\quad:\quad}l}
 \textbf{true} & \lambda x . \lambda y . x \\
@@ -1052,20 +1071,21 @@ head\ (cons\ p\ q) & = & (c \mapsto c\ (a \mapsto b \mapsto a))\ (cons\ p\ q) \\
 \textbf{not} & \lambda p . p\ \textbf{false}\ \textbf{true}
 \end{array}
 \]
-其中\textbf{false}的定义和丘奇数0的定义本质上是相同的。试用$\lambda$变换证明：\textbf{and}\ \textbf{true}\ \textbf{false} = \textbf{false}；你能给出if...then...else...语句的$\lambda$定义么？
+
+where \textbf{false} is defined as same as the Church number 0. Use the $\lambda$ conversion rules to prove that: \textbf{and}\ \textbf{true}\ \textbf{false} = \textbf{false}. Please give the definition of if ... then ... else ... expression with the $\lambda$ calculus.
 }
 \end{Exercise}
 
-\section{更多的递归结构}
+\section{More recursive structures}
 
-至此，我们已经将递归函数和递归数据结构建立在完整的数学基础上。利用这些工具，我们可以继续定义一些较复杂的数据结构。例如下面的二叉树。
+We've completely defined the recursive functions and the basic pair data structures on top of pure mathematics. We can next define complex data structures like the binary trees.
 
 \lstset{frame=none}
 \begin{lstlisting}
 data Tree A = nil | node (Tree A, A, Tree A)
 \end{lstlisting}
 
-这个递归定义说，一棵元素类型为A的二叉树或者为空，或者是一个分支节点。节点包含三部分：两棵元素类型为A的子树和一个类型为A的元素。习惯上我们称这两棵子树为左子树和右子树。A是类型参数，例如自然数。$node(nil, 0, node(nil, 1, nil))$表示了一棵元素为自然数的二叉树。下面我们为二叉树定义抽象的叠加操作$foldt$。
+This definition says, a binary tree of type A is either empty, or a branch node with three parts: two sub-trees of type A, together with an element of type A. We often call the two sub-trees as the left and right sub-trees. A is the type parameter, like natural numbers for example. $node(nil, 0, node(nil, 1, nil))$ is a binary tree of natural numbers. We can define the abstract fold operation $foldt$ for binary trees.
 
 \be
 \begin{array}{l}
@@ -1074,27 +1094,27 @@ foldt(f, g, c, node(l, x, r)) = g(foldt(f, g, c, l), f(x), foldt(f, g, c, r))
 \end{array}
 \ee
 
-如果函数$f$将类型为A的自变量映射为类型为B的值，我们将其类型记为$f : A \to B$。克里化的函数$foldt(f, g, c)$的类型为$foldt(f, g, c) : Tree\ A \to B$，其中$c$的类型为$B$，而函数$g$的类型为$g : (B \times B \times B) \to B$，写成克里化的形式为$g : B \to B \to B \to B$。使用抽象的叠加函数$foldt$我们可以定义针对二叉树的逐一映射$mapt$：
+If function $f$ maps variable of type A to B, we write its type as $f : A \to B$. The Curried function $foldt(f, g, c)$ has type of $foldt(f, g, c) : Tree\ A \to B$, where the type of $c$ is $B$; the type of $g$ is $g : (B \times B \times B) \to B$, written in Curried form is $g : B \to B \to B \to B$. We can define the map function $mapt$ for binary trees with the $foldt$ function.
 
 \be
 mapt(f) = foldt(f, node, nil)
 \ee
 
-通过叠加操作，还可以定义函数来统计一棵二叉树中的元素个数：
+With the folding function, we can count the number of elements in a tree:
 
 \be
 sizet = foldt(one, sum, 0)
 \ee
 
-其中$one(x) = 1$，是一个常数函数，它对任何变量都返回1。$sum$是一个三元的累加函数：$sum(a, b, c) = a + b + c$。
+Where, $one(x) = 1$ is a constant function, it always returns 1 for any parameters. $sum$ is a ternary summation function defined as $sum(a, b, c) = a + b + c$.
 
-在此基础上，复合使用第一章定义的列表，我们还可以从二叉树扩展到多叉树，下面是一个多叉树的定义：
+Using the list defined in chapter 1, we can expand the binary trees to multi-trees as below.
 
 \begin{lstlisting}
 data MTree A = nil | node (A, List (MTree A))
 \end{lstlisting}
 
-一棵元素类型为A的多叉树或者为空，或者为一个复合节点。复合节点包括一个类型为A的元素，和若干子树。所有子树用一个多叉树的列表来表示。定义多叉树的抽象叠加操作需要相互递归调用列表的叠加操作。
+A multi-tree of type A is either empty, or a composite node, which contains an element of type A, together with multiple sub-trees. The sub-trees are hold in a list. The abstract tree folding operation recursively calls the list folding operation.
 
 \be
 \begin{array}{l}
@@ -1105,123 +1125,166 @@ h(t, z) = foldm(f, g, z, t)
 \ee
 
 \begin{Exercise}
-\Question{不用抽象的叠加操作$foldt$，通过递归定义二叉树的逐一映射$mapt$；}
-\Question{定义一个函数$depth$，计算一棵二叉树的最大深度；}
-\Question{有人认为，二叉树的抽象叠加操作$foldt$应该这样定义：
+\Question{Define the abstract $mapt$ for binary trees without of using $foldt$.}
+\Question{Define a function $depth$, which counts for the maximum depth of a binary tree.}
+\Question{Someone thought the abstract fold operation for binary tree $foldt$, should be defined as the following:
 \[
 \begin{array}{l}
 foldt(f, g, c, nil) = c \\
 foldt(f, g, c, node(l, x, r)) = foldt(f, g, g(foldt(f, g, c, l), f(x)), r)
 \end{array}
 \]
-也就是说，$g : (B \times B) \to B$是一个类似于加法这样的二元函数。能否利用这个$foldt$定义逐一映射$mapt$？}
-\Question{排序二叉树（又称二叉搜索树）是一种特殊的二叉树，如果二叉树的元素类型A是可比较的，并且对任何非空节点$node(l, k, r)$都满足：左子树$l$中的任何元素都小于$k$，右子树$r$中的任何元素都大于$k$。定义二叉树的插入函数$insert(x, t) : (A \times Tree A) \to Tree A$}
-\Question{为多叉树定义逐一映射。能否利用多叉树的叠加操作来定义？如果不能，应当怎样修改叠加操作？}
+That is to say $g : (B \times B) \to B$ is a binary operation like add. Can we use this $foldt$ to define $mapt$?}
+\Question{The binary search tree (BST) is a special tree that the type A is comparable. For any none empty $node(l, k, r)$, all elements in the left sub-tree $l$ are less than $k$, and all elements in the right sub-tree $r$ are greater than $k$. Define function $insert(x, t) : (A \times Tree\ A) \to Tree\ A$ that inserts an element into the tree.}
+\Question{Can we define the mapping operation for multi-trees with folding? If not, how should we modify the folding operation?}
 \end{Exercise}
 
-\section{递归的形式与结构}
+\section{The recursive pattern and structure}
 
-递归不仅存在于古老的欧几里得算法和现代计算机系统中，它迷人的形式和结构还出现在各种人类文明艺术中。图\ref{fig:Ceramic-Tile-Tessellations-Marrakech}的平面镶嵌中，可以看到多重不同的递归形式。
+Recursion exists both in the ancient Euclidean algorithm and in modern computer systems. The fascinating recursive pattern and structure also appear in various of arts in human civilizations. For example in Islamic mosaic arts, shown in figure \ref{fig:Ceramic-Tile-Tessellations-Marrakech}.
 
 %\begin{wrapfigure}{R}{0.3\textwidth}
 \begin{figure}[htbp]
  \centering
- \includegraphics[scale=1]{img/Marrakech.eps}
+ \includegraphics[scale=1]{img/Marrakech.jpg}
  %\captionsetup{labelformat=empty}
- \caption{马拉喀什（摩洛哥城市）的瓷砖图案}
+ \caption{Zellige terracotta tiles in Marrakech (a city of the Kingdom of Morocco)}
  \label{fig:Ceramic-Tile-Tessellations-Marrakech}
 \end{figure}
 %\end{wrapfigure}
 
-我们可以看到瓷砖中的多边形图案中递归地含有更小的多边形嵌套。通过不同颜色的瓷砖，这种递归展现出几何形式的美。这些图案还在更大的范围组成条纹形式，而各个条纹内部都是不同的递归图形。图\ref{fig:flower}左边展示的是文艺复兴时期艺术大师达$\cdot$芬奇手稿中的递归图样。在圆周上使用相同的半径，依次可作出六个相互交织的圆，从而构成一个六瓣的花样图案。而在更大的范围上，又递归地构成了同样形式的图案。左侧是中国民间手工编织的蝈蝈笼子，他们展示了类似的递归图样。笼子的网眼是六边形的，而笼子的整体形状从轴向看去也是六边形的。
+We can see the polygon patterns in the mosaic recursively contain smaller polygons. It demonstrates the beauty of recursive geometric patterns through the colorful tiles. The small patterns form big stripes, which brings the varies of effects. Figure \ref{fig:flower} is a sketch of the famous Renaissance artist Leonardo da Vinci. It's also a recursive pattern. Using the same radius, he drew six interlaced circles along the centered one. They form a six-lobed snowflake style figure. And they recursively form the same pattern in a bigger scope. The right figure shows a pile of Chinese hand-made katydid cages. It demonstrated the similar recursive pattern. The mesh of the cage is hexagonal. While the overall shape of the cage is also hexagonal when viewed from the axial direction.
 
 %\begin{wrapfigure}{R}{0.3\textwidth}
 \begin{figure}[htbp]
  \centering
- \subcaptionbox{达芬奇绘制的递归图案手稿}[0.3\linewidth]{\includegraphics[scale=0.20]{img/ldv_flower.eps}} \quad
- \subcaptionbox{手工编织的蝈蝈笼子}[0.5\linewidth]{\includegraphics[scale=0.36]{img/cage.eps}}
+ \subcaptionbox{A sketch of Leonardo da Vinci}[0.3\linewidth]{\includegraphics[scale=0.20]{img/ldv_flower.jpg}} \quad
+ \subcaptionbox{Chinese katydid cages}[0.5\linewidth]{\includegraphics[scale=0.36]{img/cage.jpg}}
  %\captionsetup{labelformat=empty}
- \caption{艺术和生活物品中的递归形式}
+ \caption{The recursive pattern in art and artifact.}
  \label{fig:flower}
 \end{figure}
 %\end{wrapfigure}
 
-递归不仅出现在美术作品中，还出现在更加抽象的艺术形式中，例如音乐。复调音乐中的卡农（Canon）和赋格（Fugue）都是这方面的代表。卡农的所有声部虽然都模仿一个声部，但不同高度的声部依一定间隔进入，造成一种此起彼伏，连绵不断的效果。每一个声部都地归地展示主题但却含有各种变化，比如音调的升高或降低、逆行重叠、速度变快（减值）或变慢（增值）、旋律倒影等等。
+Not only in art, recursion also appears in music. For example, the polyphonic music canon and fugue can have recursive musical texture. Canon is a contrapuntal music that employs a melody with one or more imitations played after a given duration. The initial melody is called the leader, while the imitative melody, which is played in a different voice, is called the follower. The follower must imitate the leader, either as an exact replication of its rhythms and intervals or some transformation thereof. The weaving of the leader and followers, results in a continuous effect. Each part imitates the theme but contains various changes, such as raising or lowering the pitch, retrograde overlapping, faster (diminution) or slowing (augmentation), melody reflection, and so on.
 
-\begin{wrapfigure}{L}{0.45\textwidth}
-%\begin{figure}[htbp]
+%\begin{wrapfigure}{L}{0.45\textwidth}
+\begin{figure}[htbp]
  \centering
- \includegraphics[scale=0.6]{img/Drawing-Hands-1948.eps}
+ \includegraphics[scale=0.8]{img/Haydn-OP-76.png}
  %\captionsetup{labelformat=empty}
- \caption{艾舍尔的作品《画手》，1948年}
+ \caption{Minuet of Haydn's String Quartet in D Minor, Op. 76, No. 2}
+ \label{fig:Haydn-OP-76}
+\end{figure}
+%\end{wrapfigure}
+
+%\begin{wrapfigure}{L}{0.45\textwidth}
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[scale=0.6]{img/Drawing-Hands-1948.jpg}
+ %\captionsetup{labelformat=empty}
+ \caption{M.C. Escher, Drawing Hands, 1948}
  \label{fig:Drawing-Hands}
-%\end{figure}
-\end{wrapfigure}
+\end{figure}
+%\end{wrapfigure}
 
-赋格通常建立在一个主题上，以不同的声部、不同的调子、偶尔也用不同的速度或上下颠倒或从后往前地进行演奏。然而，赋格的概念远不如卡农那么严格，因而允许有更多的情感或艺术的表现。赋格的识别标志的是它的开始方式：单独的一个声部唱出它的主题，唱完后，第二个声部或移高五度或降低四度进入。与此同时，第一个声部继续唱“对应主题”，也叫第二主题，用来在节奏、和声、及旋律方面与主题形成对比。每个声部依次唱出主题，常常是另一个声部伴唱对应主题，其它的声部所起的作用随作曲家的想象而定。当所有的声部都“到齐”了，就不再有什么规则了。当然，还是有一些标准的手法，但它没有严格到只能够按照某个公式去创作赋格。 《音乐的奉献》 中的两首赋格曲就是杰出例子，它们绝不可能“照公式创造出来”。这两首曲子都具有远比赋格的性质更为深刻的东西\cite{GEB}。
+A fugue is like a canon, in that it is usually based on one theme which gets played in different voices and different keys, and occasionally at different speeds or upside down or backwards. However, the notion of fugue is much less rigid than that of canon, and consequently it allows for more emotional and artistic expression. The telltale sign of a fugue is the way it begins: with a single voice singing its theme. When it is done, then a second voice enters, either five scale-notes up, or four down. Meanwhile the first voice goes on, singing the ``countersubject'': a secondary theme, chosen to provide rhythmic, harmonic, and melodic contrasts to the subject. Each of the voices enters in turn, singing the theme, often to the accompaniment of the countersubject in some other voice, with the remaining voices doing whatever fanciful things entered the composer's mind. When all the voices have ``arrived'', then there are no rules. There are, to be sure, standard kinds of things to do-but not so standard that one can merely compose a fugue by formula. The two fugues in J.S. Bach's Musical Offering are outstanding examples of fugues that could never have been "composed by formula". There is something much deeper in them than mere fugality\cite{GEB}.
 
-这些都是有限递归的例子。图\ref{fig:Drawing-Hands}是荷兰艺术大师艾舍尔在1948年创作的《画手》，两只手递归地在描绘着对方。《画手》是无穷递归的典型例子。画中上方的手正在用一支笔描绘着下方的手，而下方的手也在地归地描绘着上方的手。这组相互递归的嵌套一层一层，无穷无尽。
+Not only finite recursion, we can also find the infinite recursion in arts. Figure \ref{fig:Drawing-Hands}, Drawing Hands is a lithograph by the Dutch artist M. C. Escher first printed in January 1948. Two hands mutual recursively are drawing each other. It an example of infinite recursion. The upper hand is using a pencil drawing the lower hand, while the lower hand, at the same time, is drawing the upper hand. The recursion is embedded loop by loop endlessly.
 
-无穷递归的一个数学与艺术完美结合的例子是“分形”（fractal）。例如著名的分形图案“科克雪花”（Kock snowflake）曲线可以通过这样的无穷递归规则来产生：对图形中的每个线段，均分为三段，以第二段为底向上方作出一个等腰三角形，然后再把这个底擦掉。图\ref{fig:fractal}中展示了三重递归后从一个正三角形得到的科克雪花。另一个著名的递归分形图案是谢尔平斯基三角形（Sierpinski），它的生成规则是对图形中的每个三角形，分别取三边的中点，然后连成一个内部的小三角形。下图展示了递归四次后的谢尔平斯基三角形。
+The perfect combination of mathematical recursion and art is fractal. Kock snowflake is a famous fractal curve, which can be generated by infinite recursion rules: For every section, divided it into 3 equal parts, draw a equilateral triangle on top of the middle section, then erase the bottom side of the triangle. Figure \ref{fig:fractal} shows the Kock snowflake result after recursively applying this rule three times on a equilateral triangle. Another famous fractal pattern is called Sierpinski triangle. The generation rule is to connect all the three middle points of the side in a triangle recursively. Below figure shows the Sierpinski triangle after recursively applying the rules four times.
 
 %\begin{wrapfigure}{R}{0.3\textwidth}
 \begin{figure}[htbp]
  \centering
- \subcaptionbox{科克雪花的递归生成规则}[0.4\linewidth]{\includegraphics[scale=0.25]{img/KochFlake.eps}}
- \subcaptionbox{谢尔平斯基三角形}[0.4\linewidth]{\includegraphics[scale=0.1]{img/Sierpinski-triangle.eps}}
+ \subcaptionbox{Recursive generate rules for Kock snowflake}[0.4\linewidth]{\includegraphics[scale=0.25]{img/KochFlake.png}}
+ \subcaptionbox{Sierpinski triangle}[0.4\linewidth]{\includegraphics[scale=0.1]{img/Sierpinski-triangle.png}}
  %\captionsetup{labelformat=empty}
- \caption{递归产生的分形图案}
+ \caption{Recursive generated fractal patterns.}
  \label{fig:fractal}
 \end{figure}
 %\end{wrapfigure}
 
-最后让我们以两张分形图案来结束本章，其中一张是人类思维产生的分形——茱莉亚集（Julia）；另一张是自然界产生的分形。
+We show another two fractal patterns as the close of this chapter. One is the fractal in human mind, Julia set; the other is a fractal in nature.
 
 \begin{figure}[htbp]
  \centering
- \subcaptionbox{茱莉亚集分形}[0.45\linewidth]{\includegraphics[scale=0.18]{img/Julia_set.eps}}
- \subcaptionbox{西兰花中的分形}[0.45\linewidth]{\includegraphics[scale=0.2]{img/Broccoli.eps}}
+ \subcaptionbox{Julia set fractal}[0.45\linewidth]{\includegraphics[scale=0.18]{img/Julia_set.png}}
+ \subcaptionbox{Broccoli fractal}[0.45\linewidth]{\includegraphics[scale=0.2]{img/Broccoli.jpg}}
  %\captionsetup{labelformat=empty}
- \caption{人类思维和自然界产生的分形}
+ %\caption{人类思维和自然界产生的分形}
  \label{fig:more-fractal}
 \end{figure}
 
-\section{扩展阅读}
+\section{Further Reading}
 
-韩雪涛的《数学悖论与三次数学危机》\cite{HanXueTao16}对古希腊数学的成就有生动的介绍。欧几里得的《几何原本》中译本\cite{Elements}是永远的经典。斯捷潘诺夫和罗斯的《数学与泛型编程》\cite{StepanovRose15}中有欧几里得算法算法的多种实现。随着各大主流编程环境引入lambda演算，这方面的介绍材料很多。佩顿琼斯的《函数式编程语言的实现》\cite{SPJ1987}讲解全面并且深入浅出。侯世达先生的《集异璧》\cite{GEB}中有大量关于递归的介绍和奇思妙想，曾获得普利策大奖。中译本秉着文化同构的精神进行了非凡的再创作。
+{\em Mathematics: The Loss of Certainty} by Morris Kline contains good introduction about mathematics in ancient Greek. The {\em Elements} by Euclidean is the most famous classic book. It contains the Euclidean algorithm. {\em From Mathematics to Generic Programming} by Alexander Stepanov and Daniel E Ross gives varies of implementation of the Euclidean algorithm. As more and more main stream programming environments adopt lambda calculus, there are many materials about it. {\em The Implementation of Functional Programming Languages} by Simon Peyton Jones is a good book introduced lambda calculus in depth. {\em Gödel, Escher, Bach: An Eternal Golden Braid} by Douglas Hofstadter intensively presents the unbelievable ideas of recursion and self-reference. It won the Pulitzer Prize for general non-fiction and the National Book Award for Science.
+
+\section{Appendix: Example program for 2 water jars puzzle}
+
+After figure out the integer solutions for 2 water jars puzzle, we can generate the detailed steps, and output them like table (\ref{tab:designed-jugs-ops}).
+
+\lstset{frame=single}
+\begin{lstlisting}
+-- Populate the steps
+water a b c = if x > 0 then pour a x b y
+              else map swap $ pour b y a x
+  where
+    (x, y) = jars a b c
+
+-- Pour from a to b, fill a for x times, and empty b for y times.
+pour a x b y = steps x y [(0, 0)]
+  where
+    steps 0 0 ps = reverse ps
+    steps x y ps@((a', b'):_)
+      | a' == 0 = steps (x - 1) y ((a, b'):ps)  -- fill a
+      | b' == b = steps x (y + 1) ((a', 0):ps)  -- empty b
+      | otherwise = steps x y ((max (a' + b' - b) 0,
+                                min (a' + b') b):ps) -- a to b
+\end{lstlisting}
+
+Run this program, enter \texttt{water 9 4 6}, the best pour water steps
+are output as below:
+
+\begin{verbatim}
+[(0,0),(9,0),(5,4),(5,0),(1,4),(1,0),(0,1),(9,1),(6,4),(6,0)]
+\end{verbatim}
 
 \ifx\wholebook\relax \else
 \begin{thebibliography}{99}
 
 \bibitem{HanXueTao16}
-韩雪涛 ``数学悖论与三次数学危机''. 人民邮电出版社. 2016, ISBN: 9787115430434
+{\fontspec{\cnmainft}韩雪涛 ``数学悖论与三次数学危机''. 人民邮电出版社. 2016, ISBN: 9787115430434}
+
+\bibitem{MKlein1972}
+Morris Klein. ``Mathematical thought from Ancient to Modern Times, Vol. 1''. Oxford University Press; 1972. ISBN: 9780195061352
 
 \bibitem{StepanovRose15}
-[美] 亚历山大 A$\cdot$斯捷潘诺夫，丹尼尔 E$\cdot$罗斯著，爱飞翔译. ``数学与泛型编程：高效编程的奥秘''. 机械工业出版社. 2017, ISBN: 9787111576587
+Alexander A. Stepanov, Daniel E. Rose ``From Mathematics to Generic Programming''. Addison-Wesley Professional; 1 edition (November 17, 2014) ISBN-13: 978-0321942043
 
 \bibitem{Elements}
-[古希腊] 欧几里得 著，兰纪正 朱恩宽 译，梁宗巨 张毓新 徐伯谦 校订 ``几何原本''. 译林出版社. 2014, ISBN: 9787544750066
+Euclid, Thomas Heath (Translator) ``Euclid's Elements (The Thirteen Books) ''. Digireads.com Publishing (December 26, 2017). ISBN-13: 978-1420956474
 
 \bibitem{HanXueTao2009}
-韩雪涛 ``好的数学——“下金蛋”的数学问题''. 湖南科学技术出版社. 2009, ISBN: 9787535756725
+{\fontspec{\cnmainft}韩雪涛 ``好的数学——“下金蛋”的数学问题''. 湖南科学技术出版社. 2009, ISBN: 9787535756725}
 
 \bibitem{Bezout-Identity}
-Wikipedia ``贝祖等式'' \url{https://en.wikipedia.org/wiki/Bézout's_identity}
+Wikipedia ``Bézout's identity'' \url{https://en.wikipedia.org/wiki/Bézout's_identity}
 
 \bibitem{LiuXinyu2017}
-刘新宇 ``算法新解'' 人民邮电出版社. 2017, ISBN: 9787115440358
+{\fontspec{\cnmainft}刘新宇 ``算法新解'' 人民邮电出版社. 2017, ISBN: 9787115440358}
 
 \bibitem{wiki-Turing}
-Wikipedia ``艾伦$\cdot$图灵'' \url{https://en.wikipedia.org/wiki/Alan_Turing}
+Wikipedia ``Alan Turing'' \url{https://en.wikipedia.org/wiki/Alan_Turing}
 
 \bibitem{Dowek2011}
-[法] 吉尔$\cdot$多维克 著，劳佳 译 ``计算进化史：改变数学的命运''. 人民邮电出版社. 2017, ISBN: 9787115447579
+by Serge Abiteboul (Author), Gilles Dowek (Author), K-Rae Nelson (Translator) ``The Age of Algorithms''. Cambridge University Press (December 31, 2019) ISBN-13: 978-1108745420
 
 \bibitem{SPJ1987}
 Simon L. Peyton Jones. ``The implementation of functional programming language''. Prentice Hall. 1987, ISBN: 013453333X
 
 \bibitem{GEB}
-[美]候世达 ``哥德尔、埃舍尔、巴赫——集异壁之大成''. 商务印书馆 1996. ISBN: 978-7-100-01323-9
+Douglas R. Hofstadter ``Gödel, Escher, Bach: An Eternal Golden Braid ''. Basic Books; Anniversary edition (February 5, 1999) ISBN-13: 978-0465026562
 
 \end{thebibliography}
 

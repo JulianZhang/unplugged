@@ -1,3 +1,5 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{prelude}[2019/06/19 Unplug Prelude LaTeX package]
 %
 % loading packages
 %
@@ -34,20 +36,25 @@
 % other packages
 %--------------------------------------------------------------------------
 \usepackage{graphicx, color}
+\usepackage{adjustbox}
 \usepackage{wrapfig}
-\usepackage{subcaption}  %subfig is deprecated
+\usepackage{subcaption}  % subfig is deprecated
+\usepackage{enumerate}
 \usepackage{multicol}
-\usepackage[table]{xcolor} %for colored table
+\usepackage{pdfpages}    % to include pdf
+\usepackage[table]{xcolor} % for colored table
+\usepackage{hhline}
 \usepackage{tikz}
-\usetikzlibrary{patterns,matrix,positioning,shapes}
+\usetikzlibrary{patterns,matrix,positioning,shapes,arrows}
 
-\usepackage{amsmath, amsthm, amssymb, amsbsy} % for math
+\usepackage{amsmath, amsthm, amssymb, amsbsy, nccmath} % for math
 \usepackage{textgreek, upgreek}
 \usepackage{gensymb}
 \usepackage{mathtools}
 \usepackage{extarrows}
 \usepackage{exercise} % for exercise
 \usepackage{stmaryrd} % for banana brackets
+\usepackage{pict2e}   % for customize lens brackets
 \usepackage{ulem}
 
 \usepackage{import} % for nested input
@@ -141,13 +148,6 @@
 
 \interactionmode=\count255
 
-\setmainfont[Mapping=tex-text, BoldFont=\cnboldft]{\cnmainft} % 正文字体（衬线字体）对应Roman
-\setsansfont[BoldFont=\cnboldft]{\cnmainft}   % 无衬线字体
-\setmonofont[Scale=MatchLowercase]{\monoft}   % 等宽字体
-
-\XeTeXlinebreaklocale "zh"  % to solve the line breaking issue
-\XeTeXlinebreakskip = 0pt plus 1pt minus 0.1pt
-
 \titleformat{\paragraph}
 {\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
 \titlespacing*{\paragraph}
@@ -197,10 +197,45 @@
   flexiblecolumns=false
 }
 
-\newcommand\doubleplus{+\kern-1.3ex+\kern0.8ex}
+\newcommand\doubleplus{\ensuremath{\mathbin{+\mkern-10mu+}}}
+%\newcommand\doubleplus{+\kern-1.3ex+\kern0.8ex}
+%\newcommand\mdoubleplus{\ensuremath{\mathbin{+\mkern-10mu+}}}
 \newcommand{\arrowto}[2][]{\xlongrightarrow[#1]{\displaystyle #2}}
 \newcommand{\lbb}{\llparenthesis} % left banana bracket
 \newcommand{\rbb}{\rrparenthesis} % right banana bracket
+
+\newcommand{\lbparen}{%
+  \mathopen{%
+    \sbox0{$()$}%
+    \setlength{\unitlength}{\dimexpr\ht0+\dp0}%
+    \raisebox{-\dp0}{%
+      \begin{picture}(.32,1)
+      \linethickness{\fontdimen8\textfont3}
+      \roundcap
+      \put(0,0){\raisebox{\depth}{$($}}
+      \polyline(0.32,0)(0,0)(0,1)(0.32,1)
+      \end{picture}%
+    }%
+  }%
+}
+
+\newcommand{\rbparen}{%
+  \mathclose{%
+    \sbox0{$()$}%
+    \setlength{\unitlength}{\dimexpr\ht0+\dp0}%
+    \raisebox{-\dp0}{%
+      \begin{picture}(.32,1)
+      \linethickness{\fontdimen8\textfont3}
+      \roundcap
+      \put(-0.08,0){\raisebox{\depth}{$)$}}
+      \polyline(0,0)(0.32,0)(0.32,1)(0,1)
+      \end{picture}%
+    }%
+  }%
+}
+
+\newcommand{\llb}{\lbparen} % left lens bracket
+\newcommand{\rlb}{\rbparen} % right lens bracket
 
 % ======================================================================
 
@@ -229,53 +264,49 @@
 \newcommand{\blre}{\[ \begin{array}{cll}}
 \newcommand{\elre}{\end{array} \]}
 
-\newtheorem{theorem}{定理}[section]
-\newtheorem{lemma}[theorem]{引理}
-\newtheorem{proposition}[theorem]{命题}
-\newtheorem{corollary}[theorem]{推论}
-\newtheorem{definition}{定义}[section]
-\newtheorem{example}{例}[section]
-
-% 中文书籍设置
-% ====================================
-\renewcommand\contentsname{目\ 录}
-%\renewcommand\listfigurename{插图目录}
-%\renewcommand\listtablename{表格目录}
-\renewcommand\figurename{图}
-\renewcommand\tablename{表}
-\renewcommand\proofname{证明}
-\renewcommand\ExerciseName{练习}
-%\renewcommand{\algorithmcfname}{算法}
-
-\ifx\wholebook\relax
-\renewcommand\bibname{参\ 考\ 文\ 献}                    %book类型
-%\newtheorem{Definition}[Theorem]{定义}
-
-\else
-\renewcommand\refname{参\ 考\ 文\ 献}
-\fi
-
-%\setcounter{secnumdepth}{4}
-\titleformat{\chapter}
-  {\normalfont\bfseries\Large}
-  {第\arabic{chapter}章}
-  {12pt}{\Large}
-%% \titleformat{\subsection}
-%%   {\normalfont\bfseries\large}
-%%   {\CJKnumber{\arabic{subsection}}、}
-%%   {12pt}{\large}
-%% \titleformat{\subsubsection}
-%%   {\normalfont\bfseries\normalsize}
-%%   {\arabic{subsubsection}.}
-%%   {12pt}{\normalsize}
-
-%\renewcommand{\baselinestretch}{1.5}                        %文章行间距为1.5倍。
+\newcommand{\btab}{\vspace{5mm} \begin{tabular}}
+\newcommand{\etab}{\end{tabular} \vspace{5mm}}
 
 \makeatletter
 \newcommand{\verbatimfont}[1]{\renewcommand{\verbatim@font}{\ttfamily#1}}
 \makeatother
 
 \setcounter{tocdepth}{4}
-\setcounter{secnumdepth}{4}
+%\setcounter{secnumdepth}{4}
 
 %\verbatimfont{\footnotesize}
+
+\DeclareOption{cn}{
+  \setmainfont[Mapping=tex-text, BoldFont=\cnboldft]{\cnmainft} % 正文字体（衬线字体）对应Roman
+  \setsansfont[BoldFont=\cnboldft]{\cnmainft}   % 无衬线字体
+  \setmonofont[Scale=MatchLowercase]{\monoft}   % 等宽字体
+
+  \XeTeXlinebreaklocale "zh"  % to solve the line breaking issue
+  \XeTeXlinebreakskip = 0pt plus 1pt minus 0.1pt
+
+  \newtheorem{axiom}{公理}[section]
+  \newtheorem{theorem}{定理}[section]
+  \newtheorem{lemma}[theorem]{引理}
+  \newtheorem{proposition}[theorem]{命题}
+  \newtheorem{corollary}[theorem]{推论}
+  \newtheorem{definition}{定义}[section]
+  \newtheorem{example}{例}[section]
+
+  % 中文书籍设置
+  % ====================================
+  \renewcommand\ExerciseName{练习}
+}
+
+\DeclareOption{en}{
+  \newtheorem{axiom}{Axiom}[section]
+  \newtheorem{theorem}{Theorem}[section]
+  \newtheorem{lemma}[theorem]{Lemma}
+  \newtheorem{proposition}[theorem]{Proposition}
+  \newtheorem{corollary}[theorem]{Corollary}
+  \newtheorem{definition}{Definition}[section]
+  \newtheorem{example}{Example}[section]
+}
+
+
+\DeclareOption*{\PackageWarning{prelude}{Unknown ‘\CurrentOption’}}
+\ProcessOptions\relax

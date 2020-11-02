@@ -1,11 +1,15 @@
-%\documentclass{article}
-\documentclass[UTF8, a4paper,twoside]{book} %this has problems
+\documentclass[b5paper,twoside]{book}
+\usepackage[nomarginpar
+  %, margin=.5in
+  , top=1.5cm, bottom=1.5cm, left=2cm, right=2cm
+]{geometry}
 
 % ==================== Book flag==========================
 
 \global\let\wholebook=\relax %without relax, we build article, esle book
 
-\input{common-en.tex}
+\usepackage[en]{prelude}
+\usepackage[firstpage=true]{background}
 
 \setcounter{page}{1}
 
@@ -15,6 +19,9 @@
   {recursion/}
   {algebra/}
   {category-theory/}
+  {deduction/}
+  {infinity/}
+  {paradox/}
 }
 
 \makeindex
@@ -31,18 +38,32 @@
 %                 COVER PAGE
 % ================================================================
 
-\title{{\bf \Huge Mathematics of Programming}
+% https://en.wikipedia.org/wiki/File:FWF_Samuel_Monnier_d%C3%A9tail.jpg
+\backgroundsetup{
+  scale=2,
+  opacity=0.4,
+  angle=0,
+  position={0,0},
+  contents={
+    \includegraphics[width=\paperwidth,height=\paperheight]{img/cover-bg.jpg}}
+}
+
+\title{
+  {\bf \Huge Isomorphism \newline}
+  \vspace{5mm}
+  {\bf -- Mathematics of Programming \newline \newline \newline}
   \centering
-  \scalebox{0.4}{\includegraphics{img/fibonacci-spiral.eps}}
-            }
+  \scalebox{0.3}{\includegraphics{nat/img/the-school-of-athens.jpg}}
+}
 
 \author{LIU Xinyu
-  \thanks{{\bfseries LIU Xinyu} \newline
-    Version: 0.6180339887498949 \newline
-    Email: liuxinyu95@gmail.com \newline
-    }}
+  \thanks{ liuxinyu95@gmail.com, Version: 0.6180339887498949}
+}
 
 \maketitle
+
+\frontmatter
+\subimport{appendix/preface/}{preface-en.tex}
 
 % ================================================================
 %                 Content
@@ -52,27 +73,40 @@
 \tableofcontents
 \newpage
 
-%\part{Preface}
+\mainmatter
+
 \subimport{nat/}{nat-en.tex}
 
 \subimport{recursion/}{recursion-en.tex}
 
-%\subimport{algebra/}{algebra-zh-cn.tex}
+\subimport{algebra/}{algebra-en.tex}
 
-%\subimport{category-theory/}{category-zh-cn.tex}
+\subimport{category-theory/}{category-en.tex}
 
-\part{Appendix}
+\subimport{deduction/}{deduction-en.tex}
+
+\subimport{infinity/}{infinity-en.tex}
+
+\subimport{paradox/}{paradox-en.tex}
+
+\part*{Appendix}
 \appendix
 %\appendixpage
 \noappendicestocpagenum
 \addappheadtotoc
 
-%\subimport{appendix/nat/}{nat-en.tex}
+\backmatter
+\subimport{appendix/answer/}{ans-en.tex}
 
-%\subimport{appendix/recursion/}{recursion-en.tex}
+\subimport{appendix/nat/}{nat-en.tex}
 
-%\input{fdl-1.3.tex}
+\subimport{appendix/category/}{category-en.tex}
+
+%\part{Reference}
+\subimport{appendix/reference/}{reference-en.tex}
 
 \printindex
+
+\input{fdl-1.3.tex}
 
 \end{document}

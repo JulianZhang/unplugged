@@ -1,7 +1,4 @@
-IMG_OBJECTS = Pythagoras Pythagoras-proof Euclid Bezout Meziriac \
-Hippasus pentagram irrational Turing Church Church-Rosser Marrakech \
-ldv_flower cage Drawing-Hands-1948 KochFlake Sierpinski-triangle \
-Julia_set Broccoli
+IMG_OBJECTS =
 DOT_OBJECTS =
 DOT_SOURCES = $(foreach file, $(DOT_OBJECTS), $(file).dot)
 
@@ -24,7 +21,7 @@ $(IMG_OBJECTS): % : %.eps
 # pattern rule matching
 # Makefile auto variable: $< first prerequisite, $@ target
 %.eps : %.png
-	convert $< $@
+	convert -flatten $< $@
 
 %.eps : %.jpg
 	convert $< $@

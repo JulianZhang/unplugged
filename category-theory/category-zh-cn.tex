@@ -9,7 +9,7 @@
 \addtolength{\evensidemargin}{-0.05in}
 \addtolength{\textwidth}{0.1in}
 
-\input{../common-zh-cn.tex}
+\usepackage[cn]{../prelude}
 
 \setcounter{page}{1}
 
@@ -28,7 +28,7 @@
 \markboth{范畴}{编程中的数学}
 
 \ifx\wholebook\relax
-\chapter{范畴论}
+\chapter{范畴}
 \numberwithin{Exercise}{chapter}
 \fi
 
@@ -38,7 +38,7 @@
 
 \begin{wrapfigure}{R}{0.4\textwidth}
  \centering
- \includegraphics[scale=0.5]{img/dewdrop.eps}
+ \includegraphics[scale=0.5]{img/dewdrop.jpg}
  \captionsetup{labelformat=empty}
  \caption{艾舍尔《露珠》1948}
  \label{fig:Escher-Dewdrop-1948}
@@ -46,39 +46,48 @@
 
 欢迎来到范畴世界！我建议你小小的奖励自己一下。你已经迈过了第一道门槛，正在通往神奇的抽象王国之路上。这条路是世界上许多最聪明的心智披荆斩棘开辟出来的。如果说，人们将具体的事物，抽象成不带具体意义的数与形是原始阶段；将数、形与计算的意义去除，抽象成代数结构（例如群）和代数关系（例如同构）是第一阶段；范畴可以算是抽象的第二阶段。
 
-你也许会问，什么是范畴？为什么要了解范畴？这和编程有什么关系？范畴是数学家在1940年代研究同调代数时的“副产品”——顺手发明的理论。最近十几年，范畴论由于其强大的抽象，几乎普适于任何问题，正向各种各样的领域渗透。不要说各大编程语言纷纷引入lambda演算和闭包等结构，有超过20种语言已经实现了单子（Monad）\cite{Monad-Haskell-Wiki}——用范畴的语言说，叫做“函子范畴上的幺半群”。
+你也许会问，什么是范畴？为什么要了解范畴？这和编程有什么关系？范畴是数学家在1940年代研究同调代数时的“副产品”——顺手发明的理论。最近十几年，范畴论由于其强大的抽象，几乎普适于任何问题，正向各种各样的领域渗透。不要说各大编程语言纷纷引入lambda演算和闭包等结构，有超过20种语言已经实现了单子（Monad）\cite{Monad-Haskell-Wiki}——用范畴的语言说，叫做“自函子范畴上的幺半群”。许多基本的计算逐渐使用范畴的语言进行抽象\footnote{例如，传统的右侧叠加定义：\\
+\texttt{foldr \_ z {[} {]} = z} \\
+\texttt{foldr f z (x:xs) = f x (foldr f z xs)} \\
+用范畴语言抽象为：\texttt{foldr f z t = appEndo (foldMap (Endo . f) t) z} 详见本章结尾部分。}。
 
 更重要的是：我们需要抽象。赫尔曼$\cdot$外尔说现代数学在过去几十年不断沉湎在抽象和形式化上。编程领域何尝不是如此呢？现代计算机科学解决的问题空前复杂，大数据量、分布式、高并发、还要保证数据和计算的安全。仅仅靠着前几十年的传统方法——暴力求解、务实的工程实践再加上一点聪明的头脑已经不够了。这逼迫着我们去吸取其它科学和数学中的新方法和新工具。
 
 正如迪厄多内所说：“这种抽象绝不是来自数学家的反常意愿，似乎他们想通过使用深奥莫测的语言来把自己与其他人隔开。数学家是被经典对象和关系的本质特性逼着去锻造新的抽象工具，来解决过去看来是不可攻克的问题。”\cite{Dieudonne1987}（中文版第2页，英文版第9页）
 
+\vspace{5mm}
+
 范畴论是数学家艾伦伯格和麦克兰恩在1940年代创立的。
 
-\begin{wrapfigure}{R}{0.3\textwidth}
+%\begin{wrapfigure}{R}{0.3\textwidth}
+\begin{figure}[htbp]
  \centering
- \includegraphics[scale=0.25]{img/Eilenberg.eps}
+ \includegraphics[scale=0.25]{img/Eilenberg.png}
  \captionsetup{labelformat=empty}
  \caption{艾伦伯格（Samuel Eilenberg, 1913 - 1998）}
  \label{fig:Eilenberg}
-\end{wrapfigure}
+\end{figure}
+%\end{wrapfigure}
 
-塞缪尔·艾伦伯格于1913年生于波兰华沙的一个犹太人家庭。他于1936年在华沙大学获得博士学位。艾伦伯格主要研究代数拓扑。他与诺曼·斯廷罗德（Norman Steenrod）一起对同调理论进行了公理化。艾伦伯格在与麦克兰恩合作研究同调代数的过程中一起创立了范畴论。艾伦伯格也是著名的布尔巴基小组成员。他与昂利·嘉当合作，在1956年完成了经典著作《同调代数》。艾伦伯格后来移居美国，在纽约哥伦比亚大学做教授，他的主要工作是发展纯粹的范畴论。他是该领域的奠基者之一。1986年他获得沃尔夫奖。1998年艾伦伯格逝世于美国纽约市。
+\index{艾伦伯格}
+塞缪尔·艾伦伯格于1913年生于波兰华沙的一个犹太人家庭。父亲是一个酿酒师。他在华沙大学接受了高等教育。当时的华沙大学云集了一批波兰的大数学家，并在点集拓扑学上取得了世界瞩目的成就。他于1936年在华沙大学获得博士学位。在波兰的第二大数学学术中心利沃夫，艾伦伯格结识了著名数学家巴拿赫，并加入了当时著名的数学家团体“苏格兰咖啡”。艾伦伯格和这些数学家们经常聚集在利沃夫市的一家苏格兰咖啡馆，边品尝咖啡边讨论那些没有解决的数学问题。这些未解决的问题后来被整理成了一本书，名叫《苏格兰问题集》（Scottish Book）。1939年，欧洲的局势已经极其紧张。艾伦伯格的父亲劝他移民到美国。他先去了普林斯顿，并于1940年在密歇根大学获得了一个教职。艾伦伯格主要研究代数拓扑。他与诺曼·斯廷罗德（Norman Steenrod）一起对同调理论进行了公理化。艾伦伯格也是著名的布尔巴基小组成员。1949年安德烈·韦伊在芝加哥大学工作的时候邀请艾伦伯格合作编写布尔巴基项目中关于同调群的内容。他与昂利·嘉当合作，在1956年完成了经典著作《同调代数》。艾伦伯格在与麦克兰恩合作研究同调代数的过程中一起创立了范畴论。艾伦伯格后来在纽约哥伦比亚大学做教授，他的主要工作是发展纯粹的范畴论。他是该领域的奠基者之一。1986年他获得沃尔夫奖。1998年艾伦伯格逝世于美国纽约市。
 
 艾伦伯格还是著名的亚洲艺术品收藏家。他收集了来自印度、印度尼西亚、尼泊尔、泰国、柬埔寨、斯里兰卡和中亚的雕塑和艺术品。1992年，他把自己收藏的400多件艺术品捐赠给了纽约大都会博物馆\cite{Wiki-Eilenberg}。
 
-\begin{wrapfigure}{L}{0.3\textwidth}
+\begin{wrapfigure}{L}{0.35\textwidth}
  \centering
- \includegraphics[scale=1]{img/Mac-Lane.eps}
+ \includegraphics[scale=1]{img/Mac-Lane.jpg}
  \captionsetup{labelformat=empty}
  \caption{麦克兰恩（Saunders Mac Lane, 1909 - 2005）}
  \label{fig:Mac-Lane}
 \end{wrapfigure}
 
+\index{麦克兰恩}
 桑德斯·麦克兰恩1909年生于美国康涅狄格州的诺维奇市。麦克兰恩受洗时的名字是“雷斯利·桑德斯·麦克兰恩”。但是他的父母不喜欢这个名字，所以后来就把雷斯利去掉了。麦克兰恩名字的英文本来是MacLane，他的妻子在打字时总是习惯加上一个空格变成Mac Lane，索性后来麦克兰恩就将错就错了。
 
-麦克兰恩在高中时最喜欢化学。他的父亲在这时去世了，只好由祖父来照顾他。1926年，麦克兰恩的一个远房叔叔资助他到耶鲁学习。他的数学老师希尔带领他参加数学竞赛，并且一路过关斩将获得优胜。从此麦克兰恩下定了从事数学的决心。1930年，麦克兰恩从耶鲁毕业，获得了数学和物理学的双学位。毕业前一年，有一次在新泽西召开耶鲁橄榄球队的球迷聚会。麦克兰恩在会上被授予耶鲁优秀毕业成绩奖\cite{Wiki-Mac-Lane}。恰好芝加哥大学的新任校长哈钦斯也在这次聚会中，他鼓励麦克兰恩到芝加哥大学深造。麦克兰恩于是来到了他后来毕生工作的芝加哥大学\footnote{这里有一段小插曲，聚会后不久，哈钦斯就答应给麦克兰恩一笔奖学金。但是麦克兰恩竟然忘记申请研究生课程就直接去了芝加哥大学。当然最后他被获准入学。}。1931年他获得了硕士学位，接着获得了前往世界数学圣地——哥廷根大学进修的机会。麦克兰恩幸运的成为了最后一批前往哥廷根的美国人，不久纳粹德国就开始禁止美国人前来学习。
+麦克兰恩在高中时最喜欢化学。他的父亲在这时去世了，只好由祖父来照顾他。1926年，麦克兰恩的一个远房叔叔资助他到耶鲁学习。他的数学老师希尔带领他参加数学竞赛，并且一路过关斩将获得优胜。从此麦克兰恩下定了从事数学的决心。1930年，麦克兰恩从耶鲁毕业，获得了数学和物理学的双学位。毕业前一年，有一次在新泽西召开耶鲁橄榄球队的球迷聚会。麦克兰恩在会上被授予耶鲁优秀毕业成绩奖\cite{Wiki-Mac-Lane}。恰好芝加哥大学的新任校长哈钦斯也在这次聚会中，他鼓励麦克兰恩到芝加哥大学深造。麦克兰恩于是来到了他后来毕生工作的芝加哥大学\footnote{这里有一段小插曲，聚会后不久，哈钦斯就答应给麦克兰恩一笔奖学金。但是麦克兰恩竟然忘记申请研究生课程就直接去了芝加哥大学。当然最后他被获准入学。}。在芝加哥大学，年近七十岁的数学家摩尔鼓励麦克兰恩前往世界数学圣地——哥廷根大学学习。1931年他获得了硕士学位，接着获得了前往哥廷根大学进修的机会。麦克兰恩幸运的成为了最后一批前往哥廷根的美国人，不久纳粹德国就开始禁止美国人前来学习。
 
-在哥廷根，麦克兰恩师从大数学家保罗$\cdot$伯奈斯、埃米$\cdot$诺特、赫尔曼$\cdot$外尔。在他即将获得博士学位的前夕，导师伯奈斯因为是犹太人，被纳粹政府赶出了校园，于是只好由外尔接替伯奈斯。1934年麦克兰恩获得了哥廷根数学研究所的博士学位，并返回美国\footnote{取得学位后，麦克兰恩与来自芝加哥的多罗茜$\cdot$琼斯结婚，不久后，他们夫妻一起返回了芝加哥。}。
+在哥廷根，麦克兰恩师从大数学家保罗$\cdot$伯奈斯、埃米$\cdot$诺特、赫尔曼$\cdot$外尔。在他即将获得博士学位的前夕，导师伯奈斯因为是犹太人，被纳粹政府赶出了校园，于是只好由外尔接替伯奈斯。1934年麦克兰恩获得了哥廷根数学研究所的博士学位，并返回美国\footnote{取得学位后，麦克兰恩与来自芝加哥的多罗茜$\cdot$琼斯结婚（琼斯帮助他打印了博士论文）。他们邀请朋友举行了一个简朴的婚礼。不久后，他们夫妻一起返回了美国。}。
 
 在1944年与1945年，麦克兰恩领导了在第二次世界大战期间有卓越贡献的哥伦比亚大学应用数学小组。麦克兰恩曾任美国科学院与美国哲学会的副主席，美国数学会的主席。在领导美国数学会的期间，他提倡对现代数学教学改进的研习活动。而在1974年至1980年间，他担任了美国政府的科学顾问。1976年，以他为首的美国数学家访问团访问了中国，考察了当时中国数学学术发展。麦克兰恩于1949年获选为美国科学院院士，并在1989年获得美国国家科学奖章。
 
@@ -88,17 +97,17 @@
 
 \section{范畴}
 
-让我们用非洲大草原来了解范畴。在大草原这个范畴中，有很多种动植物。狮子、鬣狗、猎豹、羚羊、水牛、斑马、秃鹫、蜥蜴、眼镜蛇、蚂蚁……我们管这些动物叫做对象\footnote{和编程中的“面向对象”无关。这里指抽象事物。}，每种动物和植物都是一个对象。这些动植物之间会产生联系，例如狮子会吃羚羊，羚羊吃掉草。我们很容易构造一个食物链。可以从羚羊画一个箭头指向狮子，从草画一个箭头指向羚羊来表示这样的关系。这样对象加上箭头就构成了一个有结构的，彼此联系在一起的系统。
+让我们用非洲大草原来了解范畴。在大草原这个范畴中，有很多种动植物。狮子、鬣狗、猎豹、羚羊、水牛、斑马、秃鹫、蜥蜴、眼镜蛇、蚂蚁……我们管这些动物叫做对象，每种动物和植物都是一个对象。这些动植物之间会产生联系，例如狮子会吃羚羊，羚羊吃掉草。我们很容易构造一个食物链。可以从羚羊画一个箭头指向狮子，从草画一个箭头指向羚羊来表示这样的关系。这样对象加上箭头就构成了一个有结构的，彼此联系在一起的系统。
 
 \begin{figure}[htbp]
  \centering
- \includegraphics[scale=0.4]{img/food-chain.eps}
+ \includegraphics[scale=0.4]{img/food-chain.png}
  %\captionsetup{labelformat=empty}
  \caption{动植物对象与食物关系箭头组成了一个有结构的系统}
- \label{fig:powerset}
+ \label{fig:food-chain}
 \end{figure}
 
-这样的系统要想成为范畴，还必须满足两点。第一点是每个对象都有指向自己的箭头。这种特殊的箭头称为恒等箭头。对于草原上的动植物，从羚羊到狮子箭头说明羚羊在狮子食物链的下游。我们可以认为每种动植物都处于自己物种食物链的下游（别误会，并不是指吃同类，而是指不吃同类）。这样每个物种就都有自指的箭头了。第二点是箭头之间是可组合的。什么叫做组合呢？草有一个指向羚羊的箭头$f$，羚羊有一个指向狮子的箭头$g$。我们即可以把这两个箭头组合起来成为$g \circ f$，表示草处于狮子食物链的下游。进一步，把两个箭头组合起来后，还可以和第三个箭头再次组合。例如狮子死后会被秃鹫吃掉，这样我们可以从狮子画一个指向秃鹫的箭头$h$。组合在一起就是$h \circ (g \circ f)$。这个箭头的含义表示草处于秃鹫食物链的下游，它等价与$(h \circ g) \circ f$。也就是说，食物链的上下游关系是满足结合性的。
+这样的系统要想成为范畴，还必须满足两点。第一点是每个对象都有指向自己的箭头。这种特殊的箭头称为恒等箭头。对于草原上的动植物，从羚羊到狮子箭头说明羚羊在狮子食物链的下游。我们可以认为每种动植物都处于自己物种食物链的下游（别误会，并不是指吃同类，而是指不吃同类）。这样每个物种就都有自指的箭头了。第二点是箭头之间是可组合的。什么叫做组合呢？草有一个指向羚羊的箭头$f$，羚羊有一个指向狮子的箭头$g$。我们可以把这两个箭头组合起来成为$g \circ f$，表示草处于狮子食物链的下游。进一步，把两个箭头组合起来后，还可以和第三个箭头再次组合。例如狮子死后会被秃鹫吃掉，这样我们可以从狮子画一个指向秃鹫的箭头$h$。组合在一起就是$h \circ (g \circ f)$。这个箭头的含义表示草处于秃鹫食物链的下游，它等价与$(h \circ g) \circ f$。也就是说，食物链的上下游关系是可结合的。
 
 在组合的基础上，还有一个叫作“可交换”的概念。例如下面图中，
 
@@ -128,14 +137,15 @@
 \end{tikzpicture}
 \end{center}
 
-如果这两个平行的箭头是等效的，我们称它们是可交换的。用符号表示就是：
+如果这两个平行箭头等效，我们称它们是可交换的。用符号表示就是：
 
 \[
 h = g \circ f
 \]
 
-这样，我们说草原上的动植物，在食物链关系这个箭头下，构成了一个范畴。现在我们给出较为正式的范畴的定义。
+这样，我们说草原上的动植物，在食物链关系这个箭头下，构成了一个范畴。现在我们给出较为正式的范畴定义。
 
+\index{范畴} \index{箭头}
 \begin{definition}
 一个范畴$\pmb{C}$包括一组对象（Object）\footnote{和编程中的“面向对象”无关。这里指抽象事物。}，记为$A, B, C, ...$，和一组箭头（Arrow），记为$f, g, h, ...$。它们之上定义了以下四种操作：
 \begin{itemize}
@@ -151,7 +161,7 @@ h = g \circ f
 \[
 f \circ (g \circ h) = (f \circ g) \circ h
 \]
-我们可以将其写为$f g h$。
+我们可以将其写为$f\ g\ h$。
 \item \textbf{单位元公理}：恒等箭头对于组合运算来说相当于单位元。
 对于任何箭头$A \arrowto{f} B$来说，都有：
 \[
@@ -176,7 +186,6 @@ red \doubleplus (apple \doubleplus tree) = (red \doubleplus apple) \doubleplus t
 \[
 \texttt{""} \doubleplus apple = apple = apple \doubleplus \texttt{""}
 \]
-
 任何词句连接上空词句（单位元）都仍然等于它本身。
 
 把词句幺半群放在一边，再考虑另一个幺半群。群元素是字母组成的集合（在编程中称为字符集），二元操作是集合的并，单位元是空集。将两个字母集合并在一起可以获得一个更大的集合，例如：
@@ -211,13 +220,13 @@ red \doubleplus (apple \doubleplus tree) = (red \doubleplus apple) \doubleplus t
 
 显然组合后“数个数$\circ$取字母”也是一个转换关系。它表示先从英文词句中抽取出不同的字母，然后再统计不同字母的个数。这样，我们就得到了\textbf{幺半群范畴}$\pmb{Mon}$。其中对象是各种各样的幺半群，箭头是彼此间的转换关系，数学上叫做态射。恒等箭头从一个幺半群指向它自己。
 
-这是一个非常巨大的范畴，它包含宇宙中\textbf{所有}的幺半群\footnote{你可能想到了罗素悖论。确切地说，$\pmb{Mon}$包含了宇宙中所有“小”的幺半群}。另一方面，范畴也可以很小，我们接下来看的例子只含有一个幺半群。考虑英文词句这个幺半群，它只有一个对象，就是全体英文的集合（请原谅，这看起来也不怎么小）。对于任何一个英文词句，例如hello，我们都可以定义一个前缀操作，把hello添加到任何其它英文词句前面。我们管这个操作叫“加前缀hello”。例如：“加前缀hello”作用到单词Alice上就变成了helloAlice；类似地还可以定义“加前缀hi”，把它作用到Alice上就得到了hiAlice。如果认为这是两个不同的箭头，则它们的组合就是：
+这是一个非常巨大的范畴，它包含宇宙中\textbf{所有}的幺半群\footnote{你可能想到了罗素悖论。确切地说，$\pmb{Mon}$包含了宇宙中所有“小”的幺半群}。另一方面，范畴也可以很小，我们接下来看的例子只含有一个幺半群。考虑英文词句这个幺半群，它只有一个对象。这个对象是什么并不重要，它可以是任何固定的英文词句集合，甚至是全体英文的集合（请原谅，这看起来也不怎么小）。对于任何一个英文词句，例如hello，我们都可以定义一个前缀操作，把hello添加到任何其它英文词句前面。我们管这个操作叫“加前缀hello”。例如：“加前缀hello”作用到单词Alice上就变成了helloAlice；类似地还可以定义“加前缀hi”，把它作用到Alice上就得到了hiAlice。如果认为这是两个不同的箭头，则它们的组合就是：
 
 \begin{center}
 加前缀hello $\circ$ 加前缀hi = 加前缀hellohi
 \end{center}
 
-表示先增加前缀hi，然后再增加前缀hello。不难验证，任意三个这样的箭头满足结合律。接下来我们还需要检查一下单位元，也就是空词句“”。以空词句作为前缀等于没有变化，也就是恒等变换。这样我们就得到了只有一个对象的幺半群范畴，如图\ref{fig:monoid-as-category}所示。
+表示先增加前缀hi，然后再增加前缀hello。不难验证，任意三个这样的箭头满足结合律。接下来我们还需要检查一下单位元，也就是空词句“”。以空词句作为前缀等于没有变化，也就是恒等变换。这样我们就得到了只有一个对象的幺半群范畴，如图\ref{fig:monoid-as-category}所示。范畴中的每个箭头，都对应幺半群中的一个元素，箭头间的组合，对应于幺半群的二元运算，恒等箭头对应于幺半群的单位元。
 
 \begin{figure}[htbp]
 \centering
@@ -231,10 +240,13 @@ red \doubleplus (apple \doubleplus tree) = (red \doubleplus apple) \doubleplus t
 \label{fig:monoid-as-category}
 \end{figure}
 
+\index{幺半群范畴}
 同样是幺半群，我们既看到了包含宇宙中全部幺半群的范畴$\pmb{Mon}$，也看到了只包含一个幺半群的范畴。可谓一沙一世界，一花一叶一如来。更有意思的是，对于任何范畴$\pmb{C}$，和其中任何的对象$A$，定义集合$hom(A, A)$为所有从$A$指向$A$的箭头。则这一箭头的集合在组合运算下又构成一个幺半群，其中单位元是恒等箭头。这种对偶值得我们仔细体会。
 
+\index{集合全函数范畴}
 我们举的第二个例子是集合。我们让每个集合都成为一个对象\footnote{一旦开始考虑全部集合的集合，就会对导致“全部不包括自身的集合”这样的矛盾，称之为罗素悖论。我们将在第7章详细讲述罗素悖论。}，而箭头是从一个集合$A$到另一个集合$B$的函数（或映射）。我们称$A$为函数的定义域，$B$为值域\footnote{确切地说是全函数，即定义域中的每个元素都可以应用的函数}。组合运算就是函数的组合。即$y = f(x)$与$z = g(y)$的组合为$z = (g \circ f)(x) = g(f(x))$。不难验证，函数的组合满足结合律，单位元是恒等函数$id(x) = x$。这样我们就获得了全体集合和函数组成的范畴$\pmb{Set}$。
 
+\index{偏序集} \index{预序集}
 我们举的第三个例子包括一对概念。分别叫做\textbf{偏序集}和\textbf{预序集}。给定一个集合，所谓预序（pre-order），是说集合中的两个元素之间可以进行比较。我们用二元关系符号$\leq$来表示，这个符号不一定是大于小于关系，它可能表示一个集合是另一个集合的子集，一个词句是另一个词句的后缀，一个人是另一个人的后代等等。如果关系$\leq$满足以下两条性质，我们说这是一个预序关系：
 
 \begin{itemize}
@@ -281,7 +293,7 @@ preset \quad \quad \quad poset
     (m-3-6) edge (m-4-8) %贾政--贾探春
     (m-3-6) edge (m-4-9) %贾政--贾环
     (m-4-1) edge (m-5-1) %贾珍--贾蓉
-    (m-4-4) edge (m-5-4) %贾琏--巧姐
+    (m-4-4) edge (m-5-4) %贾琏--巧姐Pre-discuss on OP1 review
     (m-4-5) edge (m-5-5); %贾珠--贾兰
 \end{tikzpicture}
 \caption{《红楼梦》贾家的家族树}
@@ -294,12 +306,13 @@ preset \quad \quad \quad poset
 
 \begin{figure}[htbp]
  \centering
- \includegraphics[scale=0.4]{img/powerset.eps}
+ \includegraphics[scale=0.4]{img/powerset.png}
  %\captionsetup{labelformat=empty}
  \caption{一个集合的子集在包含关系下构成一个偏序集}
  \label{fig:powerset}
 \end{figure}
 
+\index{偏序集范畴} \index{预序集范畴}
 一般来说，任何一个偏序集都是一个预序集，但是反过来却不一定成立。一个预序集不一定是一个偏序集。高中时我们都学过单调函数，就是那种只增不减的函数，如果$x \leq y$，则$f(x) \leq f(y)$。把这种单调函数组合起来用到偏序集和预序集上，我们就获得了一对范畴
 
 \[
@@ -319,6 +332,7 @@ i \longrightarrow j
 这样任何对象间或者没有箭头，表示它们不可比较；或者存在一个箭头，表示它们有$\leq$关系。总之，任何两个对象间最多只有一个箭头。可以验证这样定义的箭头可以组合，并且每个元素都有$i \leq i$，因此有指向自己的箭头。这样一个预序集本身就是一个范畴。我们再次看到了预序集范畴和幺半群范畴的对偶。幺半群作为范畴只含有一个对象，却含有丰富的箭头；预序集作为范畴对象很多，但是对象间的箭头却最多只有一个。
 
 \begin{Exercise}
+\Question{证明恒等箭头是唯一的（提示：可以参考上一章中群单位元唯一性的证明）。}
 \Question{验证幺半群$(S, \cup, \varnothing)$（群元素是集合，二元运算是集合的并，单位元是空集）和$(N, +, 0)$（群元素是自然数，二元运算是加法，单位元是零）都是只含有一个对象的范畴。}
 \Question{第一章中我们介绍了自然数的皮亚诺公理，并且介绍了和皮亚诺算术同构的其它结构，例如链表等。这些完全可以用范畴来解释。这一结论是德国数学家戴德金发现的，尽管当时还没有范畴论。我们今天将这一范畴命名为皮亚诺范畴$\pmb{Pno}$。范畴中的对象为$(A, f, z)$，其中$A$为元素的集合，对于自然数来说这个集合是全体自然数$N$；$f: A \to A$是后继函数，对于自然数来说，就是$succ$；$z \in A$是起始元素，对于自然数来说是0。任给两个皮亚诺对象$(A, f, z)$和$(B, g, c)$，现在定义从$A$到$B$的态射
 \[
@@ -347,7 +361,7 @@ R \subseteq B \times A
 B \times A = \{(b, a) | b \in B, a \in A\}
 \]
 
-我们以红楼梦人物为例，集合$A =$ \{贾蓉, 贾惜春, 贾琏\}，集合$B =$ \{秦可卿, 王熙凤\}，则$B \times A$的积为\{(秦可卿, 贾蓉), (秦可卿, 贾惜春), (秦可卿, 贾琏), (王熙凤, 贾蓉), (王熙凤, 贾惜春), (王熙凤, 贾琏)\}。集合$R$是$B \times A$的子集，它可以看作$A$与$B$的某种关系。如果$A$中的元素$a$和$B$中的元素$b$满足关系$R$，则有$(b, a) \in R$，我们将其记为$bRa$。具体到这个例子，我们令$R=$\{(秦可卿, 贾蓉), (王熙凤, 贾琏)\}，则$R$代表婚姻关系。
+我们以红楼梦人物为例，集合$A =$ \{贾蓉, 贾惜春, 贾琏\}，集合$B =$ \{秦可卿, 王熙凤\}，则$B \times A$的积为\{(秦可卿, 贾蓉), (秦可卿, 贾惜春), (秦可卿, 贾琏), (王熙凤, 贾蓉), (王熙凤, 贾惜春), (王熙凤, 贾琏)\}。集合$R$是$B \times A$的子集，它可以看作$A$与$B$的某种关系。如果$A$中的元素$a$和$B$中的元素$b$满足关系$R$，则有$(b, a) \in R$，我们将其记为$bRa$。具体到这个例子，如果令$R=$\{(秦可卿, 贾蓉), (王熙凤, 贾琏)\}，则$R$代表婚姻关系。
 
 这样从对象$A$到$B$的\textbf{所有}箭头构成的集合就代表了从$A$到$B$的各种可能的关系。现在我们考虑箭头的组合
 
@@ -355,7 +369,7 @@ B \times A = \{(b, a) | b \in B, a \in A\}
 A \to B \to C
 \]
 
-如果存在某个中间集合中的元素$b$，同时使得两个关系$bRa$，$cSb$都成立，我们就说存在箭头间的组合。具体到红楼梦的例子，令集合$C=$\{王夫人, 薛姨妈, 邢夫人\}，关系$S=$\{(王夫人, 王熙凤), (薛姨妈, 王熙凤)\}表示姑妈关系。这样组合箭头$S \circ R$的结果是：\{(王夫人, 贾琏), (薛姨妈, 贾琏)\}，表示$c$的侄女嫁给了$b$的关系。也就是说王夫人、薛姨妈和贾琏都通过王熙凤使得两个关系同时成立。恒等箭头的定义很简单，所有元素都和自己产生恒等关系。
+如果存在某个中间集合中的元素$b$，同时使得两个关系$bRa$，$cSb$都成立，我们就说存在箭头间的组合。具体到红楼梦的例子，令集合$C=$\{王夫人, 薛姨妈, 邢夫人\}，关系$S=$\{(王夫人, 王熙凤), (薛姨妈, 王熙凤)\}表示姑妈关系。这样组合箭头$S \circ R$的结果是：\{(王夫人, 贾琏), (薛姨妈, 贾琏)\}，表示$c$的侄女嫁给了$a$的关系。也就是说王夫人、薛姨妈和贾琏都通过王熙凤使得两个关系同时成立。恒等箭头的定义很简单，所有元素都和自己产生恒等关系。
 
 我们还可以从任何已知的范畴产生新的范畴，例如把一个范畴$\pmb{C}$中的所有箭头反向就得到了一个对偶的范畴$\pmb{C}^{op}$。这样我们了解了一个范畴，就同时了解了它的对偶范畴。
 
@@ -363,7 +377,7 @@ A \to B \to C
 我们说范畴论是对抽象代数结构的“二次抽象”。上一节我们看到如何把所有的集合和映射、群和态射、偏序集和单调函数等抽象成范畴。接下来的问题是，如何在这些范畴之间架设桥梁、进行比较？函子\footnote{C++语言的一些资料中，用英文functor来命名函数对象，即function object。这与范畴论中的函子完全无关。}（functor）就是用来对范畴及其内在的关系（对象和箭头）进行比较的。
 
 \subsection{函子的定义}
-
+\index{函子}
 在某种意义上说，函子好比是范畴之间的变换关系（态射）。但是它不仅把一个范畴中的对象映射为另一范畴中的对象，它还将一个范畴中的箭头映射到另一个范畴中。这一点是和普通的态射（例如群之间的态射）不同的。
 
 函子通常用符号$\mathbf{F}$表示。既然说函子好比是范畴间的态射，那么函子必须能够忠实保持范畴间的结构和关系，这是如何做到的呢？为此函子必须满足两条性质。
@@ -375,7 +389,8 @@ A \to B \to C
 A \arrowto{id} A \quad \longmapsto \quad \mathbf{F}A \arrowto{id} \mathbf{F}A
 \]
 
-\item 第二条性质，函子必须能够保持箭头的组合仍然变换为箭头的组合\footnote{实际存在两种变换方式，一种叫做协变，一种叫做反变。这里仅考虑了协变。}。
+\index{协变} \index{反变}
+\item 第二条性质，函子必须能够保持箭头的组合仍然变换为箭头的组合\footnote{实际存在两种变换方式，一种叫做协变，一种叫做反变(在编程语言的类型系统中译为“逆变”。编程语言借鉴了范畴论中函子相关的用语)。这里仅考虑了协变。}。
 
 \begin{center}
 \begin{tikzpicture}
@@ -403,13 +418,15 @@ A \arrowto{id} A \quad \longmapsto \quad \mathbf{F}A \arrowto{id} \mathbf{F}A
 \subsection{函子的例子}
 \label{sec:functor:examples}
 
-\begin{wrapfigure}{R}{0.3\textwidth}
+%\begin{wrapfigure}{R}{0.3\textwidth}
+\begin{figure}[htbp]
  \centering
- \includegraphics[scale=0.3]{img/blackhole.eps}
+ \includegraphics[scale=0.3]{img/blackhole.jpg}
  \captionsetup{labelformat=empty}
  \caption{常数函子的行为像一个黑洞}
  \label{fig:blackhole}
-\end{wrapfigure}
+\end{figure}
+%\end{wrapfigure}
 
 \index{函子!恒等函子} \index{函子!id函子}
 让我们用具体的例子来更好地理解函子的概念。如果一个函子从一个范畴映射到这个范畴本身上，这样的函子被称为\textbf{自函子}（endo-functor）\footnote{这和代数中的自同构概念很类似。如果记不清了，请回顾一下上一章。}。最简单的函子称为“恒等函子”，它是一个自函子，记为$id: \pmb{C} \to \pmb{C}$。它可以作用到任何范畴上，将对象$A$映射为对象$A$，将箭头$f$映射为箭头$f$。
@@ -421,19 +438,19 @@ A \arrowto{id} A \quad \longmapsto \quad \mathbf{F}A \arrowto{id} \mathbf{F}A
 \index{函子!可能函子} \index{函子!Maybe函子}
 我们接下来举的例子叫做“可能函子”（maybe functor）。计算机科学家，快速排序算法的提出者，1980年图灵奖得主霍尔\footnote{英文是Hoare，不是美国物理学家霍尔（Hall）。}曾说过一段有趣的话\footnote{2009年在伦敦举行的QCon会议上}。
 
+“我在1965年发明了空引用（null reference）。这是一个导致数十亿美元损失的发明。当时，我在为一种面向对象语言（ALGOL W）设计最早的类型系统。我希望能够保证所有的引用，经过编译器的自动检查，都是绝对安全的。但是我无法抗拒空引用的想法，它太容易实现了。此后，空引用导致了无数的错误、漏洞和系统崩溃。在过去的40年，由此导致的痛苦损失估计高达数十亿美元。”\cite{Wiki-Hoare}
+
+% I call it my billion-dollar mistake. It was the invention of the null reference in 1965. At that time, I was designing the first comprehensive type system for references in an object oriented language (ALGOL W). My goal was to ensure that all use of references should be absolutely safe, with checking performed automatically by the compiler. But I couldn't resist the temptation to put in a null reference, simply because it was so easy to implement. This has led to innumerable errors, vulnerabilities, and system crashes, which have probably caused a billion dollars of pain and damage in the last forty years.
+
 %\begin{wrapfigure}{L}{0.25\textwidth}
 \begin{figure}[htbp]
  \centering
- \includegraphics[scale=1]{img/Hoare.eps}
+ \includegraphics[scale=1]{img/Hoare.jpg}
  \captionsetup{labelformat=empty}
  \caption{计算机科学家霍尔}
  \label{fig:Hoare}
 \end{figure}
 %\end{wrapfigure}
-
-“我在1965年发明了空引用（null reference）。这是一个导致数十亿美元损失的发明。当时，我在为一种面向对象语言（ALGOL W）设计最早的类型系统。我希望能够保证所有的引用，经过编译器的自动检查，都是绝对安全的。但是我无法抗拒空引用的想法，它太容易实现了。此后，空引用导致了无数的错误、漏洞和系统崩溃。在过去的40年，由此导致的痛苦损失估计高达数十亿美元。”\cite{Wiki-Hoare}
-
-% I call it my billion-dollar mistake. It was the invention of the null reference in 1965. At that time, I was designing the first comprehensive type system for references in an object oriented language (ALGOL W). My goal was to ensure that all use of references should be absolutely safe, with checking performed automatically by the compiler. But I couldn't resist the temptation to put in a null reference, simply because it was so easy to implement. This has led to innumerable errors, vulnerabilities, and system crashes, which have probably caused a billion dollars of pain and damage in the last forty years.
 
 2015年后主流的编程环境都纷纷将Maybe概念引入以取代null来获取更安全的方法\footnote{例如Java和C++中的\texttt{Optional<T>}。}。
 
@@ -495,6 +512,7 @@ f'\ (Just\ x) & = & Just\ (f\ x)
 \end{array}
 \]
 
+\index{fmap}
 这种给定$f$，映射成$f'$的行为恰好就是$\mathbf{Maybe}$函子对箭头进行的映射。实际的编程环境中，通常使用$fmap$来定义函子对箭头的映射。我们可以定义所有函子$\mathbf{F}$满足：
 
 \[
@@ -520,7 +538,7 @@ n < 2: & [n] \\
 \end{cases}
 \]
 
-下面是一个相应的Haskell代码实现。为了提高性能，这个实现使用了尾递归。
+下面是一个相应的例子代码实现。为了提高性能，这个实现使用了尾递归。
 
 \lstset{frame=single}
 \begin{lstlisting}[style=Haskell]
@@ -590,17 +608,20 @@ fmap\ id\ (Just\ x) & = & Just\ (id\ x) & \text{$fmap$的定义} \\
 接下来验证第二条性质：
 
 \[
+\resizebox{\textwidth}{!}{\ensuremath{
 \begin{array}{rcll}
 fmap\ (f \circ g)\ Nothing & = & Nothing & \text{$fmap$的定义} \\
            & = & fmap\ f\ Nothing & \text{反向使用$fmap$的定义} \\
            & = & fmap\ f\ (fmap\ g\ Nothing) & \text{反向使用$fmap$的定义} \\
            & = & (fmap\ f\ \circ fmap\ g)\ Nothing & \text{反向用函数组合的定义}
 \end{array}
+}}
 \]
 
 并且
 
 \[
+\resizebox{\textwidth}{!}{\ensuremath{
 \begin{array}{rcll}
 fmap\ (f \circ g)\ (Just\ x) & = & Just\ ((f \circ g)\ x) & \text{$fmap$的定义} \\
            & = & Just\ (f\ (g\ x)) & \text{函数组合的定义} \\
@@ -608,6 +629,7 @@ fmap\ (f \circ g)\ (Just\ x) & = & Just\ ((f \circ g)\ x) & \text{$fmap$的定�
            & = & fmap\ f\ (fmap\ g\ (Just\ x)) & \text{反向使用$fmap$的定义} \\
            & = & (fmap\ f\ \circ fmap\ g)\ (Just\ x) & \text{反向用函数组合的定义}
 \end{array}
+}}
 \]
 
 因此Maybe的确是一个函子。
@@ -616,6 +638,7 @@ fmap\ (f \circ g)\ (Just\ x) & = & Just\ ((f \circ g)\ x) & \text{$fmap$的定�
 \end{example}
 
 \begin{example}
+\index{函子!列表函子}
 接下来介绍的例子是列表函子。在第一章中我们介绍了列表的定义：
 
 \lstset{frame=none}
@@ -681,7 +704,7 @@ fmap\ f\ Cons(x, xs) = Cons(f\ x, fmap\ f\ xs)
 \end{array}
 \]
 
-仔细观察这个定义，再和第一章中列表的“逐一映射”定义对比，会发现它们除了名字之外完全一样，因此我们可以复用列表的“逐一映射”来定义列表函子，例如Haskell中列表函子的定义就是通过复用\texttt{map}实现的。
+仔细观察这个定义，再和第一章中列表的“逐一映射”定义对比，会发现它们除了名字之外完全一样，因此我们可以复用列表的“逐一映射”来定义列表函子，在一些编程环境中，列表函子的定义就是通过复用\texttt{map}实现的。
 
 \lstset{frame=single}
 \begin{lstlisting}
@@ -734,6 +757,7 @@ fmap\ (f \circ g)\ Nil & = & Nil & \text{$fmap$的定义} \\
 针对$(x:xs)$的递归情况，令递归假设为$fmap\ (f \circ g)\ xs = (fmap\ f \circ fmap\ g)\ xs$，我们有：
 
 \[
+\resizebox{\textwidth}{!}{\ensuremath{
 \begin{array}{rcll}
 fmap\ (f \circ g)\ (x:xs) & = & ((f \circ g)\ x):(fmap\ (f \circ g)\ xs) & \text{$fmap$的定义} \\
   & = & ((f \circ g)\ x):((fmap\ f \circ fmap\ g)\ xs) & \text{递归假设} \\
@@ -742,6 +766,7 @@ fmap\ (f \circ g)\ (x:xs) & = & ((f \circ g)\ x):(fmap\ (f \circ g)\ xs) & \text
   & = & fmap\ f\ (fmap\ g\ (x:xs)) & \text{再次反向使用$fmap$的定义} \\
   & = & (fmap\ f\ \circ fmap\ g)\ (x:xs) & \text{反向用函数组合的定义}
 \end{array}
+}}
 \]
 
 这就验证了$\mathbf{List}$的确是一个函子。
@@ -793,24 +818,27 @@ fmap\ (f \circ g)\ (x:xs) & = & ((f \circ g)\ x):(fmap\ (f \circ g)\ xs) & \text
 %\begin{wrapfigure}{L}{0.25\textwidth}
 \begin{figure}[htbp]
  \centering
- \includegraphics[scale=0.2]{img/Descartes.eps}
+ \includegraphics[scale=0.2]{img/Descartes.jpg}
  \captionsetup{labelformat=empty}
  \caption{勒内$\cdot$笛卡尔（1596-1650）。哈尔斯的画布油画，现藏于卢浮宫}
  \label{fig:Decartes}
 \end{figure}
 %\end{wrapfigure}
 
+\index{笛卡尔积} \index{笛卡尔}
 笛卡尔积又称直积，是用法国哲学家、数学家、物理学家笛卡尔的名字命名的。在笛卡尔的时代，拉丁文是学术上广泛使用的语言。笛卡尔也有一个拉丁化的名字——卡提修斯（Cartesius）。正因为如此，笛卡尔积也称卡氏积，笛卡尔坐标系也称卡氏坐标系。
 
 笛卡尔1596年生于法国一个地位较低的贵族家庭。一岁时他的母亲患肺结核去世，而他也受到传染，造成体弱多病。母亲去世后，父亲移居他乡并再婚，笛卡尔由外祖母带大，自此父子很少见面，但是父亲一直提供金钱方面的帮助，使他能够受到良好的教育。
 
-笛卡尔后来进入位于拉弗莱什的耶稣会的皇家大亨利学院学习。在那里，他学习到了数学和物理学，包括伽利略的工作。1616年毕业后，他遵从父亲的意愿，进入普瓦捷大学学习法律，并获得业士学位和文凭。毕业后笛卡尔一直对职业选择不定，又决心游历欧洲各地，专心寻求“世界这本大书”中的智慧。1618年，笛卡尔加入荷兰的拿骚的毛里茨的军队。
+笛卡尔后来进入位于拉弗莱什的耶稣会的皇家大亨利学院学习。在那里，他学习到了数学和物理学，包括伽利略的工作。由于笛卡尔体弱多病，学校特许他每天早上不用像其他同学一样5点起床，而是一直睡到11点。笛卡尔直到晚年仍然保留了这一作息习惯。
 
-笛卡尔对结合数学与物理学的兴趣，是在荷兰当兵期间产生的。1618年，他偶然在路旁公告栏上，看到用佛莱芒语提出的数学问题征答。这引起了他的兴趣，并且让身旁的人，将他不懂的佛莱芒语翻译成拉丁语。这位身旁的人就是大他八岁的以撒·贝克曼（Isaac Beeckman）。贝克曼在数学和物理学方面有很高造诣，很快成为了他的导师。4个月后，他写信给贝克曼：“你是将我从冷漠中唤醒的人……”。
+1614年毕业后，他遵从父亲的意愿，进入普瓦捷大学学习法律，并获得业士学位和文凭。毕业后笛卡尔一直对职业选择不定，又决心游历欧洲各地，专心寻求“世界这本大书”中的智慧。1618年，笛卡尔加入荷兰拿骚的毛里茨军队。
 
-1622年，当他26岁时，笛卡尔变卖掉父亲留下的资产，用4年时间游历欧洲。他先在意大利住了2年，随后迁往于巴黎。当时法国教会势力庞大，不能自由讨论宗教问题，因此笛卡尔在1628年移居荷兰，在那里住了20多年。在此期间，笛卡尔致力于哲学研究，他发表了多部重要的文集，包括《方法论》、《形而上学的沉思》和《哲学原理》等，成为欧洲最有影响力的哲学家之一。
+笛卡尔对数学与物理学的兴趣，是在荷兰当兵期间产生的。1618年，他偶然在路旁公告栏上，看到用佛莱芒语提出的数学问题征答。这引起了他的兴趣，并且让身旁的人，将他不懂的佛莱芒语翻译成拉丁语。这位身旁的人就是大他八岁的以撒·贝克曼（Isaac Beeckman）。贝克曼在数学和物理学方面有很高造诣，很快成为了他的导师。4个月后，他写信给贝克曼：“你是将我从冷漠中唤醒的人……”。
 
-1649年笛卡尔受瑞典克里斯蒂娜女王之邀来到斯德哥尔摩担任女王的私人教师，但不幸在这片“熊、冰雪与岩石的土地”上得了肺炎，在1650年2月去世，享年54岁。
+1622年，当他26岁时，笛卡尔变卖掉父亲留下的资产，用4年时间游历欧洲。他先在意大利住了2年，随后迁往于巴黎。当时法国教会势力庞大，不能自由讨论宗教问题，因此笛卡尔在1628年移居荷兰，在那里住了20多年。他深居简出，仅仅通过好友梅森\footnote{马林$\cdot$梅森，法国修道士、学者、数学家和音乐理论家。他发现了梅森素数，即形如$M_n = 2^n − 1$的素数。他和当时的著名数学家和科学家有广泛的联系，被称为16世纪上半叶世界数学和科学的中心人物。}和学术界取得联系。在此期间，笛卡尔致力于哲学研究，他发表了多部重要的文集，包括《方法论》、《形而上学的沉思》和《哲学原理》等，成为欧洲最有影响力的哲学家之一。1637年，笛卡尔在他的文章《几何学》中，创立了解析几何。
+
+1649年笛卡尔受瑞典克里斯蒂娜女王之邀来到斯德哥尔摩担任女王的私人教师。但是女王习惯在清晨5点起床向笛卡尔学习，这一下子打破了笛卡尔一生11点起床的作息习惯。几个月后，在这片“熊、冰雪与岩石的土地”上，笛卡尔不幸得了肺炎，在1650年2月去世，享年54岁。
 
 笛卡尔留下名言“我思故我在”，提出了“普遍怀疑”的主张。他开拓了欧洲理性主义哲学，是西方现代哲学的奠基人。他的哲学思想深深影响了之后的几代人。笛卡尔对现代数学的发展做出了重要的贡献，他创立的解析几何，成功地将当时完全分开的代数和几何学联系到了一起。
 
@@ -855,18 +883,20 @@ A + B = zip\ A\ \{0, ...\} \doubleplus zip\ B\ \{1, ...\}
 \end{tikzpicture}
 \end{center}
 
-\begin{wrapfigure}{R}{0.4\textwidth}
+%\begin{wrapfigure}{R}{0.4\textwidth}
+\begin{figure}[htbp]
  \centering
- \includegraphics[scale=0.06]{img/hands.eps}
+ \includegraphics[scale=0.06]{img/hands.png}
  \captionsetup{labelformat=empty}
  \caption{}
  \label{fig:hands}
-\end{wrapfigure}
+\end{figure}
+%\end{wrapfigure}
 
 对比这两种构造我们发现它们是对偶的。如果把两张图旋转90度，把$A$画在上面，$B$画在下面，这样两个问题一个在左侧，一个在右侧。如同双手一样对称。我们后面会发现，这种现象在范畴的相关概念中很常见。甚至我们的宇宙中也充满了对称。这样当我们了解了一个事物，就对偶地了解了另一个事物。
 
 \subsection{积和余积的定义}
-
+\index{积} \index{余积}
 \begin{definition}
 对于范畴$\pmb{C}$中的一对对象$A$和$B$，一个
 
@@ -874,6 +904,7 @@ A + B = zip\ A\ \{0, ...\} \doubleplus zip\ B\ \{1, ...\}
 \text{指向$A, B$的} \quad \quad \quad \text{从$A, B$出发的}
 \]
 
+\index{楔形（wedge）}
 \textbf{楔形}（wedge）是范畴$\pmb{C}$中的一个对象$X$和一对箭头：
 
 \begin{center}
@@ -966,6 +997,7 @@ A + B = zip\ A\ \{0, ...\} \doubleplus zip\ B\ \{1, ...\}
 \end{tikzpicture}
 \end{center}
 
+\index{媒介箭头}
 其中箭头$m$叫做楔形$X$的媒介箭头（mediating arrow或者mediator）
 \end{definition}
 
@@ -1025,14 +1057,14 @@ S \arrowto{m} S
 \end{center}
 \end{lemma}
 
-详细的证明过程可以参考本书后面的附录。在一些编程环境，例如Haskell中，积的确是通过二元组$(a, b)$以及函数$fst$和$snd$来实现的。但是，余积却是以单独的数据类型来实现的。
+详细的证明过程可以参考本书后面的附录。在一些编程环境中，积的确是通过二元组$(a, b)$以及函数$fst$和$snd$来实现的。但是，余积却是以单独的数据类型来实现的。
 
 \lstset{frame = single}
 \begin{lstlisting}
 data Either a b = Left a | Right b
 \end{lstlisting}
 
-这样的好处是，我们不需要再通过0, 1这样的标记（tag）来了解一个\texttt{Either a b}的元素$x$究竟是来自\texttt{a}还是\texttt{b}。例如下面的Haskell例子代码使用模式匹配来决定如何处理余积的元素：
+这样的好处是，我们不需要再通过0, 1这样的标记（tag）来了解一个\texttt{Either a b}的元素$x$究竟是来自\texttt{a}还是\texttt{b}。例如下面的例子代码使用模式匹配来决定如何处理余积的元素：
 
 \begin{lstlisting}
 either :: (a -> c) -> (b -> c) -> Either a b -> c
@@ -1124,6 +1156,7 @@ m \circ right = g
 \end{tikzpicture}
 \end{center}
 
+\index{消去律}
 通过这对范畴图，我们立即可以得到一些积和余积的性质。首先是\textbf{消去律}：
 
 \[
@@ -1135,11 +1168,12 @@ snd \circ \langle f, g \rangle = g
 & \quad \quad &
 \begin{cases}
 [f, g] \circ left = f \\
-[f, g] \circ right = f
+[f, g] \circ right = g
 \end{cases}
 \end{array}
 \]
 
+\index{反射律}
 对于积，如果$f$恰好等于$fst$，而$g$恰好等于$snd$，我们就得到了上一小节中恒等箭头的特例；同样对于余积，如果$f$恰好等于$left$，而$g$恰好等于$right$，则媒介箭头也是恒等箭头。我们称这条性质为\textbf{反射律}（reflection law）：
 
 \[
@@ -1169,6 +1203,7 @@ id = \langle fst, snd \rangle \quad \quad \quad id = [left, right]
 \langle h, k \rangle \circ \phi \quad \quad \quad \phi \circ [h, k]
 \]
 
+\index{融合律}
 代入$m$，并使用消去律，这样就得到了\textbf{融合律}（fusion law）：
 
 \[
@@ -1196,10 +1231,10 @@ id = \langle fst, snd \rangle \quad \quad \quad id = [left, right]
 \phi \circ [h, k] = [\phi \circ h, \phi \circ k]
 \]
 
-我们在下一章将看到，这些性质和定律对于我们进行算法推导、程序化简、性能优化会起很重要的作用。
+我们在后面会看到，这些性质和定律对于我们进行算法推导、程序化简、性能优化会起很重要的作用。
 
 \subsection{积和余积作为函子}
-
+\index{二元函子}
 了解了范畴的积，就自然引出了\textbf{二元函子}（bifunctor或binary functor）的概念。我们此前介绍的函子，将一个范畴中的对象转换成另一个范畴中的对象，同时将一个范畴中箭头转成另一个范畴中的箭头。所谓二元函子，它作用于两个范畴$\pmb{C}$和$\pmb{D}$的积，也就是说它的源是$\pmb{C} \times \pmb{D}$。所以对于对象部分，二元函子的转换关系为：
 
 \[
@@ -1353,6 +1388,7 @@ f + g = [left \circ f, right \circ g]
 \end{array}
 \]
 
+\index{吸收律}
 为此，我们先证明积和余积的\textbf{吸收律}（absorption law）：
 
 \[
@@ -1391,6 +1427,7 @@ f + g = [left \circ f, right \circ g]
 
 \end{mdframed}
 
+\index{bimap}
 积函子是二元函子的一个特例。我们可以为积函子定义$bimap$如下：
 
 \[
@@ -1429,11 +1466,13 @@ bimap\ f\ g\ (right\ y) = right\ (g\ y)
 \begin{center}
 \begin{tikzpicture}
   \matrix (m) [matrix of math nodes,
-               row sep=3em, column sep=4em, minimum width=2em]{
-     \pmb{Src} & \pmb{Trg} \\};
+               row sep=0.1em, column sep=4em, minimum width=2em]{
+          \text{ }    &  \text{ }  \\
+     \pmb{Src} & \pmb{Trg} \\
+          \text{ }    &  \text{ }  \\};
   \path[-stealth]
-    (m-1-1.north east) edge node [above] {$\mathbf{F}$} (m-1-2.north west)
-    (m-1-1.south east) edge node [below] {$\mathbf{G}$} (m-1-2.south west);
+    (m-1-1) edge node [above] {$\mathbf{F}$} (m-1-2)
+    (m-3-1) edge node [below] {$\mathbf{G}$} (m-3-2);
 \end{tikzpicture}
 \end{center}
 
@@ -1445,6 +1484,7 @@ bimap\ f\ g\ (right\ y) = right\ (g\ y)
 
 并且除了$A$外，我们对$\pmb{Src}$中的所有对象做同样的研究。
 
+\index{自然变换}
 \begin{definition}
 任给如上图所示的一对函子$\mathbf{F}, \mathbf{G}$，一个自然变换
 
@@ -1644,7 +1684,7 @@ safeHead\ (x:xs) = Just\ x
 \end{proof}
 \end{example}
 
-我们总结一下这两个自然变换的例子。从范畴中的任意对象$A$开始（对于集合范畴，相当于一个集合$A$；对于编程，相当于一个类型$A$），通过一个函子$\mathbf{F}$，将其映射为对象$\mathbf{F}A$（对于集合范畴，$\mathbf{F}A$是另一个集合；对于编程，$\mathbf{F}A$是另一个类型），而另一函子$\mathbf{G}$将以映射为$\mathbf{G}A$。自然变换$\phi$经由$A$索引的箭头（在集合范畴中是一个映射；在编程中是一个函数）\footnote{也称在$A$上的部分（The component at $A$）}，形如：
+我们总结一下这两个自然变换的例子。从范畴中的任意对象$A$开始（对于集合范畴，相当于一个集合$A$；对于编程，相当于一个类型$A$），通过一个函子$\mathbf{F}$，将其映射为对象$\mathbf{F}A$（对于集合范畴，$\mathbf{F}A$是另一个集合；对于编程，$\mathbf{F}A$是另一个类型），而另一函子$\mathbf{G}$将其映射为$\mathbf{G}A$。自然变换$\phi$经由$A$索引的箭头（在集合范畴中是一个映射；在编程中是一个函数）\footnote{也称在$A$上的部分（The component at $A$）}，形如：
 
 \[
 \phi_A : \mathbf{F} A \to \mathbf{G} A
@@ -1656,7 +1696,7 @@ safeHead\ (x:xs) = Just\ x
 \phi : \forall A \cdot \mathbf{F} A \to \mathbf{G} A
 \]
 
-例如在Haskell中，可以这样写\footnote{Haskell中有一个ExplicitForAll的选项，我们在下一章介绍构造——叠加融合律（build/fold fusion law）时会再次遇到它。}：
+在某些编程环境中，可以这样写\footnote{Haskell中有一个ExplicitForAll的选项，我们在下一章介绍构造——叠加融合律（build/foldr fusion law）时会再次遇到它。}：
 
 \lstset{frame=single}
 \begin{lstlisting}
@@ -1684,7 +1724,7 @@ safeHead :: [a] -> Maybe a
 我们说自然变换是用来比较函子的。仿照抽象代数中同构的含义，我们需要定义什么情况下认为两个函子是“等价”的。
 
 % natural isomorphism
-
+\index{自然同构}
 \begin{definition}
 我们称两个函子$\mathbf{F}$和$\mathbf{G}$间的\textbf{自然同构}是一个自然变换：
 
@@ -1712,7 +1752,7 @@ swap\ (a, b) = (b, a)
 \end{array}
 \]
 
-$swap$是一个自然变换，它作用于两个二元函子，恰巧这两个二元函子都是积函子，即：$\mathbf{F} = \mathbf{G} = \times$
+$swap$是一个自然变换，它将一个二元函子变换为另一个二元函子。恰巧这两个二元函子都是积函子，即：$\mathbf{F} = \mathbf{G} = \times$
 
 由于是二元函子，所以对任意两个箭头$A \arrowto{f} C$和$B \arrowto{g} D$，我们需要下面的自然条件使得范畴图可交换：
 
@@ -1763,7 +1803,7 @@ length\ (x:xs) = 1 + length\ xs
 \end{array}
 \]
 }
-\Question{自然变换也可以进行组合，考虑两个自然变换$\mathbf{F} \arrowto{\phi} \mathbf{G}$}和$\mathbf{G} \arrowto{\psi} \mathbf{H}$，对于任意箭头$A \arrowto{f} B$，试画出自然变换组合$\phi \circ \psi$的范畴图，并列出可交换性的条件。
+\Question{自然变换也可以进行组合，考虑两个自然变换$\mathbf{F} \arrowto{\phi} \mathbf{G}$和$\mathbf{G} \arrowto{\psi} \mathbf{H}$，对于任意箭头$A \arrowto{f} B$，试画出自然变换组合$\psi \circ \phi$的范畴图，并列出可交换性的条件。}
 \end{Exercise}
 
 \section{数据类型}
@@ -1773,6 +1813,7 @@ length\ (x:xs) = 1 + length\ xs
 \subsection{起始对象和终止对象}
 让我们先认识两个最简单的数据类型，起始对象（initial object）和终止对象（terminal object或final object）。这两个对象也像左右手一样是对偶的，它们虽然简单，可是并不容易理解。
 
+\index{起始对象} \index{终止对象}
 \begin{definition}
 在任意范畴$\pmb{C}$中，如果有一个特殊的对象$S$，使得范畴中的每个对象$A$都有一个唯一的箭头
 
@@ -1803,7 +1844,7 @@ length\ (x:xs) = 1 + length\ xs
 我们只证明起始对象的同构唯一性，终止对象可以通过对偶性得到证明。
 
 \begin{proof}
-假设除0外还存在另一个起始对象0'。考虑起始对象0，根据定义一定存在从0指向0'的箭头$f$；反过来，当考虑起始对象0'的时候，也一定存在从0'指向0的箭头$g$。但是根据范畴公理，一定也有从0指向自己的箭头$id_0$和从0'指向自己的箭头$id_0'$。根据起始对象定义中箭头的唯一性，一定有：
+假设除0外还存在另一个起始对象0'。考虑起始对象0，根据定义一定存在从0指向0'的箭头$f$；反过来，当考虑起始对象0'的时候，也一定存在从0'指向0的箭头$g$。但是根据范畴公理，一定也有从0指向自己的箭头$id_0$和从0'指向自己的箭头$id_{0'}$。根据恒等箭头的唯一性，一定有：
 
 \[
   id_0 = f \circ g \quad \text{和} \quad id_{0'} = g \circ f
@@ -1829,6 +1870,7 @@ length\ (x:xs) = 1 + length\ xs
 这就证明了0和0'是同构的。换言之，在同构的意义下，起始对象是唯一的。
 \end{proof}
 
+\index{零对象}
 特别地，如果一个对象既是起始对象，又是终止对象，我们称之为零对象（zero object或null object）。一个范畴并不一定有零对象。
 
 接下来我们通过一些例子，由简到难说明起始对象和终止对象对应着什么样的数据类型。
@@ -1860,7 +1902,7 @@ G \longrightarrow \{e\}
 
 \begin{figure}[htbp]
  \centering
- \includegraphics[scale=0.3]{img/01-obj.eps}
+ \includegraphics[scale=0.3]{img/01-obj.png}
  %\captionsetup{labelformat=empty}
  \caption{零对象}
  \label{fig:zero-obj}
@@ -1876,7 +1918,7 @@ G \longrightarrow \{e\}
   S \longrightarrow \{ \bigstar \}
 \]
 
-但是问题来了，空集$\varnothing$怎样映射到$\{ \bigstar \}$上？事实上，空集是集合范畴中的起始对象。对于任何集合$S$，我们都可以定义箭头
+但是问题来了，空集$\varnothing$怎样映射到$\{ \bigstar \}$上？事实上，空集\footnote{20世纪的伟大数学家，法国布尔巴基学派的成员安德烈$\cdot$韦伊说他发明了空集符号$\varnothing$，这是挪威语中的一个字母。}是集合范畴中的起始对象。对于任何集合$S$，我们都可以定义箭头
 
 \[
   \varnothing \arrowto{f} S
@@ -1903,7 +1945,7 @@ G \longrightarrow \{e\}
 \begin{example}
 在最后一个例子中，我们来到编程领域。编程环境的类型系统本质上是集合范畴$\pmb{Set}$。一个集合相当于是一个数据类型。例如整形$Int$是所有整数的集合；布尔型是两个元素$\{True, False\}$组成的集合。既然集合范畴的终止对象是$\{ \bigstar \}$，那么什么数据类型是编程中的终止对象呢？由于终止对象在同构的意义下是唯一的，所以任何只含有一个值的数据类型都是编程中的终止对象。
 
-例如在Haskell中，特别定义了一个数据类型叫做“()”，它只含有一个元素，也叫做“()”。
+为此，我们可以特别定义一个数据类型叫做“()”，它只含有一个元素，也叫做“()”。
 
 \begin{lstlisting}
 data  ()  =  ()
@@ -1939,7 +1981,7 @@ no _ = False
 
 在集合范畴中，起始对象是空集$\varnothing$，那么在编程中它对应着什么数据类型呢？既然数据类型本质上是集合，那么空集就相当于没有任何值的数据类型。在编程中，相当于我们声明了一个数据类型，但是却没有对它进行定义。
 
-例如在Haskell中，声明了一个类型\texttt{Void}，但是却没有为它定义任何值：
+例如我们可以声明一个类型\texttt{Void}，但是却没有为它定义任何值：
 
 \begin{lstlisting}
 data Void
@@ -1952,7 +1994,7 @@ absurd :: Void -> a
 absurd _ = undefined
 \end{lstlisting}
 
-函数的具体实现并不重要，因为根本不存在一个实际的参数来调用这个函数。因此在Haskell标准库的某个版本中还有这样的实现：
+函数的具体实现并不重要，因为根本不存在一个实际的参数来调用这个函数。我们完全也可以这样定义：
 
 \begin{lstlisting}
 absurd :: Void -> a
@@ -1995,6 +2037,7 @@ one () = 1
 \end{Exercise}
 
 \subsection{幂}
+\index{幂} \index{exponential}
 
 起始对象和终止对象，相当于0和1，积和余积相当于$\times$和$+$，如果再有了指数（幂），我们就可以在范畴这个抽象层面中拥有和基本算术运算，甚至和多项式“同构”的强大工具。
 
@@ -2067,6 +2110,7 @@ isDigit 'b' = False
 
 现在我们把例子中的集合推进到无限集。在这一节的开头，我们说克里化后的函数$f: N \to (N \to N)$，是从自然数$N$到“函数对象”的函数。我们把函数对象记为$(\Rightarrow)$，则$f$的类型为$N \arrowto{f} (\Rightarrow)$。也就是从索引集$\{0, 1, ...\}$到$(\Rightarrow)$的映射，它是一个无穷长元组的集合，元组的每个值都是一个函数对象。记为$(\Rightarrow)^N$。
 
+\index{apply}
 一般来说，我们把函数的集合$f : B \to C$记为$C^B$。从这个集合中取出一个函数$f \in C^B$，然后在从集合$B$中取出一个值$b \in B$，我们可以用一个名叫$apply$的函数将$f$应用到$b$上，从而得到一个$C$中的值$c = f(b)$。即\footnote{有些文献，例如\cite{PeterSmith2018}第111-112页, \cite{Wiki-Exponentials}使用$eval$，也就是求值（evaluation）作为名称，这里采用和\cite{Bird97}（第72页）一致的命名。这样和Lisp中的命名传统一致。}：
 
 \[
@@ -2086,7 +2130,8 @@ apply(\lambda g(a), b) = g(a, b)
 C^B \times B \arrowto{apply} C
 \]
 
-现在，我们终于可以给出完整的幂对象（Expenentials或Expenential object）定义了。
+\index{幂对象（Exponentials或Exponential object）}
+现在，我们终于可以给出完整的幂对象（Exponentials或Exponential object）定义了。
 
 \begin{definition}
 如果范畴$\pmb{C}$中存在终止对象和积，则一个\textbf{幂对象}是一对对象和箭头
@@ -2125,6 +2170,7 @@ C^B \times B \arrowto{apply} C
 
 \end{definition}
 
+\index{克里化}
 第二章中我们没有给出克里化的完整定义，现在利用幂对象，我们可以给出$curry$的定义了：
 
 \[
@@ -2148,7 +2194,7 @@ curry\ g = \lambda g
 
 并且我们还能说明为什么幂转换箭头是唯一的，假设还存在另外的箭头$A \arrowto{h} C^B$，使得$apply \circ (h \times id) = g$，根据上述泛性性质，我们立刻得到$h = curry\ g$。
 
-我们还可以从范畴的角度来理解幂对象，在范畴$\pmb{C}$中，如果固定对象$B, C$，我们可以构造一个名叫$\pmb{Exp}$的范畴，这个范畴中的对象是$A \times B \to C$这样的箭头，范畴中的箭头是这样定义的。
+我们还可以从范畴的角度来理解幂对象，在范畴$\pmb{C}$中，如果固定对象$B, C$，我们可以构造一个名叫$\pmb{Exp}$的范畴，这个范畴中的对象是$A \times B \to C$这样的箭头，范畴中的箭头是这样定义的：
 
 \begin{center}
 \begin{tikzpicture}
@@ -2186,7 +2232,7 @@ curry\ apply = id
 
 \begin{Exercise}
 \Question{验证$\pmb{Exp}$的确是一个范畴，指出$id$箭头和箭头的组合。}
-\Question{反射律$curray\ apply = id$中，$id$的下标是什么？请用另一种方法证明它。}
+\Question{反射律$curry\ apply = id$中，$id$的下标是什么？请用另一种方法证明它。}
 \Question{我们称下面的等式
 \[
 (curry\ f) \circ g = curry(f \circ (g \times id))
@@ -2198,6 +2244,7 @@ curry\ apply = id
 
 有了起始对象0，终止对象1，余积代表的加法，积代表的乘法，再加上幂对象代表的指数幂，我们终于拥有了在范畴上进行运算甚至构造抽象多项式的能力。但是且慢，让我们停下来看一下这样能跑多远。正如第三章开头我们讲到的，必须时刻关注一个问题：“某一种抽象的适用范围有多大？什么情况下这一抽象会失效？”
 
+\index{笛卡尔闭}
 并非所有的范畴都有起始或终止对象，也并非所有的范畴都有幂对象。如果一个范畴存在有限积、对于任何对象$A$和$B$都存在幂$A^B$，我们称这样的范畴为\textbf{笛卡尔闭}的（Cartesian closed）。一个笛卡尔闭范畴必须包含：
 
 \begin{enumerate}
@@ -2208,10 +2255,11 @@ curry\ apply = id
 
 我们既可以把终止对象1，想象成一个对象的零次幂：$A^0 = 1$，也可以把它想象成零个对象的积。非常幸运的是，编程时我们所在的范畴——集合和全函数组成的范畴是笛卡尔闭的。一个笛卡尔闭范畴可以作为简单类型$\lambda$-演算（simply typed lambda calculus）的数学模型（见第二章），从而成为所有带有类型的编程语言的基础(\cite{Milewski2018}第148页)。
 
+\index{双笛卡尔闭（Bicartesian closed）}
 如果一个笛卡尔闭的范畴还同时支持终止对象的对偶——起始对象，和积的对偶——余积。并且支持积和余积的分配律，我们称其为\textbf{双笛卡尔闭}范畴（Bicartesian closed）：
 
 \begin{enumerate}
-  \setcounter{enumi}{4}
+  \setcounter{enumi}{3}
   \item 一个起始对象（0）；
   \item 任何一对对象都有余积（$+$）；
   \item 积可以从左右两侧分配到余积上：
@@ -2223,6 +2271,7 @@ curry\ apply = id
   \]
 \end{enumerate}
 
+\index{对象算术}
 现在我们可以看看基本算术运算在一个笛卡尔闭的范畴上，特别是编程中都意味着什么了。这一理论称为对象算术理论（Equational theory）。
 
 \subsubsection{0次幂}
@@ -2420,7 +2469,7 @@ e () = 1_M
 \right .
 \]
 
-第一种箭头是说，两个幺半群的元素进行二元运算，其结果仍是这个幺半群中的元素（二元运算是封闭的）；第二种箭头是“选择函数”，1是终止对象\footnote{我们借鉴Haskell中的符号，特意用“()”表示终止对象，在同构的意义下$1 = \{ \bigstar \} = \{ () \}$。这样的好处是，$e()$看起来像是个无参数的函数调用，实际接受了终止对象中的唯一元素()作为参数。}。
+第一种箭头是说，两个幺半群的元素进行二元运算，其结果仍是这个幺半群中的元素（二元运算是封闭的）；第二种箭头是“选择函数”，1是终止对象\footnote{我们特意用“()”表示终止对象，在同构的意义下$1 = \{ \bigstar \} = \{ () \}$。这样的好处是，$e()$看起来像是个无参数的函数调用，实际接受了终止对象中的唯一元素()作为参数。}。
 
 现在我们就可以用函数$m$和$e$来替换幺半群公理了：
 
@@ -2480,7 +2529,7 @@ M^{M \times M} \times M^1 = M^{M \times M + 1}
 
 我们称这样定义了一个幺半群的$F$-代数$(M, \alpha)$。
 
-例如在Haskell中，可以这样定义一个F-代数箭头的类型：
+例如在编程中，可以这样定义一个F-代数箭头的类型：
 
 \begin{lstlisting}
 type Algebra f a = f a -> a
@@ -2595,6 +2644,7 @@ x & \longmapsto & x^{-1} & \text{逆元} \\
 我们称这样定义了一个群上的F-代数$(G, \alpha)$。
 \end{example}
 
+\index{F-代数} \index{F-余代数}
 现在我们可以给出F-代数的定义了。在范畴论中，许多概念是对偶的，成对出现的。这就像是买一送一，我们定义了F-代数，就同时得到了F-余代数（F-coalgebra）\footnote{也译作上代数和共代数。}。关于F-余代数，我们暂时只给出定义。稍后将在第6章介绍无穷的概念时，再给出相应的例子。
 
 \begin{definition}
@@ -2701,7 +2751,7 @@ data NatF A = ZeroF | SuccF A
 \end{array}
 \]
 
-这恰恰是我们在第一章定义的自然数类型。我们把\texttt{Nat}和\texttt{Nat A}并列写在一起：
+这恰恰是我们在第一章定义的自然数类型。我们把\texttt{Nat}和\texttt{NatF A}并列写在一起：
 
 \begin{lstlisting}
 data Nat = Zero | Succ Nat
@@ -2871,6 +2921,7 @@ j \circ i = id_{\mathbf{NatF}I}
 
 这一结论，和1889年皮亚诺给出算术公理时的结论完全一样，任何满足皮亚诺公理的结构$(A, [c, f])$，都存在从自然数$(N, [zero, succ])$到这一结构的唯一同构。它将自然数$n$映射到$f^n(c) = f(f(...f(c))..)$上。现在，我们可以给出\textbf{初始代数}（initial algebra）的定义了。
 
+\index{初始代数}
 \begin{definition}
 F-代数范畴$\pmb{Alg}(F)$中，如果存在初始对象，则这一初始对象叫做初始代数。
 \end{definition}
@@ -2881,13 +2932,14 @@ F-代数范畴$\pmb{Alg}(F)$中，如果存在初始对象，则这一初始对�
 %\begin{wrapfigure}{R}{0.35\textwidth}
 \begin{figure}[htbp]
  \centering
- \includegraphics[scale=0.4]{img/Lambek.eps}
+ \includegraphics[scale=0.4]{img/Lambek.jpg}
  \captionsetup{labelformat=empty}
  \caption{兰贝克（Joachim Lambek） 1922 - 2014}
  \label{fig:Lambek}
 \end{figure}
 %\end{wrapfigure}
 
+\index{兰贝克定理}
 1968年，兰贝克（Lambek）最早指出$i$是一个同构映射，并且称初始代数$(I, i)$是函子$\mathbf{F}$的不动点\cite{Lambek-1968}。现在这一事实被称作\textbf{兰贝克定理}。
 
 F-代数中若存在初始代数$(I, i)$，则存在到任何其它代数$(A, f)$的唯一态射。我们把从$I$到$A$的态射记为$\lbb f \rbb$，使得下面的范畴图可交换：
@@ -2910,6 +2962,7 @@ F-代数中若存在初始代数$(I, i)$，则存在到任何其它代数$(A, f)
   \text{若} h = \lbb f \rbb \text{，当且仅当} h \circ i = f \circ \mathbf{F}(h)
 \]
 
+\index{向下态射（catamorphism）}
 我们称箭头$\lbb f \rbb$为\textbf{向下态射}(catamorphism，来自希腊语$\kappa \alpha \kappa \alpha$，意思是向下)。它两侧的括号“$\lbb \rbb$”像一对香蕉，因此被称为“香蕉括号”。
 
 向下态射的强大之处在于，它那能把一个非递归结构上的函数$f$，转换为在递归结构上的函数$\lbb f \rbb$。从而构造复杂的递归计算。我们仍然用自然数来举例子。
@@ -2956,7 +3009,7 @@ fromInt 0 = Zero
 fromInt n = Succ (fromInt (n-1))
 \end{lstlisting}
 
-于任何整数$n$，有$n = (toInt \circ fromInt)\ n$。这个例子看起来很平常，我们来看第二个关于斐波那契数列的例子。
+对于任何整数$n$，有$n = (toInt \circ fromInt)\ n$。这个例子看起来很平常，我们来看第二个关于斐波那契数列的例子。
 
 \begin{lstlisting}[style=Haskell]
 toFib :: Nat -> (Integer, Integer)
@@ -3001,11 +3054,13 @@ fibAt = fst \circ toFib \circ fromInt
     h \circ zero = c \\
     h \circ succ = f \circ h \\
   \end{cases} & \\
+\\
 \Rightarrow &
   \begin{cases}
     h\ Zero = c \\
     h\ (Succ\ n) = f(h(n))
   \end{cases} & \\
+\\
 \Rightarrow &
   \begin{cases}
     h(0) = c \\
@@ -3053,7 +3108,7 @@ data ListF A B = NilF | ConsF A B
 \mathbf{Fix}\ (\mathbf{ListF}\ A)
 & = & \mathbf{ListF}\ A (\mathbf{Fix}\ (\mathbf{ListF}\ A)) & \text{不动点的定义} \\
 & = & \mathbf{ListF}\ A\ (\mathbf{ListF}\ A\ (...)) & \text{展开} \\
-& = & NilF\ |\ ConsF\ A\ (ConsF\ A\ (...)) & \text{定义} \\
+& = & NilF\ |\ ConsF\ A\ (\mathbf{ListF}\ A\ (...)) & \mathbf{ListF}\ A \text{的定义} \\
 & = & NilF\ |\ ConsF\ A\ (\mathbf{Fix}\ (\mathbf{ListF}\ A)) & \text{反向用不动点} \\
 \end{array}
 \]
@@ -3126,7 +3181,7 @@ sum = cata sumAlg where
 \end{lstlisting}
 
 我们接下来利用列表的范畴图证明，列表的向下态射本质上就是叠加计算$foldr$。
-列表函子本质上是多项式函子$\mathbf{ListF}\ A\ B = 1 + A \times B$。由于范畴图可交换，所以：
+列表函子本质上是多项式函子。固定$A$，它将携带对象$B$映射为$\mathbf{ListF}\ A\ B = 1 + A \times B$；将箭头$h$映射为$(\mathbf{ListF}\ A)(h) = id + (id \times h)$。由于范畴图可交换，所以：
 
 \[
 \begin{array}{rll}
@@ -3139,6 +3194,7 @@ sum = cata sumAlg where
     h \circ nil = c \\
     h \circ cons = f \circ (id \times h) \\
   \end{cases} & \\
+\\
 \Rightarrow &
   \begin{cases}
     h\ Nil = c \\
@@ -3221,12 +3277,13 @@ sum = cata \circ sumAlg \\
             & h \circ [nil, branch] = [c, f] \circ (\mathbf{TreeF}\ A)(h) & \text{可交换} \\
 \Rightarrow & h \circ [nil, branch] = [c, f] \circ (id + (id_A \times h \times h)) & \text{多项式函子} \\
 \Rightarrow & h \circ [nil, branch] = [c \circ id, f \circ (id_A \times h \times h)] & \text{右侧用余积的吸收律} \\
-\Rightarrow & [h \circ nil, h \circ branch] = [c, f \circ (id_A \times h)] & \text{左侧用余积的融合律} \\
+\Rightarrow & [h \circ nil, h \circ branch] = [c, f \circ (id_A \times h \times h)] & \text{左侧用余积的融合律} \\
 \Rightarrow &
   \begin{cases}
     h \circ nil = c \\
     h \circ branch = f \circ (id_A \times h \times h) \\
   \end{cases} & \\
+\\
 \Rightarrow &
   \begin{cases}
     h\ Nil = c \\
@@ -3253,28 +3310,28 @@ foldt\ c\ h\ (Br\ k\ l\ r) = h(k, foldt\ c\ h\ l, foldt\ c\ h\ r) \\
 
 \section{小节}
 
-本章介绍了范畴论中最基本的概念，包括范畴、函子、自然变换。并且还介绍了积和余积、起始对象和终止对象、幂以及F-代数这些工具来构造较为复杂的代数结构。作为本章的结尾，我们来解读最开始那段关于叠加的代码\cite{Haskell-foldable}：
+本章介绍了范畴论中最基本的概念，包括范畴、函子、自然变换。并且还介绍了积和余积、起始对象和终止对象、幂以及F-代数这些工具来构造较为复杂的代数结构。作为本章的结尾，我们来解读一段用范畴语言实现的通用叠加操作\cite{Haskell-foldable}。通常我们认为列表的叠加操作可以这样写：
+
+\lstset{language=Haskell, frame=single}
+ \begin{lstlisting}
+foldr f z [] = z
+foldr f z (x:xs) = f x (foldr f z xs)
+\end{lstlisting}
+
+但实际上，利用范畴语言可以这样写：
 
 \lstset{frame=single}
 \begin{lstlisting}
 foldr f z t = appEndo (foldMap (Endo . f) t) z
 \end{lstlisting}
 
-所有的这一切的背后都是为了抽象，为了使得$foldr$能跳出列表，在任何可叠加的结构上进行运算。我们先看看传统的列表叠加定义：
-
-\begin{lstlisting}
-foldr :: (a -> b -> b) -> b -> [a] -> b
-foldr f z [] = z
-foldr f z (x:xs) = f x (foldr f z xs)
-\end{lstlisting}
-
-其中$f$是一个二元操作，如果我们把它改写为$\oplus$，把$z$改写为单位元$e$,根据这个定义，$foldr\ (\oplus)\ e\ [a, b, c]$就可以展开成为：
+所有的这一切的背后都是为了抽象，为了使得$foldr$能跳出列表。在传统的列表叠加定义中，$f$是一个二元操作，如果我们把它改写为$\oplus$，把$z$改写为单位元$e$，根据这个定义，$foldr\ (\oplus)\ e\ [a, b, c]$就可以展开成为：
 
 \[
 a \oplus (b \oplus (c \oplus e))
 \]
 
-这让我们联想到幺半群，$foldr$相当于在幺半群上重复进行二元操作。在Haskell的抽象幺半群定义中，除了单位元和二元操作外，还定义了将一列元素“累加”的操作。用我们的$\oplus$和$e$符号，这个定义相当于：
+这让我们联想到幺半群，$foldr$相当于在幺半群上重复进行二元操作。在抽象幺半群定义中，除了单位元和二元操作外，我们还可以定义将一列元素“累加”起来的操作。用$\oplus$和$e$符号，这个定义相当于：
 
 \[
 \begin{array}{l}
@@ -3283,7 +3340,7 @@ concat_M = foldr\ (\oplus)\ e \\
 \end{array}
 \]
 
-在Haskell中这个函数的名字叫做\texttt{mconcat}。它的意思是说，对于任何幺半群$M$，$concat$可以将一个$M$中元素的列表，通过二元运算和单位元叠加计算到一起。例如字符串可以看作是幺半群，单位元是空串，而二元运算是连接。所以$concat_M$ \texttt{["Hello", "String" "Monoid"]}就得到：
+在某些编程环境中，这个函数的名字叫做\texttt{mconcat}。它的意思是说，对于任何幺半群$M$，$concat$可以将一个$M$中元素的列表，通过二元运算和单位元叠加计算到一起。例如字符串可以看作是幺半群，单位元是空串，而二元运算是连接。所以$concat_M$ \texttt{["Hello", "String" "Monoid"]}就得到：
 
 \begin{verbatim}
 "Hello" ++ ("String" ++ ("Monoid" ++ "")) = "HelloStringMonoid"
@@ -3320,13 +3377,13 @@ foldMap\ g = concat_M \circ fmap\ g
 newtype Endo B = Endo (B -> B)
 \end{lstlisting}
 
-并且定义一个函数，从$\mathbf{Endo}B \arrowto{appEndo} B$：
+我们给它起名叫“自函子”（endo），这是因为它从$B$出发指向$B$自身。此外，我们定义一个函数，从$\mathbf{Endo}B \arrowto{appEndo} B$：
 
 \[
 appEndo(Endo\ a) = a
 \]
 
-然后我们规定$\mathbf{Endo}$是一个幺半群，单位元是$id$，二元运算是函数组合。在Haskell中，这相当于以下代码：
+然后我们规定$\mathbf{Endo}$是一个幺半群，单位元是$id$，二元运算是函数组合。这相当于以下定义：
 
 \lstset{frame=single}
 \begin{lstlisting}[style=Haskell]
@@ -3340,7 +3397,7 @@ instance Monoid Endo where
 \[
 \begin{array}{l}
 foldCompose : (A \to (B \to B)) \to [A] \to \mathbf{Endo}B \\
-foldCompose\ f = foldMap\ (Endo . f)
+foldCompose\ f = foldMap\ (Endo \circ f)
 \end{array}
 \]
 
@@ -3359,8 +3416,8 @@ foldCompose\ f = foldMap\ (Endo . f)
 \begin{array}{cl}
             & foldCompose\ (+)\ [1, 2, 3] \\
 \Rightarrow & foldMap\ (Endo \circ (+))\ [1, 2, 3] \\
-\Rightarrow & concat_M\ (fmap (Endo \circ (+)))\ [1, 2, 3] \\
-\Rightarrow & concat_M\ (fmap Endo\ [(+1), (+2), (+3)]) \\
+\Rightarrow & concat_M\ (fmap\ (Endo \circ (+)))\ [1, 2, 3] \\
+\Rightarrow & concat_M\ (fmap\ Endo\ [(+1), (+2), (+3)]) \\
 \Rightarrow & concat_M\ [Endo\ (+1), Endo\ (+2), Endo\ (+3)] \\
 \Rightarrow & Endo\ ((+1) \circ (+2) \circ (+3)) \\
 \Rightarrow & Endo\ (+6) \\
@@ -3377,7 +3434,7 @@ foldr\ f\ z\ xs
 \end{array}
 \]
 
-这就是我们在本章开头给出的$foldr$定义。在Haskell中，还专门定义了类型$Foldable$，对任意数据结构，使用者可以选择实现$foldMap$或者$foldr$。具体请参见本章附录。
+这就是在范畴语言中$foldr$的定义。此外，我们还可以专门定义类型$Foldable$，对任意数据结构，使用者可以选择实现$foldMap$或者$foldr$。具体请参见本章附录。
 
 \section{扩展阅读}
 

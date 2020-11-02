@@ -1,27 +1,26 @@
-Mathematics of Programming - A gentle introduction
+Isomorphism -- Mathematics of Programming
 ====
 
-2019/04
+2020/07
 
-This book introduces the mathematics behind computer programming. This is the **gentle** version for the people without mathematic or programming background. For the complete version, please refer to the [master branch](https://github.com/liuxinyu95/unplugged).
+This book introduces the mathematics behind computer programming.
+
+<img src="https://user-images.githubusercontent.com/332938/87840667-73856c80-c8d3-11ea-8d8b-0c5b366cde0f.png" width="400">
 
 Contents
 --------
 
-The book can be previewed in ([CN](https://github.com/liuxinyu95/unplugged/releases/download/v0.618033/unplugged-zh-cn.pdf)).
+The book can be downloaded in both English ([EN](https://github.com/liuxinyu95/unplugged/releases/download/v0.61803391/unplugged-en.pdf)) and Chinese ([中文](https://github.com/liuxinyu95/unplugged/releases/download/v0.61803391/unplugged-zh-cn.pdf)).
 
-- Chapter 1, Natural numbers. Peano Axiom, list and folding; ([CN](https://github.com/liuxinyu95/unplugged/releases/download/v0.6180/nat-zh-cn.pdf), [EN](https://github.com/liuxinyu95/unplugged/releases/download/v0.6180/nat-en.pdf))
-- Chapter 2, Recurrsion. Euclidean algorithm, Lambda calculus, and Y-combinator; ([CN](https://github.com/liuxinyu95/unplugged/releases/download/v0.61801/recursion-zh-cn.pdf))
-- Chapter 3, Group, Ring, and Field. Galois Theory; ([CN](https://github.com/liuxinyu95/unplugged/releases/download/v0.61802/algebra-zh-cn.pdf))
-- Chapter 4, Category theory and type system; ([CN](https://github.com/liuxinyu95/unplugged/releases/download/v0.61803/category-zh-cn.pdf))
-- Chapter 5, Deforest. Build-fold fusion law, optimization, and algorithm deduction; ([CN](https://github.com/liuxinyu95/unplugged/releases/download/v0.618030/deduction-zh-cn.pdf))
-- Chapter 6, Infinity. Set theory, Infinity and stream; ([CN](https://github.com/liuxinyu95/unplugged/releases/download/v0.618031/infinity-zh-cn.pdf))
-- Chapter 7, Logic paradox, Gödel's incompleteness theorems, and Turing halting problem. ([CN](https://github.com/liuxinyu95/unplugged/releases/download/v0.618032/paradox-zh-cn.pdf))
-
-Why a gentle version?
----------------------
-
-When visited the art museum, I was impressed by a painting about an acient poet, [BAI Juyi](https://en.wikipedia.org/wiki/Bai_Juyi) (Tang Dynasity, 772 - 846). He was reading his new poem to two old ladies, then asked their feelings. With such efforts, his poem could be understood by all people, old and young, adults and children, male and female. It encouraged me to compose a new gentle version for the people who don't have much mathematic or programming background.
+- Preface
+- Chapter 1, Natural numbers. Peano Axiom, list and folding;
+- Chapter 2, Recursion. Euclidean algorithm, Lambda calculus, and Y-combinator;
+- Chapter 3, Symmetry. Group, Ring, and Field. Galois Theory;
+- Chapter 4, Category theory and type system;
+- Chapter 5, Deforest. Build-fold fusion law, optimization, and algorithm deduction;
+- Chapter 6, Infinity. Set theory, Infinity and stream;
+- Chapter 7, Logic paradox, Gödel's incompleteness theorems, and Turing halting problem.
+- Answers to the exercise.
 
 Install
 --------
@@ -30,7 +29,6 @@ To build the book in PDF format from the sources, you need
 the following software pre-installed.
 
 - TeXLive, The book is built with XeLaTeX, a Unicode friendly version of TeX;
-- ImageMagick, which converts the images to eps format;
 
 ### Install TeXLive
 
@@ -44,15 +42,6 @@ $ sudo ./install-tl -gui text -repository http://mirror.ctan.org/systems/texlive
 ```
 
 In Windows, TeXLive provide a [gui based installer](https://tug.org/texlive/), in Mac OS X, there's a [MacTeX](https://www.tug.org/mactex/).
-
-
-### Install ImageMagick
-
-```bash
-$ sudo apt-get install imagemagick
-```
-
-For Windows and Mac OS X installer, it can be download through http://www.imagemagick.org
 
 ### Cusotmize font (Optional)
 

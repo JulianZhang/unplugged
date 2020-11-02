@@ -2,13 +2,21 @@
 
 \documentclass{article}
 
-\input{../common-zh-cn.tex}
+\usepackage[nomarginpar
+  %, margin=.5in
+]{geometry}
+
+\addtolength{\oddsidemargin}{-0.05in}
+\addtolength{\evensidemargin}{-0.05in}
+\addtolength{\textwidth}{0.1in}
+
+\usepackage[cn]{../prelude}
 
 \setcounter{page}{1}
 
 \begin{document}
 
-\title{推导}
+\title{融合}
 
 \author{刘新宇
 \thanks{{\bfseries 刘新宇} \newline
@@ -18,10 +26,10 @@
 \maketitle
 \fi
 
-\markboth{推导}{编程的数学原理}
+\markboth{融合}{编程中的数学}
 
 \ifx\wholebook\relax
-\chapter{推导}
+\chapter{融合}
 \numberwithin{Exercise}{chapter}
 \fi
 
@@ -29,13 +37,15 @@
 
 % ... mathematical knowledge ... is, in fact, merely verbal knowledge. "3" means "2+1", and "4" means "3+1". Hence it follows (though the proof is long) that "4" means the same as "2+2". Thus mathematical knowledge ceases to be mysterious.  -- Bertrand Russell
 
-\begin{wrapfigure}{R}{0.4\textwidth}
+%\begin{wrapfigure}{R}{0.3\textwidth}
+\begin{figure}[htbp]
  \centering
- \includegraphics[scale=0.5]{img/penrose-triangle.eps}
+ \includegraphics[scale=0.5]{img/penrose-triangle.png}
  \captionsetup{labelformat=empty}
  \caption{彭罗斯三角形}
  \label{fig:Penrose-triangle}
-\end{wrapfigure}
+\end{figure}
+%\end{wrapfigure}
 
 记得在中学数学课上，老师会在黑板上写一个有很多字母的式子，然后让同学们化简。有人会自告奋勇站到讲台上，拿起粉笔在黑板上推导。合并同类项、因式分解……各种办法都可以用。这个过程就像是变魔术，最后往往得到意想不到的简单结果。当然也有卡住或者绕圈子的时候，老师总是耐心地提示，引导我们找到思路。
 
@@ -104,7 +114,7 @@ all(p, xs) = h(xs) \\
 虽然这个实现不产生中间结果，可是和前面的$and(map(p, xs)$比起来，既冗长又不直观。有没有什么办法，鱼和熊掌兼得，即不丧失直观性，又能避免低效的实现呢？我们发现有些变换满足这一要求。例如：
 
 \[
-map\ sqrt\  (map\ abs\ xs) = map\ (sqrt \circ abs) xs
+map\ sqrt\  (map\ abs\ xs) = map\ (sqrt \circ abs)\ xs
 \]
 
 先把列表中每个元素取绝对值构成一列新数，然后再把这列数中的每个开方。这和把列表中每个数先取绝对值然后再立即开方后构成一列新数等价。由此我们可以得到一个转换规则：
@@ -182,10 +192,10 @@ filter\ f\ xs = foldr\ (x\ ys \mapsto
 
 \item 两个列表连接：
 
-\[
+\be
 xs \doubleplus ys = foldr\ (:)\ ys\ xs
 \label{eq:binary-concat}
-\]
+\ee
 
 这是因为:
 
@@ -201,7 +211,7 @@ concat\ xss = foldr\ \doubleplus\ []\ xss
 
 \end{enumerate}
 
-叠加操作是如此基本，如果我们能把列表的叠加操作的化简规律找到，就找到了几乎所有列表操作的化简规律。
+叠加操作是如此基本（在上一章F-代数部分，我们证明了叠加是列表的初始代数），如果我们能把列表的叠加操作的化简规律找到，就找到了所有列表操作的化简规律。
 
 \subsection{叠加——构建融合律}
 现在我们考虑，如果把空列表[]（即Nil）和连接操作“:”（即Cons）进行叠加会产生什么结果。
@@ -231,6 +241,7 @@ build(g) = g((:), [])
 \label{eq:foldr-build-fusion-law}
 \ee
 
+\index{叠加——构建融合}
 我们称这一结果为\textbf{叠加——构建融合定律}。
 
 在继续深入介绍前，让我们先看一些具体的例子。考虑如何计算从$a$到$b$间的整数和$sum([a, a+1, ..., b-1, b])$。为此我们可以先产生从$a$到$b$之间的所有整数$a, a+1, a+2, ..., b-1, b$，例如使用下面的方法：
@@ -275,7 +286,7 @@ range'\ a\ b = f\ c \mapsto
 range(a, b) = build(range'(a, b))
 \]
 
-写下来我们用融合律化简累加和的计算：
+接下来我们用融合律化简累加和的计算：
 
 \[
 \begin{array}{rcll}
@@ -338,6 +349,8 @@ x : xs = build\ (f\ z \mapsto f\ x\ (foldr\ f\ z\ xs))
 \[
 xs \doubleplus ys = build\ (f\ z \mapsto foldr\ f\ (foldr\ f\ z\ ys)\ xs)
 \]
+
+证明如下：
 
 \begin{proof}
 \blre
@@ -484,7 +497,8 @@ join\ (w:ws) = h\ w \\
 \end{array}
 \]
 
-由于$concat \circ map(f)$十分常见，很多编程环境的标准库已经提供了这样的优化实现。例如Haskell中的\texttt{concatMap}，Java和Scala中的\texttt{flatMap}。
+\index{concatMap} \index{flatMap}
+由于$concat \circ map(f)$十分常见，很多编程环境的标准库已经提供了这样的优化实现。\footnote{例如Haskell中的\texttt{concatMap}，Java和Scala中的\texttt{flatMap}。}
 \end{example}
 
 第二个例子虽然展示了融合律的强大，但是也暴露出了一个问题。推导过程机械繁琐、容易出错。这恰恰是机器，而非人类擅长的事情。有些编程环境，例如Haskell已经把融合律实现在编译器内部\cite{GLPJ-1993}。这样只要我们把列表的常见操作用构建——叠加形式定义好，机器就可以替代我们利用融合律进行上述化简，从而得到优化的程序，避免中间结果和多余的递归\footnote{例如Haskell标准库已经用构建——叠加形式实现了大多数列表操作。}。随着时间的推移，更多的编译器会逐渐支持这一优化工具。
@@ -520,10 +534,11 @@ g : \forall A. (\forall B. (A \to B \to B) \to B \to B)
 build : \forall A. (\forall B. (A \to B \to B) \to B \to B) \to \mathbf{List}\ A
 \]
 
+\index{二阶多态函数}
 由于里面有两个多态的类型$A$和$B$，因此它被称为二阶多态函数（rank-2 type polymorphic）。
 
 \subsection{用范畴论推导融合律}
-
+\index{短路融合（shortcut fusion）}
 叠加——构建融合律可以用范畴理论推导出来并进行扩展。一旦把范畴论作为理论工具，人们就发现叠加——构建融合仅仅是众多种融合规则中的一个。现在这些规则统一被称为“短路融合”（shortcut fusion）。它们在编译器优化，程序库优化中发挥了重要的作用。我们无法在这一章中对它们做全面的介绍。读者可以参考\cite{Hinze-Harper-James-2010}深入了解短路融合的理论和实践方法。
 
 在上一章中，我们介绍了F-代数，特别是初始代数和向下态射。由于初始代数是起始对象，所以它到任何其他代数都有唯一的箭头。如下图所示：
@@ -584,7 +599,7 @@ build : \forall A. (\forall B. (A \to B \to B) \to B \to B) \to \mathbf{List}\ A
 \end{tikzpicture}
 \end{center}
 
-从这个范畴图可以看出，如果存在$h$，则下面那个小正方形可交换。这等价于说从$I$经由$A$到$B$相当于从$I$直接到$B$。这就是初始代数的融合律。记为：
+从这个范畴图可以看出，当且仅当存在$h$，使得下面那个小正方形可交换，则从$I$经由$A$到$B$相当于从$I$直接到$B$。这就是初始代数的融合律。记为：
 
 \be
 \begin{array}{rcl}
@@ -606,6 +621,7 @@ h \circ foldr(f, z) = foldr(c, n)
 A \arrowto{h} B \quad \Rightarrow \quad h \circ g\ a = g\ b
 \ee
 
+\index{酸雨定律} \index{砍伐定律（deforestation）}
 这一推广的融合律被称为“酸雨定律”\footnote{由于融合律能够消除不必要的中间结果，所以最早被称为“砍伐定律”（deforestation）。而推广的融合律被幽默地称为酸雨定律（acid rain law）。}。另一方面，由于存在从初始代数$I$到$A$的箭头：$I \arrowto{\lbb a \rbb} A$，所以将$\lbb a \rbb$代入酸雨定律左侧的$h$，并且用$i$替换酸雨定律中的$a$，用$a$替换酸雨定律中的$b$，我们有：
 
 \be
@@ -640,7 +656,7 @@ foldl\ f\ z\ xs = foldr\ (b\ g\ a \mapsto g\ (f\ a\ b))\ id\ xs\ z
 \Question{证明以下列表的构建——叠加形式：
 \[
 \begin{array}{l}
-concat\ xss = build\ (f\ z \mapsto foldr\ (xs\ x \mapsto foldr\ f\ x xs)\ xss) \\
+concat\ xss = build\ (f\ z \mapsto foldr\ (xs\ x \mapsto foldr\ f\ x\ xs)\ z\ xss) \\
 map\ f\ xs = build\ (\oplus\ z \mapsto foldr\ (y\ ys \mapsto (f\ y) \oplus ys)\ z\ xs) \\
 filter\ f\ xs = build\ (\oplus\ z \mapsto foldr\ (x\ xs' \mapsto
   \begin{cases}
@@ -651,7 +667,7 @@ repeat\ x = build\ (\oplus\ z \mapsto let\ r = x \oplus r\ in\ r) \\
 \end{array}
 \]
 }
-\Question{利用融合律化简快速排序算法：
+\Question{化简快速排序算法：
 \[
 \begin{cases}
 qsort\ [] = [] \\
@@ -724,7 +740,7 @@ eval = sum \circ map\ (product \circ (map\ dec))
 eval = foldr\ (t\ ts \mapsto (foldr\ ((\times) \circ fork(dec, id))\ 1\ t) + ts)\ 0
 \]
 
-从这一结果可以写出一个可读性与性能都更好的定义：
+其中$fork(f, g)\ x = (f\ x, g\ x)$，它将两个函数分别应用到一个变量上，然后将结果组成一对值。从这一结果可以写出一个可读性与性能都更好的定义：
 
 \[
 \begin{cases}
@@ -750,7 +766,7 @@ expr(d) = [[[d]]]
 \begin{enumerate}
 \item 什么都不插入意味着将数字$d$直接添加到$e_i$的第一个子算式中的第一个因子的前面。这样由$d:f_1$组成一个新的因子。例如$e_i$是算式$8 + 9$，数字$d$是7，将7写在$8+9$的前面而什么符号都不插入，这样就得到新算式$78 + 9$；
 \item 插入乘号意味着用数字$d$构成一个因子$[d]$，然后将它添加到$e_i$中第一个子算式的前面。这样由$[d]:t_1$组成一个新的子算式。具体到$8 + 9$这个例子，我们把7写在它的前面，然后在7和8之间插入一个乘号，这样就得到新算式$7 \times 8 + 9$；
-\item 插入加号意味着用数字$d$构成一个子算式$[[d]]$，然后将将它添加到$e_i$的最前面，组成新的算式$[[d]]:e_i$。具体到$8 + 9$这个例子，我们把7写在它的前面，然后在7和8之间插入一个加号，这样就得到新算式$7 + 8 + 9$；
+\item 插入加号意味着用数字$d$构成一个子算式$[[d]]$，然后将将它添加到$e_i$的最前面，组成新的算式$[[d]]:e_i$。具体到$8 + 9$这个例子，我们把7写在它的前面，然后在7和8之间插入一个加号，这样就得到新算式$7 + 8 + 9$。
 \end{enumerate}
 
 把这三种情形转换为定义就得到了下面的函数：
@@ -879,11 +895,11 @@ map\ fst \circ filter\ ((=100) \circ value \circ snd)\ (foldr\ expand\ []\ [1, 2
 \[
 str = (join\ \text{``+''}) \circ (map\ ((join\ \text{``} \times \text{''}) \circ (map\ (show \circ dec))))
 \]
-其中$show$可以将数字转换为字符串。函数$join(c, s)$将一组字符串$s$用$c$连接起来，例如$join($``\#''$, [$``abc'', ``def''$]) = $``abc\#def''。利用融合律化简$str$的定义。
+其中$show$可以将数字转换为字符串。函数 $join(c, s)$ 将一组字符串$s$用$c$连接起来，例如 $join($``\#''$, [$``abc'', ``def''$]) = $``abc\#def'' 。利用融合律化简$str$的定义。
 }
 \end{Exercise}
 
-\section{小节和扩展阅读}
+\section{小结和扩展阅读}
 
 程序推导是数学推导的一种特殊情况。通过这一手段，我们可以从直观的、未经化简或优化的定义出发，利用一套形式化的方法和定理，一步一步进行变换。从而最终得到简洁的、优化的结果。伯德在他的《函数式算法设计珠玑》\cite{Bird-2010}中给出了很多的例子。
 

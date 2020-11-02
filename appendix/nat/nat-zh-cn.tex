@@ -2,7 +2,7 @@
 
 \documentclass[UTF8]{article}
 
-\input{../../common-zh-cn.tex}
+\usepackage[cn]{../../prelude}
 
 \setcounter{page}{1}
 
@@ -18,9 +18,11 @@
 \maketitle
 \fi
 
-\markboth{自然数}{编程的数学原理}
+\markboth{自然数}{编程中的数学}
 
-\section{加法交换律的证明}
+\chapter*{加法交换律的证明}
+\phantomsection  % so hyperref creates bookmarks
+\addcontentsline{toc}{chapter}{加法交换律的证明}
 
 为了证明加法交换律$a + b = b + a$。我们首先证明三个结论。第一个是说对于任何自然数都有：
 
@@ -90,7 +92,7 @@ a' + 1 & = a' + 0' & \text{1是0的后继} \\
 \end{array}
 \]
 
-有了这三个结论，我们就可以着手证明加法交换律了。我们首先证明$b=0$时交换律成立。根据加法定义的规则一，我们有$a + 0 ＝ a$；同时根据刚才证明的结论一，又有$0 + a = a$。这就证明了$a + 0 = 0 + a$。
+有了这三个结论，我们就可以着手证明加法交换律了。我们首先证明$b=0$时交换律成立。根据加法定义的规则一，我们有$a + 0 = a$；同时根据刚才证明的结论一，又有$0 + a = a$。这就证明了$a + 0 = 0 + a$。
 然后我们证明递推情况。假设$a + b = b + a$成立，我们要推出$a + b' = b' + a$。
 
 \[
@@ -105,7 +107,7 @@ a + b' & = (a + b)' & \text{根据加法定义的第二条规则} \\
 \end{array}
 \]
 
-这样我们就使用皮亚诺公理，完整地证明了加法的交换律\cite{StepanovRose15}。
+这样我们就使用皮亚诺公理，完整地证明了加法的交换律(\cite{StepanovRose15}, p147-148)。
 
 \ifx\wholebook\relax \else
 \begin{thebibliography}{99}

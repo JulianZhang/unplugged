@@ -1,18 +1,16 @@
-%\documentclass{article}
-\documentclass[UTF8, a4paper,twoside]{book} %this has problems
-\usepackage[nomarginpar
+\documentclass[zihao=5, b5paper, twoside, heading=true]{ctexbook}
+\usepackage[
+  nomarginpar
   %, margin=.5in
+  , top=1.5cm, bottom=1.5cm, left=2cm, right=2cm
 ]{geometry}
-
-\addtolength{\oddsidemargin}{-0.05in}
-\addtolength{\evensidemargin}{-0.05in}
-\addtolength{\textwidth}{0.1in}
 
 % ==================== Book flag==========================
 
 \global\let\wholebook=\relax %without relax, we build article, esle book
 
-\input{common-zh-cn.tex}
+\usepackage[cn]{prelude}
+\usepackage[firstpage=true]{background}
 
 \setcounter{page}{1}
 
@@ -41,18 +39,33 @@
 %                 COVER PAGE
 % ================================================================
 
-\title{{\bf \Huge 编程中的数学}
+% https://en.wikipedia.org/wiki/File:FWF_Samuel_Monnier_d%C3%A9tail.jpg
+\backgroundsetup{
+  scale=2,
+  opacity=0.4,
+  angle=0,
+  position={0,0},
+  contents={
+    \includegraphics[width=\paperwidth,height=\paperheight]{img/cover-bg.jpg}}
+}
+
+\title{
+  {\bf \Huge 同构 \newline}
+  \vspace{5mm}
+  {\bf ——编程中的数学 \newline \newline \newline}
   \centering
-  \scalebox{0.4}{\includegraphics{img/fibonacci-spiral.eps}}
-            }
+  \scalebox{0.3}{\includegraphics{nat/img/the-school-of-athens.jpg}}
+}
 
 \author{刘新宇
-  \thanks{{\bfseries 刘新宇} \newline
-    Version: 0.6180339887498949 \newline
-    Email: liuxinyu95@gmail.com \newline
-    }}
+  \thanks{ liuxinyu95@gmail.com, Version: 0.6180339887498949}
+}
 
 \maketitle
+
+%\part{前言}
+\frontmatter
+\subimport{appendix/preface/}{preface-zh-cn.tex}
 
 % ================================================================
 %                 Content
@@ -62,7 +75,8 @@
 \tableofcontents
 \newpage
 
-%\part{前言}
+\mainmatter
+
 \subimport{nat/}{nat-zh-cn.tex}
 
 \subimport{recursion/}{recursion-zh-cn.tex}
@@ -77,23 +91,24 @@
 
 \subimport{paradox/}{paradox-zh-cn.tex}
 
-\part{附录}
+\part*{附录}
 \appendix
 %\appendixpage
 \noappendicestocpagenum
 \addappheadtotoc
 
-\subimport{appendix/nat/}{nat-zh-cn.tex}
+\backmatter
+\subimport{appendix/answer/}{ans-zh-cn.tex}
 
-\subimport{appendix/recursion/}{recursion-zh-cn.tex}
+\subimport{appendix/nat/}{nat-zh-cn.tex}
 
 \subimport{appendix/category/}{category-zh-cn.tex}
 
 %\part{参考文献}
 \subimport{appendix/reference/}{reference-zh-cn.tex}
 
-%\input{fdl-1.3.tex}
-
 \printindex
+
+\input{fdl-1.3.tex}
 
 \end{document}

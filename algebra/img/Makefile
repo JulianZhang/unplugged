@@ -1,7 +1,4 @@
-IMG_OBJECTS = Escher-Liberation-1955 Gaus Cardano galois \
-Rubik_cube_notation Rubik-cube-F lagrange Fermat Arithmetica \
-bracelet-rotate bracelet-identical euler Noether Soccer-ball \
-C3 A4 S3
+IMG_OBJECTS =
 DOT_OBJECTS =
 DOT_SOURCES = $(foreach file, $(DOT_OBJECTS), $(file).dot)
 
@@ -24,7 +21,7 @@ $(IMG_OBJECTS): % : %.eps
 # pattern rule matching
 # Makefile auto variable: $< first prerequisite, $@ target
 %.eps : %.png
-	convert $< $@
+	convert -flatten $< $@
 
 %.eps : %.jpg
 	convert $< $@
@@ -49,5 +46,5 @@ png: $(PNG_OBJECTS)
 	dot -Tpng -o $@ $<
 
 clean:
-	rm -f *.ps *.eps *~
+	rm -f *.eps *~
 	rm -f $(PNG_OBJECTS)

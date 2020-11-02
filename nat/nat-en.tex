@@ -1,14 +1,21 @@
 \ifx\wholebook\relax \else
 
 \documentclass[UTF8]{article}
+\usepackage[nomarginpar
+  %, margin=.5in
+]{geometry}
 
-\input{../common-en.tex}
+\addtolength{\oddsidemargin}{-0.05in}
+\addtolength{\evensidemargin}{-0.05in}
+\addtolength{\textwidth}{0.1in}
+
+\usepackage[en]{../prelude}
 
 \setcounter{page}{1}
 
 \begin{document}
 
-\title{Natural Numbers}
+\title{Numbers}
 
 \author{LIU Xinyu
 \thanks{{\bfseries LIU Xinyu} \newline
@@ -18,10 +25,10 @@
 \maketitle
 \fi
 
-\markboth{Natural numbers}{Mathematics of Programming}
+\markboth{Numbers}{Mathematics of Programming}
 
 \ifx\wholebook\relax
-\chapter{Natural Numbers}
+\chapter{Numbers}
 \numberwithin{Exercise}{chapter}
 \fi
 
@@ -32,15 +39,15 @@
 \begin{wrapfigure}{R}{0.3\textwidth}
 %\begin{figure}[htbp]
  \centering
- \includegraphics[scale=0.3]{img/clay-envelope.eps}
+ \includegraphics[scale=0.36]{img/clay-envelope.jpg}
  \caption{The envelop of tokens in Uruk period from Susa. Louvre Museum}
  \label{fig:clay-token}
 %\end{figure}
 \end{wrapfigure}
 
-The number emerged with human evolution. Some people believe the language was inspired by number. Our ancestors learned the numbers from the gathering and hunting activities. People need count the fruits gathered. As trading developed, people need numeral tools to handle the bigger numbers than before.
+The number emerged with human evolution. Some people believe the language was inspired by number. Our ancestors learned the numbers from the gathering and hunting activities. People need count the fruits gathered. As trading developed, people need numeral tools to handle bigger numbers than before.
 
-We found in the regions of Iran, people use clay tokens for record keeping around 4000 BC. they created two round tokens with `+' sign baked to represent "two sheep". Each token represented a sheep. Representing a hundred sheep with many tokens would be impractical, so they invented different clay tokens to represent ten sheep, ten goats and so on. In order to avoid the record being altered, people invented a clay envelope in which tokens were placed, sealed, and baked. If anybody disputed the number, they could break open the envelope and do a recount. They also pressed the signs outside the envelop before it was baked, these signs on the outside became the first written language for numbers\cite{trip-to-number-kindom}. Figure \ref{fig:clay-token} shows the ancient clay tokens and envelopes found in Uruk period.
+We found in the regions of Iran, people made clay tokens for record keeping around 4000 BC. they created two round tokens with `+' sign baked to represent "two sheep". Each token represented a sheep. Representing a hundred sheep with many tokens would be impractical, so they invented different clay tokens to represent ten sheep, twenty sheep and so on. In order to avoid the record being altered, people invented a clay envelope in which tokens were placed, sealed, and baked. If anybody disputed the number, they could break open the envelope and do a recount. They also pressed the signs outside the envelop before it was baked, these signs on the outside became the first written language for numbers\cite{Calvin-Clawson-1994}. Figure \ref{fig:clay-token} shows the ancient clay tokens and envelopes found in Uruk period.
 
 As the number increasing, the clay tokens and envelops were gradually replaced by more powerful numerals. About 3500 BC, the Sumerians in Mesopotamia used round stylus in flat clay tablets to carve pictographs representing various tokens. Each sign represented both commodity being counted and the quantity of that commodity.
 
@@ -49,68 +56,52 @@ The next big step happened around 3100 BC. The abstract numbers dissociated from
 %\begin{wrapfigure}{R}{0.5\textwidth}
 \begin{figure}[htbp]
  \centering
- \includegraphics[scale=0.6]{img/Babylonian_numerals.eps}
- \caption{Babylonian numerals\cite{wiki-babylonian-num}。}
+ \subcaptionbox{Babylonian numerals\cite{wiki-babylonian-num}}[0.45\linewidth]{
+   \includegraphics[scale=0.36]{img/Babylonian_numerals.jpg}} \quad \quad
+ \subcaptionbox{The abstract three}[0.45\linewidth]{
+   \includegraphics[scale=0.21]{img/abstract-num.png}}
+ \captionsetup{labelformat=empty}
  \label{fig:babylonian-num}
-\end{figure}
-%\end{wrapfigure}
-
-The abstract number emerged from intelligent mind. People realized the abstract three could represent three eggs, three trees, and three jars. It's a powerful tool. People can manipulate the pure numbers and apply the result to the concrete things. When increase the abstract three by one to get four, we know gathering another egg after three egges gives four eggs; we also know baking another jar after three jars gives four jars. We resolve a whole kind of problem instead of one by one.
-
-%\begin{wrapfigure}{R}{0.5\textwidth}
-\begin{figure}[htbp]
- \centering
- \includegraphics[scale=0.2]{img/abstract-num.eps}
- \caption{The concrete three things and the abstract three}
  \label{fig:abstract-num}
 \end{figure}
 %\end{wrapfigure}
 
-Starting from the numbers, people developed add, subtraction, then the more powerful methods of multiplication and division. When measure the length, angles, areas, and volumes, we connected the number to the geometry quantity. People from different places found the inner relationships and laws for the numbers and shapes. Ancient Egyptian, Greece, and Chinese people found the Pythagoras theorem independently, and applied it to the amazing works like to build the great pyramid. Trace back from the modern civilization, we find the natural number is the source of math and science. Kronecker, a German mathematician said `God made the integers; all else is the work of man.'\footnote{Natural number is different from integer. We'll come back to the story of Kronecker in the chapter of infinity and Cantor.}
+The abstract number emerged from intelligent mind. People realized the abstract three could represent three eggs, three trees, and three jars. It's a powerful tool. People can manipulate the pure numbers and apply the result to the concrete things. When increase the abstract three by one to get four, we know gathering another egg after three egges gives four eggs; we also know baking another jar after three jars gives four jars. We resolve a whole kind of problems instead of one by one.
+
+Starting from the numbers, people developed add, subtraction, then the more powerful methods of multiplication and division. When measure the length, angles, areas, and volumes, we connected the number to the geometry quantity. People from different places found the inner relationships and laws for the numbers and shapes. Ancient Egyptian, Greece, and Chinese people found the Pythagoras theorem independently, and applied it to the amazing works like to build the great pyramid. Trace back from the modern civilization, we find the natural number is the source of math and science. German mathematician Kronecker said `God made the integers; all else is the work of man.'\footnote{Natural number is different from integer. We'll come back to the story of Kronecker in the chapter of infinity.}
 
 
 \section{Peano Axioms}
 
-%\begin{wrapfigure}{R}{0.4\textwidth}
-\begin{figure}[htbp]
- \centering
- \includegraphics[scale=0.2]{img/Peano.eps}
- \caption{Giuseppe Peano (1858-1932)}
- \label{fig:Peano}
-\end{figure}
-%\end{wrapfigure}
-
-Euclid's {\em Element} is the first work introduced the axiomatic methods. From the five axioms and five postulates, Euclid developed the laws one by one elaborately. Every result is only based on the axioms and the laws proved before. With this approach, he built the great building of geometry. However, theres no axiomatic formal system for natural numbers for long time. People have been considering the natural number is straightforward and the related facts are obvious. The axioms of natural number was setup by Italian mathematician Peano till 1889\footnote{Peano is a mathematician, logician, and linguist. He is the pioneer of mathematical logic and set theory. Peano influenced Russel and Whitehead for their work {\em Principia Mathematica}, and the further programs of French Bourbaki school. Peano also invented an international auxiliary language called Latino sine flexione ("Latin without inflexion," later called Interlingua, and the precursor of the Interlingua of the IALA).}. Today, we called Peano Axioms. Surprised similar to Euclid's five geometry axioms, there are five Peano natural number axioms.
+Euclid's {\em Element} is the first work introduced the axiomatic methods. From five axioms and postulates, Euclid developed the laws one by one elaborately. Every result is only based on the axioms and the theorems proved before. With this approach, he built the great building of geometry. However, there was no axiomatic formal system for natural numbers for long time. People considered natural numbers were straightforward and the related facts were obvious. The axioms of natural number was setup by Italian mathematician Peano till 1889. known as Peano Axioms nowadays. It's interesting that there are also five axioms.
 
 \begin{enumerate}
-\item 0 is a natural number. It can be expressed as $\exists 0 \in N$;
+\item 0 is a natural number. Expressed as $\exists 0 \in N$;
 \item For every natural number, there is a successor natural number. Expressed as $\forall n \in N, \exists n' = succ(n) \in N$;
 \end{enumerate}
 
-It seems that we can define the infinite natural numbers only with these two axioms. From 0, the next is 1, then the next is 2, then 3, ..., then the next is $n$, then $n+1$, ..., till infinity. However, there is a counter example. Consider the number system consists of only two numbers $\{0, 1\}$. Where the successor of 1 is defined as 0, while the successor of 0 is defined as 1. It satisfies the above two axioms well although this isn't the natural number as we expected.
-
-In order to avoid this situation, we need the third Peano axiom.
+It seems that we can define the infinite natural numbers only with these two axioms. From 0, the next is 1, then the next is 2, then 3, ..., then $n$, and then $n+1$, ... However, there is a counter example. Consider a set with only two numbers $\{0, 1\}$. Where the successor of 1 is defined as 0, while the successor of 0 is defined as 1. It satisfies the above two axioms well although they are not as we expected. In order to avoid this situation, we need the third Peano axiom.
 
 \begin{enumerate}
   \setcounter{enumi}{2}
   \item 0 isn't the successor of any natural number. Expressed as $\forall n \in N: n' \neq 0$;
 \end{enumerate}
 
-Are these three axioms enough? We can still find another counter example. Consider a finite number system with elements $\{0, 1, 2\}$. Define the successor of 0 is 1, the successor of 1 is 2, and the successor of 2 is 2 again. It can satisfy all the three axioms so far. We therefore need the fourth Peano axiom.
+Are these three axioms enough? We can still find another counter example. Consider the set of $\{0, 1, 2\}$. Define the successor of 0 is 1, the successor of 1 is 2, and the successor of 2 is 2 again. It satisfies all the three axioms so far. We therefore need the fourth Peano axiom.
 
 \begin{enumerate}
   \setcounter{enumi}{3}
   \item Different natural numbers have different successors. In other words, if two natural numbers have the same successor, then they are same. It can be formally expressed as $\forall n, m \in N: n' = m' \Rightarrow n = m$;
 \end{enumerate}
 
-It is not enough to have these four axioms however. We can still find such an example set of $\{0, 0.5, 1, 1.5, 2, 2.5, ...\}$. Define 1 is the successor of 0, 2 is the successor of 1, ...; 1.5 is the successor of 0.5, 2.5 is the successor of 1.5, ...; But 0.5 is not the successor of any other numbers. In order to exclude such `unreachable' elements, we need the last Peano axiom.
+However, it is still not enough. We can still find another example. For set $\{0, 0.5, 1, 1.5, 2, 2.5, ...\}$. Define 1 is the successor of 0, 2 is the successor of 1, ...; 1.5 is the successor of 0.5, 2.5 is the successor of 1.5, ...; But 0.5 is not the successor of any other numbers. In order to exclude such `unreachable' elements, we need the last Peano axiom.
 
 \begin{enumerate}
   \setcounter{enumi}{4}
   \item If some subset of natural numbers contains 0, and every element in it has a successor, then this subset is same as the whole natural numbers. It can be expressed as $\forall S \subset N: (0 \in S \land \forall n \in S \Rightarrow n' \in S) \Rightarrow S = N$.
 \end{enumerate}
 
-Why does the fifth axiom exclude the above counter example? For $\{$0, 0.5, 1, 1.5, 2, 2.5, ...$\}$, consider the subset of $\{0, 1, 2, ...\}$. 0 belongs to it, and every element has a successor. But it is not identity to the original set. As 1.5, 2.5, ... are not in this subset, it does not satisfy the fifth Peano axiom. This last axiom as also known as `Axiom of induction'. It can be equally stated as the following.
+Why does the fifth axiom exclude the above counter example? For $\{$0, 0.5, 1, 1.5, 2, 2.5, ...$\}$, consider the subset of $\{0, 1, 2, ...\}$. 0 belongs to it, and every element has a successor. But it is not identical to the original set. As 1.5, 2.5, ... are not in this subset, it does not satisfy the fifth Peano axiom. This last axiom as also known as `Axiom of induction'. It can be equally stated as the following.
 
 \begin{enumerate}
   \setcounter{enumi}{4}
@@ -119,9 +110,24 @@ Why does the fifth axiom exclude the above counter example? For $\{$0, 0.5, 1, 1
 
 This the complete statement of the five Peano axioms. They can build the first-order arithmetic, also known as Peano arithmetic\footnote{Some people use 1, but not 0 as the first natural number. The order is different from the original works published by Peano, where the fifth axiom of induction was list as the third one.}.
 
+%\begin{wrapfigure}{R}{0.4\textwidth}
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[scale=0.2]{img/Peano.jpg}
+ \caption{Giuseppe Peano (1858-1932)}
+ \label{fig:Peano}
+\end{figure}
+%\end{wrapfigure}
+
+Giuseppe Peano was an Italian mathematician, logician, and linguist. Peano was born and raised on a farm at Spinetta, a hamlet now belonging to Cuneo, Italy. He enrolled at the University of Turin in 1876, graduating in 1880 with high honors, after which the University employed him to teach calculus course. In 1887, Peano married Carola Crosio. In 1886, he began teaching concurrently at the Royal Military Academy. From 1880s, Peano started to study mathematical logic. He published the Peano axioms, a formal foundation for the natural numbers. Peano started the Formulario Project. It was to be an ``Encyclopedia of Mathematics'', containing all known formulae and theorems of mathematical science. In 1900, the Second International Congress of Mathematicians was held in Paris. At the conference Peano met Bertrand Russell and gave him a copy of Formulario. Russell was so struck by Peano's innovative logical symbols that he left the conference and returned home to study Peano's text\cite{M-Kline-2007}.
+
+When Russell and Whitehead wrote {\em Principia Mathematica}, they were deeply influenced by Peano. Peano played a key role in the axiomatization of mathematics and was a leading pioneer in the development of mathematical logic and set theory. As part of this effort, he made key contributions to the modern rigorous and systematic treatment of the method of mathematical induction. He spent most of his career teaching mathematics at the University of Turin. He also wrote an international auxiliary language, Latino sine flexione ("Latin without inflections", later called Interlingua), which is a simplified version of Classical Latin. Most of his books and papers are in Latino sine flexione. Although Peano put a lot of effort to rewrite his works in the new language, few people read it. On the other hand, his early works in French influnced many mathematicians, especially to the Bourbaki group, which came out many top mathematicians like André Weil, Jean Dieudonné, Henri Cartan, Schwartz, Serre, Grothendieck and so on.
+
+Giuseppe Peano died on April, 20th, 1932 when he suffered a fatal heart attack.
+
 \section{Natural numbers and programming}
 
-People make amazing achievement with the modern computer systems. We didn't establish the axioms of computer programming before developing these results. After the great success of computer application, then the foundation of computer science is gradually developed to be strict, formal, and mathematized. The similar thing happens several times in our history. Calculus was developed by Newton and Leibniz independently in the 17th century, then applied to a wide range of areas, including fluid dynamics, astronomy and so on. However, it was not formalized until Cauchy developed the foundation in the 19th century.
+People make amazing achievement with the modern computer systems. We didn't establish the axioms of computer programming before developing these results. After the great success of computer application, then the foundation of computer science is gradually developed to be strict, formal, and mathematized. The similar thing happens several times in our history. Calculus was developed by Newton and Leibniz independently in the 17th century, then applied to a wide range of areas, including fluid dynamics, astronomy and so on. However, it was not formalized until Weierstrass and Cauchy developed the foundation in the 19th century\cite{M-Kline-2007}.
 
 We'll emulate it. From the Peano axioms, define the natural numbers with computer programs. In a computer system without familiar numbers like 0, 1, 2, ..., we can define the natural numbers as below\footnote{We use a virtual, ideal programming language in this book. Some real programs are given at the end of each chapter for reference.}:
 
@@ -201,7 +207,8 @@ a \cdot b' = a \cdot b + a
 \end{array}
 \ee
 
-\begin{wrapfigure}{R}{0.4\textwidth}
+%\begin{wrapfigure}{R}{0.4\textwidth}
+\begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[scale=0.8]
 \filldraw[fill=gray, draw=black, pattern=north west lines] (0, 0) rectangle (2, 1)
@@ -212,7 +219,8 @@ a \cdot b' = a \cdot b + a
     (3, -1) rectangle (4.5, -2);
 \end{tikzpicture}
 \caption{Association of addition in geometry. The areas of the above and bottom are same.}
-\end{wrapfigure}
+%\end{wrapfigure}
+\end{figure}
 
 It turns out that the associative and commutative laws for addition and multiplication are neither axioms nor postulations. They all can be proved by Peano axioms and the definitions. Let's prove the associative law for addition as an example. This law states $(a + b) + c= a + (b + c)$. We firstly prove it holds when $c=0$. According to the first rule in the add definition:
 
@@ -234,7 +242,7 @@ Then for induction, assume $(a + b) + c = a + (b + c)$ hold, we want to prove $(
 \end{array}
 \]
 
-This complete the proof of associative law for addition. However, it is a bit complex to prove the commutative law. We give it in Appendix I.
+Hence proves the associative law for addition. However, it is a bit complex to prove the commutative law. We give it in the Appendix of the book.
 
 %\begin{wrapfigure}{R}{0.4\textwidth}
 \begin{figure}[htbp]
@@ -251,9 +259,11 @@ This complete the proof of associative law for addition. However, it is a bit co
 
 \begin{Exercise}
 \begin{enumerate}
-\item Define 1 as the successor of 0, prove $a \cdot 1 = a$ hold for all natural numbers;
-\item Prove the associative and commutative laws for multiplication;
-\item Prove the distributive law for multiplication.
+\item Define 1 as the successor of 0, prove $a \cdot 1 = a$ holds for all natural numbers;
+\item Prove the distributive law for multiplication;
+\item Prove the associative and commutative laws for multiplication.
+\item How to verify 3 + 147 = 150 with Peano axioms?
+\item Give the geometric explanation for distributive, associative, and commutative laws of multiplication.
 \end{enumerate}
 \end{Exercise}
 
@@ -268,18 +278,18 @@ sum(n + 1) = (n + 1) + sum(n)
 \end{array}
 \ee
 
-Another example is the fraction $n!$
+Another example is the factorial $n!$
 
 \be
 \begin{array}{l}
-fact(0) = 1 \\
-fact(n + 1) = (n + 1) \cdot fact(n)
+\textit{fact}(0) = 1 \\
+\textit{fact}(n + 1) = (n + 1) \cdot \textit{fact}(n)
 \end{array}
 \ee
 
-They are similar to each other. Although artificial intelligence achieves incredible result today, the machine can't jump out of the system, as intelligent life, to abstract in a higher level. This is one of the most complex, powerful, and mysterious part in human mind\cite{GEB}.
+They are similar to each other. Although artificial intelligence achieves incredible result today, the machine can't jump out of the system, as intelligent mind, to abstract in a higher level. This is one of the most complex, powerful, and mysterious part in human brain\cite{GEB}.
 
-Corresponding to zero in natural number, both summation and fraction have a start value. Summation starts from zero, fraction starts from one. For recursion, they both apply some operation to a number and its successor. For summation, it's $n' + sum(n)$, for fraction, it's $n' \cdot fact(n)$. If we abstract the start value as $c$, the recursive operation as $h$, then we can use the same form for both of them.
+Corresponding to zero in natural number, both summation and factorial have a start value. Summation starts from zero, factorial starts from one. For recursion, they both apply some operation to a number and its successor. For summation, it's $n' + sum(n)$, for factorial, it's $n' \cdot \textit{fact}(n)$. If we abstract the start value as $c$, the recursive operation as $h$, then we can use the same form for both.
 
 \be
 \begin{array}{l}
@@ -288,8 +298,9 @@ f(n + 1) = h(f(n))
 \end{array}
 \ee
 
-This scheme is called as {\em structural} recursion over the natural numbers. Below examples show how it behaves over the first
- several numbers.
+This scheme is called as {\em structural} recursion over the natural numbers. Below examples show how it behaves over the first several numbers.
+
+\vspace{5mm}
 
 \begin{tabular}{l|l}
 $n$ & $f(n)$ \\
@@ -302,13 +313,15 @@ $n$ & $f(n)$ \\
 $n$ & $f(n) = h^n(c)$
 \end{tabular}
 
-Where $h^n(c)$ means applying operation $h$ over $c$ for $n$ times. It's an instance of a more general {\em primitive} recursion(\cite{Bird97}, p5). Further, we can find it is related to the $foldn$ defined in (\ref{eq:foldn}).
+\vspace{5mm}
+
+Where $h^n(c)$ means applying operation $h$ over $c$ for $n$ times. It's an instance of the more general {\em primitive} recursion(\cite{Bird97}, p5). Further, we can find it is related to the $foldn$ defined in (\ref{eq:foldn}).
 
 \be
 f = foldn(c, h)
 \ee
 
-There are three variables in the original $foldn$ definition, why are there only two here? We can actually write it as $f(n) = foldn(c, h, n)$. When we bind the first two variables to $foldn$, it turns to be a new function accepts one argument. We can consider it as $foldn(c, h)(n)$.
+There are three variables in the original $foldn$ definition, why are there only two appeared? We can actually write it as $f(n) = foldn(c, h, n)$. When we bind the first two variables to $foldn$, it turns to be a new function accepts one argument. We can consider it as $foldn(c, h)(n)$.
 
 We call $foldn$ the {\em fold} operation on natural numbers. When $c$ is $zero$ and $h$ is $succ$, we get a sequence of natural numbers:
 
@@ -336,7 +349,9 @@ m^{()} = foldn(1, (\cdot m))
 
 This is the operation to take the power for a number $m$. When applying to natural numbers, it generates an isomorphic sequence of $1, m, m^2, m^3, ..., m^n, ...$
 
-Can we use the abstract tool $foldn$ to define the summation and fraction? Observe the below table.
+Can we use the abstract tool $foldn$ to define the summation and factorial? Observe the below table.
+
+\vspace{5mm}
 
 \begin{tabular}{r|l|l|l|l|l|l}
 $n$ & 0 & 1 & 2 & 3 & ... & $n'$ \\
@@ -345,6 +360,8 @@ $sum(n)$ & 0 & 1 + 0 = 1 & 2 + 1 = 3 & 3 + 3 = 6 & ... & $n' + sum(n)$ \\
 \hline
 $n!$ & 1 & 1 $\times$ 1 = 1 & 2 $\times$ 1 = 2 & 3 $\times$ 2 = 6 & ... & $n' \cdot (n!)$
 \end{tabular}
+
+\vspace{5mm}
 
 We know that $h$ need to be a binary operation as it manipulates $n'$ and $f(n)$. To solve it, we define $c$ as a pair $(a, b)$\footnote{Also known as {\em tuple} in computer programs}. Then define some kind of `succ' operation on the pair. We also need functions to extract $a$ and $b$ from the pair.
 
@@ -367,6 +384,8 @@ sum = 2nd \cdot foldn(c, h) \\
 
 Starting from $(0, 0)$, below table gives the steps for summation.
 
+\vspace{5mm}
+
 \begin{tabular}{r|l|l}
 $(a, b)$ & $(a', b') = h (a, b)$ & $b'$\\
 \hline
@@ -377,42 +396,41 @@ $(a, b)$ & $(a', b') = h (a, b)$ & $b'$\\
 $(m, sum(m))$ & $(m + 1, m + 1 + sum(m))$ & $sum(m + 1)$
 \end{tabular}
 
-Similarly, we can define fraction with $foldn$.
+\vspace{5mm}
+
+Similarly, we can define factorial with $foldn$.
 
 \[
 \begin{array}{lr}
-c = (0, 1) & \text{Starting pair for fraction} \\
-h (m, n) = (m', m'n) & \text{Iteration for fraction} \\
+c = (0, 1) & \text{Starting pair for factorial} \\
+h (m, n) = (m', m'n) & \text{Iteration for factorial} \\
 fact = 2nd \cdot foldn(c, h) \\
 \end{array}
 \]
 
 Here we use the symbol `$\cdot$' to `connect' the $2nd$ function and the $foldn(c, h)$ function. We call it {\em function composition}. $f\cdot g$ means firstly apply $g$ to the variable, then apply $f$ on top of the result. That is $(f\cdot g)(x) = f(g(x))$.
 
-\begin{wrapfigure}{R}{0.4\textwidth}
-%\begin{figure}[htbp]
- \centering
- \includegraphics[scale=0.4]{img/Fibonacci.eps}
- \caption{Leonardo Pisano, Fibonacci (1175-1250)}
- \label{fig:Fibonacci}
-%\end{figure}
-\end{wrapfigure}
-
 Let's see another example powered by this abstract tool, Fibonacci sequence. It's named after the medieval mathematician Leonardo Pisano. Fibonacci originates from `filius Bonacci' in Latin. It means the son of (the) Bonacci. Fibonacci's father was a wealthy Italian merchant
- often did trading around North Africa and the Mediterranean coast. Fibonacci traveled with him as a young boy. It was in Bugia (now Béjaïa, Algeria) that he learned about the Hindu–Arabic numeral system. Fibonacci realized the many advantage of this numeral system. He introduced it to Europe through his book, the Liber Abaci (Book of Abacus or Book of Calculation, 1202). European people were using Roman numeral system before that. We can still see Roman numbers in clock plat today. The Roman number for year 2018 is MMXVIII. Where an M for 1000, so two M letters mean 2000; X represents for 10, V for 5, the three I mean 3. Sum them up, we get 2018. The Hindu-Arabic numeral system introduced by Fibonacci is a positional decimal numeral system. We are using it almost everywhere today. It uses the zero invented by Indian mathematicians. Numbers at different position means different value. This advanced numeral system were widely used in business, for example converting different currencies, calculating profit and interest, which were important to the growing banking industry. It influenced the mathematics in Europe greatly.
+ often did trading around North Africa and the Mediterranean coast. Fibonacci traveled with him as a young boy. It was in Bugia (now Béjaïa, Algeria) that he learned about the Hindu–Arabic numeral system. Fibonacci realized many advantage of this numeral system. He introduced it to Europe through his book, the {\em Liber Abaci} (Book of Abacus or Book of Calculation, 1202). European people were using Roman numeral system before that. We can still see Roman numbers in clock plat today. The Roman number for year 2018 is MMXVIII. Where M stands for 1000, so two M letters mean 2000; X represents 10, V stands for 5, the three I mean 3. Sum them up, we get 2018. The Hindu-Arabic numeral system introduced by Fibonacci is a positional decimal numeral system. We are using it almost everywhere today. It uses the zero invented by Indian mathematicians. Numbers at different position mean different value. This advanced numeral system were widely used in business, for example converting different currencies, calculating profit and interest, which were important to the growing banking industry. It influenced the mathematics in Europe greatly.
 
-Fibonacci numbers is well known as a problem described in the Liber Abaci, although it can be traced back to 200 BC in India. Assuming a newly born pair of rabbits, one male, one female, are put in a field; rabbits are able to mate at the age of one month so that at the end of its second month a female can produce another pair of rabbits; rabbits never die and a mating pair always produces one new pair (one male, one female) every month from the second month on. Then how many pairs will there be in one year?
+Fibonacci numbers is well known as a problem described in the {\em Liber Abaci}, although it can be traced back to 200 BC in India. Assuming a newly born pair of rabbits, one male, one female, are put in a field; rabbits are able to mate at the age of one month so that at the end of its second month a female can produce another pair of rabbits; rabbits never die and a mating pair always produces one new pair (one male, one female) every month from the second month on. Then how many pairs will there be in one year?
 
 When start, there is a pair in the first month. In the second month, there is a new born pair. In total there are two pairs. In the third month, the matured pair produces another pair, while the new born in the previous month are still young. In total, there are 2 + 1 = 3 pairs. In the fourth month, the two pairs of matured rabbits produce another two pairs of baby. Plus the three pairs in the third month, there are total 3 + 2 = 5 pairs. Repeating it gives a sequence of numbers.
 
 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, ...
 
-%\begin{wrapfigure}{L}{0.3\textwidth}
+
+%\begin{wrapfigure}{R}{0.35\textwidth}
 \begin{figure}[htbp]
  \centering
- \includegraphics[scale=0.5]{img/fibonacci_spiral.eps}
- \caption{The length of the rectangles give a Fibonacci sequence.}
+ \subcaptionbox{The length of the squares give a Fibonacci sequence}[0.45\linewidth]{
+     \includegraphics[scale=0.4]{img/fibonacci_spiral.jpg}}
+ \subcaptionbox{Leonardo Pisano, Fibonacci (1175-1250)}[0.45\linewidth]{
+     \includegraphics[scale=0.35]{img/Fibonacci.jpg}}
+ \captionsetup{labelformat=empty}
+ \caption{}
  \label{fig:fibonacci_spiral}
+ \label{fig:Fibonacci}
 \end{figure}
 %\end{wrapfigure}
 
@@ -426,7 +444,7 @@ F_{n+2} = F_n + F_{n+1}
 \end{array}
 \ee
 
-The starting numbers are defined as 0 and 1 by convention\footnote{If start from 1 and 3, it produces the Lucas sequence 1, 3, 4, 7, 11, 18, ...}. As Fibonacci numbers start from a {\em pair} of natural numbers, and the recursive relation also uses a pair of elements, we can use our abstract tool $foldn$ to define Fibonacci sequence\footnote{We'll give another different definition of Fibonacci numbers in the chapter about Cantor and infinity.}.
+The starting numbers are defined as 0 and 1 by convention\footnote{If start from 1 and 3, it produces the Lucas sequence 1, 3, 4, 7, 11, 18, ...}. As Fibonacci numbers start from a {\em pair} of natural numbers, and the recursive relation also uses a pair of elements, we can use our abstract tool $foldn$ to define Fibonacci sequence\footnote{We'll give another different definition of Fibonacci numbers in the chapter about infinity.}.
 
 \be
 \begin{array}{l}
@@ -448,17 +466,17 @@ fib = fst . foldn (0, 1) h where
 
 \begin{Exercise}
 \begin{enumerate}
+\item Define square for natural number $()^2$ with $foldn$;
 \item Define $()^m$ with $foldn$, which gives the $m$-power of a natural number;
-\item Define square for natural number with $foldn$;
-\item Define sum of squares for odd numbers, what sequence does it produce?
-\item There is a line of holes in the forest. A fox hides in one hole. It moves to the next hole (before or after) every day. If we can check only one hole a day, is there a way to catch the fox? Prove this method works\cite{Gusen2014}.
+\item Define sum of odd numbers with $foldn$, what sequence does it produce?
+\item There is a line of holes (infinite many) in the forest. A fox hides in a hole. It moves to the next hole every day. If we can only check one hole a day, is there a way to catch the fox? Prove this method works. What if the fox moves more than one hole a day\cite{Gusen2014}?
 \end{enumerate}
 \end{Exercise}
 
 %\begin{wrapfigure}{R}{0.3\textwidth}
 \begin{figure}[htbp]
  \centering
- \includegraphics[scale=0.2]{img/PWW.eps}
+ \includegraphics[scale=0.2]{img/PWW.jpg}
  \caption{Cover of PWW (Proof Without Words), part}
  \label{fig:PWW}
 \end{figure}
@@ -500,7 +518,7 @@ We can also understand the list as isomorphism of natural numbers. According to 
 
 It's not convenient to represent long list with nested \texttt{cons}. We simplify \texttt{cons(1, cons(2, cons(3, nil)))} to [1, 2, 3], and use symbol `:' for \texttt{cons}. This list can also be written as 1:[2, 3] or 1:(2:(3:nil)). When type A is character, we use string in quote to represent this special type of list. For example, ``hello'' is the simplified form for ['h', 'e', 'l', 'l', 'o'].
 
-Similar to the adding defined for natural numbers, we can define the concatenation for lists as the following.
+Similar to add defined for natural numbers, we can define the concatenation for lists as the following.
 
 \be
 \begin{array}{l}
@@ -509,14 +527,14 @@ cons(a, x) \doubleplus y = cons(a, x \doubleplus y)
 \end{array}
 \ee
 
-There are two rules for list concatenation. First, empty list concatenates any list produces the same list; second, when concatenate the `successor' of a list to another one, it equals to firstly concatenate the two lists, then take the successor. Compare to the add for natural numbers, the definition of list concatenation is mirror symmetry.
+There are two rules for list concatenation. First, empty list concatenates any list produces the same list; second, when concatenate the `successor' of a list to another one, it equals to firstly concatenate the two lists, then take the successor. Compare to the add for natural numbers, the definition of list concatenation is mirrored symmetric.
 
 \begin{figure}[htbp]
 \begin{tabular}{r|l}
 $nil \doubleplus y = y$ & $a + 0 = a$ \\
 $cons(a, x) \doubleplus y = cons(a, x \doubleplus y)$ & $a + succ(b) = succ(a + b)$
 \end{tabular}
-\caption{The list concatenation and natural number adding are mirror symmetry.}
+\caption{The list concatenation and natural number adding are mirrored symmetric.}
 \end{figure}
 
 With the hint of symmetry, we can prove the associative law for list concatenation through the induction axiom. To prove $(x \doubleplus y) \doubleplus z = x \doubleplus (y \doubleplus z)$, we first prove it holds for $x = nil$.
@@ -550,7 +568,7 @@ f(cons(a,x)) = h(a, f(x))
 \end{array}
 \ee
 
-As the next step, let $f = foldr(c, h)$, then we can abstract the list folding. We name it as $foldr$ to call out the folding starts from right to the left.
+As the next step, let $f = foldr(c, h)$, then we can abstract the list folding. We name it as $foldr$ to call out the folding starts from right to left.
 
 \be
 \begin{array}{l}
@@ -603,7 +621,7 @@ It is corresponding to the $(+m)$ operation for natural number. Further, similar
 concat = foldr(nil, \doubleplus)
 \ee
 
-When apply $concat([[1, 1], [2, 3, 5], [8]])$, the result is $[1, 1, 2, 3, 5, 8]$. At the end of this section, we'll define two important list operations with $foldr$, filtering and mapping\footnote{Different from one to one mapping, the map defined here is one direction only. For example, the map from a string to its length is one direction. The reverse map does not exist.}. Filter is to compose a new list from the elements that satisfy a given predication. In order to realize filtering, we need introduce the conditional expression\footnote{Also known as McCarthy conditional form, or McCarthy formalism. It was introduced by the computer scientist, the inventor of Lisp John McCarthy in 1960.}. It's written as $(p \mapsto f, g)$. When give variable $x$, if the predication $p(x)$ holds, then the result is $f(x)$, else it's $g(x)$. We also use if $p(x)$ then $f(x)$ else $g(x)$ for conditional expression.
+When apply $concat([[1, 1], [2, 3, 5], [8]])$, the result is $[1, 1, 2, 3, 5, 8]$. At the end of this section, we'll define two important list operations with $foldr$, filtering and mapping\footnote{Different from one to one mapping, the map defined here is one direction only. For example, the map from a string to its length is one direction. The reverse map does not exist.}. Filter is to compose a new list from the elements that satisfy a given predication. In order to realize filtering, we need introduce the conditional expression\footnote{Also known as McCarthy conditional form, or McCarthy formalism. It was introduced by the computer scientist, the inventor of Lisp, John McCarthy in 1960.}. It's written as $(p \mapsto f, g)$. When give variable $x$, if the predication $p(x)$ holds, then the result is $f(x)$, else it's $g(x)$. We also use if $p(x)$ then $f(x)$ else $g(x)$ for conditional expression.
 
 \be
 filter(p) = foldr(nil, (p \cdot 1st \mapsto cons, 2nd))
@@ -625,9 +643,9 @@ We call the operation that applies a function to the first value in a pair as `$
 \begin{Exercise}
 \begin{enumerate}
 \item What does the expression $foldr(nil, cons)$ define?
-\item Read in a sequence of digits (string of digit numbers), convert it to decimal. How to handle hexadecimal digit and number? How to handle the decimal point?
-\item Jon Bentley gave the maximum sum of sub-vector puzzle in `Programming Pearls'. Given an integer list $\{x_1, x_2, ..., x_n\}$, find the sub-section $i, j$, that maximize the sum of $x_i + x_{i+1} + ... + x_j$. Solve it with $foldr$.
-\item The longest sub-string without repeated characters. Given a string, find the longest sub-string that there are no repeated characters in it. For example, the answer for string ``abcabcbb'' is ``abc''. Solve it with $foldr$.
+\item Read in a sequence of digits (string of digit numbers), convert it to decimal with $foldr$. How to handle hexadecimal digit and number? How to handle the decimal point?
+\item Jon Bentley gives the maximum sum of sub-vector puzzle in {\em Programming Pearls}. For integer list $\{x_1, x_2, ..., x_n\}$, find the range $i, j$, that maximizes the sum of $x_i + x_{i+1} + ... + x_j$. Solve it with $foldr$.
+\item The longest sub-string without repeated characters. Given a string, find the longest sub-string without any repeated characters in it. For example, the answer for string ``abcabcbb'' is ``abc''. Solve it with $foldr$.
 \end{enumerate}
 \end{Exercise}
 
@@ -636,7 +654,7 @@ We call the operation that applies a function to the first value in a pair as `$
 %\begin{wrapfigure}{R}{0.3\textwidth}
 \begin{figure}[htbp]
  \centering
- \includegraphics[scale=1.0]{img/the-school-of-athens.eps}
+ \includegraphics[scale=0.26]{img/the-school-of-athens.jpg}
  \caption{Raphael, School of Athens (part)}
  \label{fig:the-school-of-athens}
 \end{figure}
@@ -646,17 +664,17 @@ We illustrated several conclusions with geometry figures in this chapter, like t
 ``The chief forms of beauty are order and symmetry and definiteness, which the mathematical sciences demonstrate in a special degree.'' ({\em Metaphysic}) Like geometry, with Peano's work, natural numbers can also be built on top of the axioms. We use the similarity of natural numbers and lists to demonstrate the beauty of symmetry. When the Italian Renaissance artist Raphael created the world famous fresco {\em School of Athens}, he used the same approach of isomorphism by inventing a system of iconography. Many ancient Greece philosophers were illustrated with the figures in Raphael's time of Renaissance. The center figures are Plato and his student Aristotle. Of which Plato is depicted in the image of Leonardo da Vinci; Aristotle is in the image of Giuliano da Sangallo. They were all great artists in Renaissance. The elder Plato is walking alongside Aristotle with his right hand figure point up, while Aristotle is stretching his hand forward. It is popularly thought that their gestures indicate central aspects of their philosophies, for Plato, his Theory of Forms, and for Aristotle, his empiricist views, with an emphasis on concrete particulars. Plato argues a sense of timelessness while Aristotle looks into the physicality of life and the present realm. Below the steps in the middle, the great philosopher Heraclitus leans the box and meditates. He is famous for the thoughts about simple dialectics and materialism. The image of Heraclitus is another great artist Michelangelo in Renaissance. The front left is centered on the great mathematician Pythagoras. He is writing something. On the right side of Pythagoras is a blond young man in a white cloak, considered to be Francisco Maria della Rovere. He was Ulbino's future Grand Duke. The center of the bottom right is the great mathematician Euclid with a compass in hand (or Archimedes in other opinion), he is surrounded by Ptolemy, the great astronomer with the celestial sphere in hand. The opposite is the painter Raphael's fellow villager, the architect Bramante. The one who wore a white hat on the right is the painter Sodom, the young man next to him with half head and a hat on his head, is the painter, Raphael himself. This reminds us the great musician Bach, who wrote his name B-A-C-H in his work `The Art of Fugue' (Die Kunst der Fuge in German). School of Athens reflects the ancient Greece art and philosophy with the figures in the time of Renaissance. It is the multiple levels of isomorphism of form and content, structure and thoughts. It is seen as ``Raphael's masterpiece and the perfect embodiment of the classical spirit of the Renaissance''.
 
 \begin{Exercise}
-\Question{观察斐波那契的叠加定义，它的后继计算$(m', n') = (n, m + n)$相当于一个矩阵乘法：
+\Question{In the fold definition of Fibonacci numbers, the successor is computed as $(m', n') = (n, m + n)$. It is essentially matrix multiplication:
 \[
 \begin{pmatrix} m' \\ n' \end{pmatrix} =
 \begin{pmatrix} 0 & 1 \\ 1 & 1 \end{pmatrix}
 \begin{pmatrix} m \\ n \end{pmatrix}
 \]
-起始值是$(0, 1)^T$。这样斐波那契数列就在矩阵乘方下和自然数同构：
+Where it starts from $(0, 1)^T$. Then the Fibonacci numbers is isomorphic to natural numbers under the matrix multiplication:
 \[
 \begin{pmatrix}F_n \\ F_{n+1} \end{pmatrix} = \begin{pmatrix} 0 & 1 \\ 1 & 1 \end{pmatrix}^n\begin{pmatrix} 0 \\ 1 \end{pmatrix}
 \]
-设计一个程序，快速计算2阶方阵的幂。求得斐波那契数列的第$n$个元素。}
+Write a program to compute the power of 2-order square matrix, and use it to give the $n$-th Fibonacci number.}
 \end{Exercise}
 
 \ifx\wholebook\relax \else
@@ -665,11 +683,14 @@ We illustrated several conclusions with geometry figures in this chapter, like t
 \bibitem{wiki-number}
 Wikipedia. ``History of ancient numeral systems''. \url{https://en.wikipedia.org/wiki/History_of_ancient_numeral_systems}
 
-\bibitem{trip-to-number-kindom}
-Calvin C Clawson. ``The Mathematical Traveler, Exploring the Grand History of Numbers''. Plenum Press. ISBN: 978-0738208350
+\bibitem{Calvin-Clawson-1994}
+Calvin C Clawson. ``The Mathematical Traveler, Exploring the Grand History of Numbers''. Springer. 1994, ISBN: 9780306446450
 
 \bibitem{wiki-babylonian-num}
 Wikipedia. ``Babylonian numerals''. \url{https://en.wikipedia.org/wiki/Babylonian_numerals}
+
+\bibitem{M-Kline-2007}
+Morris Kline ``Mathematics: The Loss of Certainty''. Oxford University Press, 1980. 0-19-502754-X.
 
 \bibitem{GEB}
 Douglas R. Hofstadter ``Gödel, Escher, Bach: An Eternal Golden Braid''. Basic Books; Anniversary edition (February 5, 1999). ISBN: 978-0465026562
